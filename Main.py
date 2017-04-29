@@ -2,13 +2,16 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from guitest1 import Ui_MainWindow
-import CharacterCore as CharCore
-
+from CharacterCore import ValueReference, ValueConfig, ValueModifier
 
 app = QtWidgets.QApplication(sys.argv)
 MainWindow = QtWidgets.QMainWindow()
 ui = Ui_MainWindow()
 ui.setupUi(MainWindow)
+
+from Values import Values
+values = Values(ui)
+
 MainWindow.show()
 sys.exit(app.exec_())
 

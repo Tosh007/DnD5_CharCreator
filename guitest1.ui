@@ -59,7 +59,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="Label_AbilityScore">
        <property name="text">
         <string>Ability Score Points: 27</string>
        </property>
@@ -354,7 +354,7 @@
     <zorder>frame_IntelMod</zorder>
     <zorder>frame_WisdomMod</zorder>
     <zorder>frame_DextMod</zorder>
-    <zorder>label</zorder>
+    <zorder>Label_AbilityScore</zorder>
     <zorder>horizontalSpacer</zorder>
    </widget>
   </widget>

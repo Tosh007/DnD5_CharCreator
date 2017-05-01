@@ -54,11 +54,26 @@ class ValueReference:
         else:
             self.set(self.lastValue)
 
+class DependantValueReference(ValueReference):
+    # this value should not be set by UI
+    def __init__(self, name, widget, valueconfig, default=None, format=None):
+        assert(isinstance(widget, QtWidgets.QLabel))
+        ValueReference.__init__(self,name,widget,valueconfig,default,format)
+        self.vconf.dependant_value_change.connect(self.on_dependant_change)
+
+    def on_dependant_change(self):
+        maxv = self.vconf.getMaxValue()
+        self.set(maxv)
+
 
 class ValueConfig:
     @staticmethod
     def checkRequirements(value, oldvalue):
         return False
+
+    @staticmethod
+    def getMaxValue():
+        return -1
 
 
 

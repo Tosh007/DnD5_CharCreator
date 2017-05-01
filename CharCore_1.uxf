@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
+      <x>90</x>
       <y>90</y>
       <w>410</w>
       <h>280</h>
@@ -31,7 +31,7 @@ on_changed()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>490</x>
+      <x>580</x>
       <y>210</y>
       <w>310</w>
       <h>160</h>
@@ -48,7 +48,7 @@ bool checkRequirements(value, oldvalue)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>470</x>
+      <x>560</x>
       <y>480</y>
       <w>360</w>
       <h>180</h>
@@ -61,7 +61,7 @@ bool checkRequirements(value, oldvalue)
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>490</x>
+      <x>580</x>
       <y>90</y>
       <w>160</w>
       <h>60</h>
@@ -73,26 +73,26 @@ bool checkRequirements(value, oldvalue)
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
+      <x>490</x>
       <y>100</y>
       <w>100</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=)-
-m1=require
+require
 </panel_attributes>
     <additional_attributes>70.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
+      <x>490</x>
       <y>240</y>
       <w>100</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=)-
-m1=require
+require
 </panel_attributes>
     <additional_attributes>70.0;20.0;10.0;20.0</additional_attributes>
   </element>

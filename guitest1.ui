@@ -357,6 +357,131 @@
     <zorder>Label_AbilityScore</zorder>
     <zorder>horizontalSpacer</zorder>
    </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>50</y>
+      <width>231</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_7">
+     <item>
+      <widget class="QComboBox" name="comboBox_Class">
+       <item>
+        <property name="text">
+         <string>Bardbarian</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Bard</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Cleric</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Druid</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Fighter</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Monk</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Paladin</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Ranger</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Rogue</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Sorcerer</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Warlock</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Wizard</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox_Race">
+       <item>
+        <property name="text">
+         <string>Human</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Dwarf</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Elf</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Halfling</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Dragonborn</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Gnome</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Half-Elf</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Half-Orc</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Tiefling</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

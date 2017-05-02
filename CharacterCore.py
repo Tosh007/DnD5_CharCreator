@@ -7,6 +7,7 @@ class ValueReference:
         self.vconf = valueconfig
         self.widget = widget
         self.format = None
+        self.modifiers = []
         if isinstance(widget, QtWidgets.QSpinBox):
             self._get = widget.value
             self._set = widget.setValue
@@ -35,14 +36,24 @@ class ValueReference:
             self._blockSignals(False)
         
 
-    def get(self):
+    def get(self, ignoreModifier=False):
         # returns current value from qt widget
         if isinstance(self._get, str):
-            return int(self._get)
+            v = int(self._get)
         elif isinstance(self._get, int):
-            return self._get
+            v = self._get
         else: 
-            return self._get()
+            v = self._get()
+        if not ignoreModifier:
+            v = self.applyMods(v)
+        return v
+
+    def applyMods(self, v):
+        self.modifiers.sort(key=ValueModifier.modOrder)
+        for mod in self.modifiers:
+                v = mod.mod(v)
+        return v
+
 
     def on_changed(self):
         # always called when value is changed by gui
@@ -77,5 +88,26 @@ class ValueConfig:
 
 
 
-class ValueModifier:pass
+class ValueModifier:
+    mod = lambda x: x
+    order = 0
+    @classmethod
+    def connect(self, valueref):
+        if iter(valueref):
+            for ref in valueref:
+                ref.modifiers.append(self)
+        else:
+            valueref.modifiers.append(self)
+    @classmethod
+    def disconnect(self, valueref):
+        if iter(valueref):
+            for ref in valueref:
+                ref.modifiers.remove(self)
+        else:
+            valueref.modifiers.remove(self)
+
+    @staticmethod
+    def modOrder(m):
+        return m.order
+
 

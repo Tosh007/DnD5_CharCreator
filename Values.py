@@ -1,4 +1,10 @@
 from CharacterCore import ValueReference, ValueConfig, ValueModifier, DependantValueReference
+
+class AbilityScoreHardCap(ValueModifier):
+    mod = lambda x: min(20,x)
+    order = 10 #executed after all other modifiers
+
+
 class AbilityScoreConfig(ValueConfig):
     points = None
     @staticmethod
@@ -23,6 +29,9 @@ class AbilityModConfig(ValueConfig):
     def getMaxValue(self):
         return (self.score.get()//2)-5
 
+
+
+
 class Values:
     def __init__(self, ui):
         AbilityScoreConfig.points = ValueReference("AbilityScorePoints", ui.Label_AbilityScore, ValueConfig, 27, "Ability Score Points: {0}")
@@ -32,6 +41,8 @@ class Values:
         self.intelligence = ValueReference("IntelligenceScore", ui.SpinBox_IntelScore, AbilityScoreConfig)
         self.wisdom       = ValueReference("WisdomScore", ui.SpinBox_WisdomScore, AbilityScoreConfig)
         self.charisma     = ValueReference("CharismaScore", ui.SpinBox_CharismaScore,AbilityScoreConfig)
+
+        AbilityScoreHardCap.connect((self.strength,self.dexterity,self.constitution,self.intelligence,self.wisdom,self.charisma))
 
         self.strengthMod  = DependantValueReference("StrengthMod", ui.label_EchoStrengthMod, AbilityModConfig(self.strength), -1,"{0}")
         self.dextMod  = DependantValueReference("DexterityMod", ui.label_EchoDextMod, AbilityModConfig(self.dexterity), -1,"{0}")

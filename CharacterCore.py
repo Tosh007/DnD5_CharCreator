@@ -34,6 +34,13 @@ class ValueReference:
         self._set(value)
         if self._blockSignals:
             self._blockSignals(False)
+        #modifiers
+        mstring = ""
+        for mod in self.modifiers:
+            mstring += mod.string()
+
+        if (isinstance(self.widget, QtWidgets.QSpinBox)):
+            self.widget.setSuffix(mstring)
         
 
     def get(self, ignoreModifier=False):
@@ -91,6 +98,8 @@ class ValueConfig:
 class ValueModifier:
     mod = lambda x: x
     order = 0
+    text = "Null mod"
+
     @classmethod
     def connect(self, valueref):
         if iter(valueref):
@@ -98,6 +107,7 @@ class ValueModifier:
                 ref.modifiers.append(self)
         else:
             valueref.modifiers.append(self)
+
     @classmethod
     def disconnect(self, valueref):
         if iter(valueref):
@@ -109,5 +119,9 @@ class ValueModifier:
     @staticmethod
     def modOrder(m):
         return m.order
+
+    @classmethod
+    def string(self):
+        return self.text
 
 

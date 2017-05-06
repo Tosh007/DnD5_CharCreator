@@ -1,6 +1,7 @@
 from CharacterCore import ValueReference, ValueConfig, ValueModifier, DependantValueReference
 
 class AbilityScoreHardCap(ValueModifier):
+    text = ""
     mod = lambda x: min(20,x)
     order = 10 #executed after all other modifiers
 

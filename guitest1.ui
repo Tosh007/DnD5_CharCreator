@@ -432,53 +432,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox_Race">
-       <item>
-        <property name="text">
-         <string>Human</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Dwarf</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Elf</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Halfling</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Dragonborn</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Gnome</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Half-Elf</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Half-Orc</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Tiefling</string>
-        </property>
-       </item>
-      </widget>
+      <widget class="QComboBox" name="comboBox_Race"/>
      </item>
     </layout>
    </widget>

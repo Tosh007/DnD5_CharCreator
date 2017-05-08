@@ -1,31 +1,35 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import pyqtSignal, QObject
 from direct.fsm.FSM import FSM
 
-class DependentObject:
+class DependentObject(QObject):
+    changeSignal = pyqtSignal()
     def __init__(self, widget):
+        QObject.__init__(self, widget)
         self.widget = widget
         if isinstance(widget, QtWidgets.QSpinBox):
-            self.changeSignal = widget.valueChanged
+            widget.valueChanged.connect(self.changeSignal)
         elif isinstance(widget, QtWidgets.QComboBox):
-            self.changeSignal = widget.currentIndexChanged
+            widget.currentIndexChanged.connect(self.changeSignal)
         elif isinstance(widget, QtWidgets.QLabel):
-            self.changeSignal = None
+            pass
         else:
             raise TypeError(str(type(widget))+" is not supported")
+        self.changeSignal.connect(self.on_changed)
 
-    def connectChange(self, objects):
-        if iter(objects):
+    def connect(self, objects):
+        try:
             for obj in objects:
                 self.changeSignal.connect(obj.changeSignal)
-        else:
-            self.changeSignal.connect(objects)
+        except TypeError:
+            self.changeSignal.connect(objects.changeSignal)
 
-    def disconnectChange(self, objects):
-        if iter(objects):
+    def disconnect(self, objects):
+        try:
             for obj in objects:
                 self.changeSignal.disconnect(obj.changeSignal)
-        else:
-            self.changeSignal.disconnect(objects)
+        except TypeError:
+            self.changeSignal.disconnect(objects.changeSignal)
 
 
 class ValueReference(DependentObject):
@@ -46,9 +50,6 @@ class ValueReference(DependentObject):
             self._blockSignals = None
         else:
             raise NotImplemented("unsupported widget")
-        
-        if self.changeSignal:
-            self.changeSignal.connect(self.on_changed)
         self.lastValue = self.get()
 
     def set(self, value):
@@ -90,9 +91,14 @@ class ValueReference(DependentObject):
         else:return (v,mstring)
 
     def on_changed(self):
-        # always called when value is changed by gui
+        # always called when value is changed by gui, or another value changed that may cause this to change
         # uses ValueConfig to verify such a value is possible,
         # and either updates the fallback value, or resets to fallback
+        # exception: if valueconfig.getMaxValue the value is just set to the highest possible value.
+        if self.vconf.getMaxValue:
+            maxv = self.vconf.getMaxValue()
+            self.set(maxv)
+            return
         value = self.get(True)
         if self.vconf.checkRequirements(value, self.lastValue):
             self.lastValue = value
@@ -102,28 +108,12 @@ class ValueReference(DependentObject):
         if (isinstance(self.widget, QtWidgets.QSpinBox)):
             self.widget.setSuffix(mstring)
 
-# Deprecated, to be replaced
-class DependantValueReference(ValueReference):
-    # this value should not be set by UI
-    def __init__(self, widget, valueconfig, format=None):
-        assert(isinstance(widget, QtWidgets.QLabel))
-        ValueReference.__init__(self,widget,valueconfig,format)
-        self.vconf.dependant_value_change.connect(self.on_dependant_change)
-
-    def on_dependant_change(self):
-        maxv = self.vconf.getMaxValue()
-        self.set(maxv)
-
-
 class ValueConfig:
     @staticmethod
     def checkRequirements(value, oldvalue):
         return False
 
-    @staticmethod
-    def getMaxValue():
-        return -1
-
+    getMaxValue = None
 
 
 class ValueModifier:
@@ -133,21 +123,23 @@ class ValueModifier:
 
     @classmethod
     def connect(self, valueref):
-        if iter(valueref):
+        try:
             for ref in valueref:
                 ref.modifiers.append(self)
-                ref.changeSignal.emit(0)
-        else:
+                ref.changeSignal.emit()
+        except TypeError:
             valueref.modifiers.append(self)
-            valueref.changeSignal.emit(0)
+            valueref.changeSignal.emit()
 
     @classmethod
     def disconnect(self, valueref):
-        if iter(valueref):
+        try:
             for ref in valueref:
                 ref.modifiers.remove(self)
-        else:
+                ref.changeSignal.emit()
+        except TypeError:
             valueref.modifiers.remove(self)
+            valueref.changeSignal.emit()
 
     @staticmethod
     def modOrder(m):
@@ -162,12 +154,9 @@ class ChoiceReference(FSM, DependentObject):
     def __init__(self, widget, items):
         FSM.__init__(self, "")
         DependentObject.__init__(self, widget)
-
-        self.changeSignal.connect(self.on_changed)
         widget.addItems(items)
 
-    
-    def on_changed(self,i):
+    def on_changed(self):
         item = self.widget.currentText()
         item = item.replace(" ", "_")
         item = item.replace("-", "_")

@@ -1,4 +1,4 @@
-from CharacterCore import ValueReference, ValueConfig, ValueModifier, DependantValueReference, ChoiceReference
+from CharacterCore import ValueReference, ValueConfig, ValueModifier, ChoiceReference
 
 
 """
@@ -31,7 +31,6 @@ class AbilityScoreConfig(ValueConfig):
 class AbilityModConfig(ValueConfig):
     def __init__(self, score):
         self.score = score
-        self.dependant_value_change = score.changeSignal
 
     def getMaxValue(self):
         return (self.score.get()//2)-5
@@ -101,12 +100,19 @@ class Values:
 
         AbilityScoreHardCap.connect((self.strength,self.dexterity,self.constitution,self.intelligence,self.wisdom,self.charisma))
 
-        self.strengthMod  = DependantValueReference(ui.label_EchoStrengthMod, AbilityModConfig(self.strength),"{0}")
-        self.dextMod  = DependantValueReference(ui.label_EchoDextMod, AbilityModConfig(self.dexterity),"{0}")
-        self.constMod  = DependantValueReference(ui.label_EchoConstMod, AbilityModConfig(self.constitution),"{0}")
-        self.intelMod  = DependantValueReference(ui.label_EchoIntelMod, AbilityModConfig(self.intelligence),"{0}")
-        self.wisdomMod  = DependantValueReference(ui.label_EchoWisdomMod, AbilityModConfig(self.wisdom),"{0}")
-        self.charismaMod  = DependantValueReference(ui.label_EchoCharismaMod, AbilityModConfig(self.charisma),"{0}")
+        self.strengthMod  = ValueReference(ui.label_EchoStrengthMod, AbilityModConfig(self.strength),"{0}")
+        self.dextMod  = ValueReference(ui.label_EchoDextMod, AbilityModConfig(self.dexterity),"{0}")
+        self.constMod  = ValueReference(ui.label_EchoConstMod, AbilityModConfig(self.constitution),"{0}")
+        self.intelMod  = ValueReference(ui.label_EchoIntelMod, AbilityModConfig(self.intelligence),"{0}")
+        self.wisdomMod  = ValueReference(ui.label_EchoWisdomMod, AbilityModConfig(self.wisdom),"{0}")
+        self.charismaMod  = ValueReference(ui.label_EchoCharismaMod, AbilityModConfig(self.charisma),"{0}")
+
+        self.strength.connect(self.strengthMod)
+        self.dexterity.connect(self.dextMod)
+        self.constitution.connect(self.constMod)
+        self.intelligence.connect(self.intelMod)
+        self.wisdom.connect(self.wisdomMod)
+        self.charisma.connect(self.charismaMod)
 
         # Races
         self.raceSelect = Races(ui.comboBox_Race,self)

@@ -64,8 +64,7 @@ class ValueReference(DependentObject):
             self._blockSignals(False)
         
         v, mstring = self.applyMods(value, True)
-        if (isinstance(self.widget, QtWidgets.QSpinBox)):
-            self.widget.setSuffix(mstring)
+        self.widget.setToolTip(mstring)
         
 
     def get(self, ignoreModifier=False):
@@ -84,9 +83,10 @@ class ValueReference(DependentObject):
         mstring = ""
         self.modifiers.sort(key=ValueModifier.modOrder)
         for mod in self.modifiers:
-                nv = mod.mod(v)
-                if (nv!=v): mstring += " "+mod.string()  # only add mod desc to mstring if value is changed
-                v = nv
+            nv = mod.mod(v)
+            if (nv!=v): mstring += mod.string(v)+"\n"  # only add mod desc to mstring if value is changed
+            v = nv
+        mstring = mstring[:-1]
         if not needDescription:return v
         else:return (v,mstring)
 
@@ -104,9 +104,8 @@ class ValueReference(DependentObject):
             self.lastValue = value
         else:
             self.set(self.lastValue)
-        v, mstring = self.applyMods(value,True)
-        if (isinstance(self.widget, QtWidgets.QSpinBox)):
-            self.widget.setSuffix(mstring)
+        v, mstring = self.applyMods(value, True)
+        self.widget.setToolTip(mstring)
 
 class ValueConfig:
     @staticmethod
@@ -146,9 +145,13 @@ class ValueModifier:
         return m.order
 
     @classmethod
-    def string(self):
-        return self.text
-
+    def string(self,v=None):
+        if v is None:
+            return self.text.format("","","")
+        else:
+            mv = self.mod(v)
+            dv = mv-v
+            return self.text.format(v,mv,dv)
 
 class ChoiceReference(FSM, DependentObject):
     def __init__(self, widget, items):

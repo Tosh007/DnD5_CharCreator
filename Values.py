@@ -42,8 +42,12 @@ Races
 ------------------------------------------------------------------
 """
 class Human_AbilityScoreIncrease(ValueModifier):
-    text = "Human: +1"
+    text = "Human: {2:+d}"
     mod = lambda x: x+1
+
+class HalfOrc_AbilityScoreIncrease(ValueModifier):
+    text = "Half-Orc: {2:+d}"
+
 
 class Races(ChoiceReference):
     def __init__(self, widget, values):
@@ -76,6 +80,7 @@ class Races(ChoiceReference):
     def exitHalf_Elf(self):pass
 
     def enterHalf_Orc(self):pass
+
     def exitHalf_Orc(self):pass
 
     def enterOrc(self):pass

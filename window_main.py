@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'guitest1.ui'
+# Form implementation generated from reading ui file 'window_main.ui'
 #
 # Created by: PyQt5 UI code generator 5.8.2
 #
@@ -165,7 +165,7 @@ class Ui_MainWindow(object):
         self.frame_DextMod.raise_()
         self.Label_AbilityScore.raise_()
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(260, 50, 231, 41))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(260, 50, 341, 41))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.horizontalLayout_7 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
@@ -188,6 +188,9 @@ class Ui_MainWindow(object):
         self.comboBox_Race = QtWidgets.QComboBox(self.horizontalLayoutWidget)
         self.comboBox_Race.setObjectName("comboBox_Race")
         self.horizontalLayout_7.addWidget(self.comboBox_Race)
+        self.comboBox_SubRace = QtWidgets.QComboBox(self.horizontalLayoutWidget)
+        self.comboBox_SubRace.setObjectName("comboBox_SubRace")
+        self.horizontalLayout_7.addWidget(self.comboBox_SubRace)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 861, 21))

@@ -362,7 +362,7 @@
      <rect>
       <x>260</x>
       <y>50</y>
-      <width>231</width>
+      <width>341</width>
       <height>41</height>
      </rect>
     </property>
@@ -433,6 +433,9 @@
      </item>
      <item>
       <widget class="QComboBox" name="comboBox_Race"/>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox_SubRace"/>
      </item>
     </layout>
    </widget>

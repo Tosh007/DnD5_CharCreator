@@ -1,7 +1,7 @@
 # python qt test program 1
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
-from guitest1 import Ui_MainWindow
+from window_main import Ui_MainWindow
 from CharacterCore import ValueReference, ValueConfig, ValueModifier
 
 app = QtWidgets.QApplication(sys.argv)

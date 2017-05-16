@@ -11,6 +11,7 @@ ui.setupUi(MainWindow)
 
 from Values import Values
 values = Values(ui)
+values.request("On")
 
 MainWindow.show()
 sys.exit(app.exec_())

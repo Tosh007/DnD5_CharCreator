@@ -72,7 +72,8 @@ class FiniteStateMachine:
             elif key=="depend":
                 dependants = self._states[state][key]
                 for name in dependants:
-                    targets = self.objects.get(dependants[dep])
+                    dep = self.objects.get(name)[0]
+                    targets = self.objects.get(dependants[name])
                     dep.connect(targets)     
         self.currentState = state
 
@@ -119,7 +120,7 @@ class ValueReference(DependentObject):
         mstring = ""
         self.modifiers.sort(key=ValueModifier.modOrder)
         for mod in self.modifiers:
-            print(v)
+            #print(v)
             nv = mod.mod(v)
             if (nv!=v): mstring += mod.string(v)+"\n"  # only add mod desc to mstring if value is changed
             v = nv
@@ -149,7 +150,7 @@ class ValueReference(DependentObject):
         svmod = " ({0})".format(vmod)
         
         if isinstance(self.widget, QtWidgets.QLabel):
-            if self.format:sv = self.format.format(v,(vmod if mdesc else ""))
+            if self.format:sv = self.format.format(v,(svmod if mdesc else ""),vmod)
             else:sv=str(v) + (svmod if mdesc else "")
             s = sv
             self._set(s)

@@ -1,4 +1,4 @@
-from CharacterCore import ValueReference, ValueConfig, ValueModifier, ChoiceReference
+from CharacterCore import ValueReference, ValueConfig, ValueModifier, ChoiceReference, FiniteStateMachine
 
 VRef = ValueReference
 VConf = ValueConfig
@@ -55,7 +55,7 @@ class Subrace_Dwarf(CRef):
     states = ("Hill Dwarf","Mountain Dwarf")
 
 class Races(CRef):
-    states = {"Human":{}, "Dwarf":{}, "Elf":{}, "Halfling":{}, "Dragonborn":{},
+    states = {"Human":{"mod":{Human_plus1:("strength","dexterity","constitution","intelligence","wisdom","charisma")}}, "Dwarf":{}, "Elf":{}, "Halfling":{}, "Dragonborn":{},
              "Gnome":{}, "Half-Elf":{}, "Half-Orc":{}, "Orc":{}, "Tiefling":{}}
 
 """
@@ -68,11 +68,22 @@ class Classes(CRef):
     states = {"Barbarian":{"mod":{Barbarian_HP:"maxHP"}}, "Bard":{}, "Cleric":{}, "Monk":{}, "Druid":{}, "Fighter":{},
         "Paladin":{}, "Ranger":{}, "Rogue":{}, "Sorcerer":{},"Warlock":{}, "Wizard":{}}
 
-class Values:
+class Values(FiniteStateMachine):
+    states = \
+   {"On":{"mod":{AbilityScoreHardCap:("strength","dexterity","constitution","intelligence","wisdom","charisma")},
+    "depend":{"strength":"strengthMod",
+              "constitution":"constMod",
+              "dexterity":"dextMod",
+              "intelligence":"intelMod",
+              "wisdom":"wisdomMod",
+              "charisma":"charismaMod",
+
+              "constMod":"maxHP"}}}
     def __init__(self, ui_):
         global ui, values
         ui = ui_
         values = self
+        FiniteStateMachine.__init__(self,self)
         self.level = VRef(ui.Label_CharLevel, ValueConfig, "Level: {0}")
         self.level.set(1)
         self.proficiencyBonus = VRef(ui.Label_ProficiencyBonus, ValueConfig, "Proficiency Bonus: {0}")
@@ -87,8 +98,6 @@ class Values:
         self.wisdom       = VRef(ui.SpinBox_WisdomScore, AbilityScoreConfig)
         self.charisma     = VRef(ui.SpinBox_CharismaScore,AbilityScoreConfig)
 
-        AbilityScoreHardCap.connect((self.strength,self.dexterity,self.constitution,self.intelligence,self.wisdom,self.charisma))
-
         self.strengthMod  = VRef(ui.Label_EchoStrengthMod, AbilityModConfig(self.strength),"{0}")
         self.dextMod  = VRef(ui.Label_EchoDextMod, AbilityModConfig(self.dexterity),"{0}")
         self.constMod  = VRef(ui.Label_EchoConstMod, AbilityModConfig(self.constitution),"{0}")
@@ -96,19 +105,11 @@ class Values:
         self.wisdomMod  = VRef(ui.Label_EchoWisdomMod, AbilityModConfig(self.wisdom),"{0}")
         self.charismaMod  = VRef(ui.Label_EchoCharismaMod, AbilityModConfig(self.charisma),"{0}")
 
-        self.strength.connect(self.strengthMod)
-        self.dexterity.connect(self.dextMod)
-        self.constitution.connect(self.constMod)
-        self.intelligence.connect(self.intelMod)
-        self.wisdom.connect(self.wisdomMod)
-        self.charisma.connect(self.charismaMod)
-
         # Speed, ArmorClass, Initiative, max HP
         self.speed      = VRef(ui.Label_Speed, ValueConfig, "Speed: {0}")
         self.armorClass = VRef(ui.Label_ArmorClass, ValueConfig, "Armor Class: {0}")
         self.initiative = VRef(ui.Label_Initiative, ValueConfig, "Initiative: {0}")
-        self.maxHP      = VRef(ui.Label_MaxHP, MaxHPConfig, "Hit Point Maximum: {1}")
-        self.constMod.connect(self.maxHP)
+        self.maxHP      = VRef(ui.Label_MaxHP, MaxHPConfig, "Hit Point Maximum: {2}")
         self.speed.set(30)
         self.armorClass.set(0)
         self.initiative.set(0)

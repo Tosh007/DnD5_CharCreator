@@ -1,11 +1,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSignal, QObject
-from direct.fsm.FSM import FSM
 
 class DependentObject(QObject):
     changeSignal = pyqtSignal()
     def __init__(self, widget):
         QObject.__init__(self, widget)
+        print(str(type(self))+".init")
         self.widget = widget
         if isinstance(widget, QtWidgets.QSpinBox):
             widget.valueChanged.connect(self.changeSignal)
@@ -31,6 +31,51 @@ class DependentObject(QObject):
         except TypeError:
             self.changeSignal.disconnect(objects.changeSignal)
 
+    def __del__(self):
+        print(str(type(self))+".del")
+
+class FiniteStateMachine:
+    _states = {"Off":{}}
+    def __init__(self, objects):
+        self._states.update(self.states)
+        self.objects = objects
+        self.currentState = ""
+        self._enterState("Off")
+
+    def request(self,state):
+        assert state in self._states
+        print(str(type(self))+":state:"+state)
+        self._exitState(self.currentState)
+        self._enterState(state)
+
+    def _exitState(self,state):
+        self.currentState = None
+        for key in self._states[state]:
+            if key=="mod":
+                modifiers = self._states[state][key]
+                for mod in modifiers:
+                    targets = self.objects.get(modifiers[mod])
+                    mod.disconnect(targets)
+            elif key=="depend":
+                dependants = self._states[state][key]
+                for dep in dependants:
+                    targets = self.objects.get(dependants[dep])
+                    dep.disconnect(targets)
+
+    def _enterState(self,state):
+        for key in self._states[state]:
+            if key=="mod":
+                modifiers = self._states[state][key]
+                for mod in modifiers:
+                    targets = self.objects.get(modifiers[mod])
+                    mod.connect(targets)
+            elif key=="depend":
+                dependants = self._states[state][key]
+                for name in dependants:
+                    targets = self.objects.get(dependants[dep])
+                    dep.connect(targets)     
+        self.currentState = state
+
 
 class ValueReference(DependentObject):
     # reference to a value stored within a qt widget
@@ -53,20 +98,11 @@ class ValueReference(DependentObject):
         self.lastValue = self.get()
 
     def set(self, value):
+        v, mstring = self.applyMods(value, True)
         if not callable(self._get):
             self._get = value
-        if self.format:
-            value = self.format.format(value)
-        if self._blockSignals:
-            self._blockSignals(True)
-        self._set(value)
-        if self._blockSignals:
-            self._blockSignals(False)
+        self.showValue(value,v,mstring) 
         
-        v, mstring = self.applyMods(value, True)
-        self.widget.setToolTip(mstring)
-        
-
     def get(self, ignoreModifier=False):
         # returns current value from qt widget
         if isinstance(self._get, str):
@@ -83,6 +119,7 @@ class ValueReference(DependentObject):
         mstring = ""
         self.modifiers.sort(key=ValueModifier.modOrder)
         for mod in self.modifiers:
+            print(v)
             nv = mod.mod(v)
             if (nv!=v): mstring += mod.string(v)+"\n"  # only add mod desc to mstring if value is changed
             v = nv
@@ -104,8 +141,22 @@ class ValueReference(DependentObject):
             self.lastValue = value
         else:
             self.set(self.lastValue)
+            value = self.lastValue
         v, mstring = self.applyMods(value, True)
-        self.widget.setToolTip(mstring)
+        self.showValue(value,v,mstring)
+
+    def showValue(self,v,vmod,mdesc):
+        svmod = " ({0})".format(vmod)
+        
+        if isinstance(self.widget, QtWidgets.QLabel):
+            if self.format:sv = self.format.format(v,(vmod if mdesc else ""))
+            else:sv=str(v) + (svmod if mdesc else "")
+            s = sv
+            self._set(s)
+        elif isinstance(self.widget, QtWidgets.QSpinBox):
+            self.widget.setSuffix((svmod if mdesc else ""))
+            self._set(v)
+        self.widget.setToolTip(mdesc)
 
 class ValueConfig:
     @staticmethod
@@ -116,11 +167,16 @@ class ValueConfig:
 
 
 class ValueModifier:
-    mod = lambda x: x
-    order = 0
-    text = "Null mod"
+    # now using linear id counter upon instance creation for dict identification
+    _ID = 0
+    def __init__(self,mod,text,order=0):
+        self.mod = mod
+        self.text = text
+        self.order = order
+        self.ID = self._ID
+        ValueModifier._ID+=1
+        print (str(type(self))+":"+str(self.ID))
 
-    @classmethod
     def connect(self, valueref):
         try:
             for ref in valueref:
@@ -130,7 +186,6 @@ class ValueModifier:
             valueref.modifiers.append(self)
             valueref.changeSignal.emit()
 
-    @classmethod
     def disconnect(self, valueref):
         try:
             for ref in valueref:
@@ -140,11 +195,9 @@ class ValueModifier:
             valueref.modifiers.remove(self)
             valueref.changeSignal.emit()
 
-    @staticmethod
     def modOrder(m):
         return m.order
 
-    @classmethod
     def string(self,v=None):
         if v is None:
             return self.text.format("","","")
@@ -153,14 +206,27 @@ class ValueModifier:
             dv = mv-v
             return self.text.format(v,mv,dv)
 
-class ChoiceReference(FSM, DependentObject):
-    def __init__(self, widget, items):
-        FSM.__init__(self, "")
+    def __hash__(self):
+        return hash(self.ID)
+
+    def __eq__(self, other):
+        return self.ID==other.ID
+
+
+
+class ChoiceReference(FiniteStateMachine, DependentObject):
+    def __init__(self, widget, values):
+        widget.addItems(sorted(self.states.keys(),key=str.lower))
+        FiniteStateMachine.__init__(self, values)
         DependentObject.__init__(self, widget)
-        widget.addItems(items)
+        self.on_changed()
 
     def on_changed(self):
         item = self.widget.currentText()
-        item = item.replace(" ", "_")
-        item = item.replace("-", "_")
-        self.demand(item)
+        self.request(item)
+
+    def destroy(self):
+        self.request("Off")
+        self.widget.disconnect()
+        self.changeSignal.disconnect()
+        self.widget.clear()

@@ -94,14 +94,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_StrengthScore">
+         <widget class="QLabel" name="Label_StrengthScore">
           <property name="text">
            <string>Strength</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_EchoStrengthMod">
+         <widget class="QLabel" name="Label_EchoStrengthMod">
           <property name="text">
            <string>-1</string>
           </property>
@@ -139,14 +139,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_DextScore">
+         <widget class="QLabel" name="Label_DextScore">
           <property name="text">
            <string>Dexterity</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_EchoDextMod">
+         <widget class="QLabel" name="Label_EchoDextMod">
           <property name="text">
            <string>-1</string>
           </property>
@@ -193,14 +193,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_ConstScore">
+         <widget class="QLabel" name="Label_ConstScore">
           <property name="text">
            <string>Constitution</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_EchoConstMod">
+         <widget class="QLabel" name="Label_EchoConstMod">
           <property name="text">
            <string>-1</string>
           </property>
@@ -238,14 +238,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_IntelScore">
+         <widget class="QLabel" name="Label_IntelScore">
           <property name="text">
            <string>Intelligence</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_EchoIntelMod">
+         <widget class="QLabel" name="Label_EchoIntelMod">
           <property name="text">
            <string>-1</string>
           </property>
@@ -283,14 +283,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_WisdomScore">
+         <widget class="QLabel" name="Label_WisdomScore">
           <property name="text">
            <string>Wisdom</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_EchoWisdomMod">
+         <widget class="QLabel" name="Label_EchoWisdomMod">
           <property name="text">
            <string>-1</string>
           </property>
@@ -328,14 +328,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_CharismaScore">
+         <widget class="QLabel" name="Label_CharismaScore">
           <property name="text">
            <string>Charisma</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_EchoCharismaMod">
+         <widget class="QLabel" name="Label_EchoCharismaMod">
           <property name="text">
            <string>-1</string>
           </property>
@@ -360,84 +360,101 @@
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>50</y>
+      <x>390</x>
+      <y>10</y>
       <width>341</width>
       <height>41</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_7">
      <item>
-      <widget class="QComboBox" name="comboBox_Class">
-       <item>
-        <property name="text">
-         <string>Bardbarian</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Bard</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Cleric</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Druid</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Fighter</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Monk</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Paladin</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Ranger</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Rogue</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Sorcerer</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Warlock</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Wizard</string>
-        </property>
-       </item>
-      </widget>
+      <widget class="QComboBox" name="ComboBox_Class"/>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox_Race"/>
+      <widget class="QComboBox" name="ComboBox_Race"/>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox_SubRace"/>
+      <widget class="QComboBox" name="ComboBox_Subrace"/>
      </item>
     </layout>
+   </widget>
+   <widget class="QLabel" name="Label_ProficiencyBonus">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>20</y>
+      <width>161</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Proficiency Bonus</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Label_CharLevel">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>20</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Level</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Label_Initiative">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>90</y>
+      <width>98</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Initiative</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Label_ArmorClass">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>90</y>
+      <width>97</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Armor Class</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Label_MaxHP">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>90</y>
+      <width>131</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Max. Hit Point</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Label_Speed">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>90</y>
+      <width>98</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Speed</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

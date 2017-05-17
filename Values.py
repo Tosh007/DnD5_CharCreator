@@ -98,6 +98,7 @@ class Values(FiniteStateMachine):
         ui = ui_
         values = self
         FiniteStateMachine.__init__(self,self)
+        self.initFSM()
         self.level = VRef(ui.Label_CharLevel, ValueConfig, "Level: {0}")
         self.level.set(1)
         self.proficiencyBonus = VRef(ui.Label_ProficiencyBonus, ValueConfig, "Proficiency Bonus: {0}")

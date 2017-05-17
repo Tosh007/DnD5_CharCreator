@@ -36,11 +36,13 @@ class DependentObject(QObject):
 
 class FiniteStateMachine:
     _states = {"Off":{}}
+    def initFSM(self):
+        self._enterState("Off")
+
     def __init__(self, objects):
         self._states.update(self.states)
         self.objects = objects
         self.currentState = ""
-        self._enterState("Off")
 
     def request(self,state):
         assert state in self._states
@@ -61,9 +63,8 @@ class FiniteStateMachine:
                 for dep in dependants:
                     targets = self.objects.get(dependants[dep])
                     dep.disconnect(targets)
-        try:
+        if hasattr(self,"exit"+state):
             getattr(self, "exit"+state)()
-        except:pass
 
     def _enterState(self,state):
         for key in self._states[state]:
@@ -78,10 +79,8 @@ class FiniteStateMachine:
                     dep = self.objects.get(name)[0]
                     targets = self.objects.get(dependants[name])
                     dep.connect(targets) 
-        try:
+        if hasattr(self,"enter"+state):
             getattr(self, "enter"+state)()
-        except BaseException as e:
-            print(e)   
         self.currentState = state
 
 
@@ -227,6 +226,7 @@ class ChoiceReference(FiniteStateMachine, DependentObject):
         widget.addItems(sorted(self.states.keys(),key=str.lower))
         FiniteStateMachine.__init__(self, values)
         DependentObject.__init__(self, widget)
+        self.initFSM()
         self.on_changed()
 
     def on_changed(self):

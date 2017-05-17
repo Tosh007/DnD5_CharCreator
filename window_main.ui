@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>861</width>
+    <width>951</width>
     <height>632</height>
    </rect>
   </property>
@@ -23,10 +23,10 @@
    <widget class="QGroupBox" name="AbilityScoreGroup">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>50</y>
-      <width>201</width>
-      <height>348</height>
+      <x>10</x>
+      <y>60</y>
+      <width>401</width>
+      <height>521</height>
      </rect>
     </property>
     <property name="acceptDrops">
@@ -46,25 +46,19 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>134</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
       <widget class="QLabel" name="Label_AbilityScore">
        <property name="text">
         <string>Ability Score Points: 27</string>
        </property>
        <property name="scaledContents">
         <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Ability Scores                              Ability Mod                     Skills</string>
        </property>
       </widget>
      </item>
@@ -95,6 +89,18 @@
         </item>
         <item>
          <widget class="QLabel" name="Label_StrengthScore">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>64</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="text">
            <string>Strength</string>
           </property>
@@ -102,13 +108,47 @@
         </item>
         <item>
          <widget class="QLabel" name="Label_EchoStrengthMod">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>-1</string>
           </property>
           <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
           </property>
          </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_6">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="checkBox">
+            <property name="text">
+             <string>Saving Throws</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBox_2">
+            <property name="text">
+             <string>Athletics</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -140,6 +180,18 @@
         </item>
         <item>
          <widget class="QLabel" name="Label_DextScore">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>64</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="text">
            <string>Dexterity</string>
           </property>
@@ -151,9 +203,58 @@
            <string>-1</string>
           </property>
           <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
           </property>
          </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_5">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="checkBox_3">
+            <property name="text">
+             <string>Saving Throws</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBox_9">
+            <property name="text">
+             <string>Sleight of Hand</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_9">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="checkBox_10">
+            <property name="text">
+             <string>Stealth</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBox_8">
+            <property name="text">
+             <string>Acrobatics</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -194,6 +295,18 @@
         </item>
         <item>
          <widget class="QLabel" name="Label_ConstScore">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>64</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="text">
            <string>Constitution</string>
           </property>
@@ -201,13 +314,43 @@
         </item>
         <item>
          <widget class="QLabel" name="Label_EchoConstMod">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>-1</string>
           </property>
           <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
           </property>
          </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_4">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="checkBox_4">
+            <property name="text">
+             <string>Saving Throws</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -239,6 +382,24 @@
         </item>
         <item>
          <widget class="QLabel" name="Label_IntelScore">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>64</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
           <property name="text">
            <string>Intelligence</string>
           </property>
@@ -246,13 +407,82 @@
         </item>
         <item>
          <widget class="QLabel" name="Label_EchoIntelMod">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>-1</string>
           </property>
           <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
           </property>
          </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="checkBox_5">
+            <property name="text">
+             <string>Saving Throws</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBox_13">
+            <property name="text">
+             <string>Investigation</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBox_15">
+            <property name="text">
+             <string>Religion</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_8">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="checkBox_11">
+            <property name="text">
+             <string>Arcana</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBox_14">
+            <property name="text">
+             <string>Nature</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBox_12">
+            <property name="text">
+             <string>History</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -284,6 +514,18 @@
         </item>
         <item>
          <widget class="QLabel" name="Label_WisdomScore">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>64</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="text">
            <string>Wisdom</string>
           </property>
@@ -291,13 +533,40 @@
         </item>
         <item>
          <widget class="QLabel" name="Label_EchoWisdomMod">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>-1</string>
           </property>
           <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
           </property>
          </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="checkBox_6">
+            <property name="text">
+             <string>Saving Throws</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -329,6 +598,18 @@
         </item>
         <item>
          <widget class="QLabel" name="Label_CharismaScore">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>64</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="text">
            <string>Charisma</string>
           </property>
@@ -336,13 +617,40 @@
         </item>
         <item>
          <widget class="QLabel" name="Label_EchoCharismaMod">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>-1</string>
           </property>
           <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
           </property>
          </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_7">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="checkBox_7">
+            <property name="text">
+             <string>Saving Throws</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -355,7 +663,7 @@
     <zorder>frame_WisdomMod</zorder>
     <zorder>frame_DextMod</zorder>
     <zorder>Label_AbilityScore</zorder>
-    <zorder>horizontalSpacer</zorder>
+    <zorder>label_4</zorder>
    </widget>
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
@@ -381,7 +689,7 @@
    <widget class="QLabel" name="Label_ProficiencyBonus">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>110</x>
       <y>20</y>
       <width>161</width>
       <height>16</height>
@@ -394,7 +702,7 @@
    <widget class="QLabel" name="Label_CharLevel">
     <property name="geometry">
      <rect>
-      <x>40</x>
+      <x>10</x>
       <y>20</y>
       <width>81</width>
       <height>16</height>
@@ -407,7 +715,7 @@
    <widget class="QLabel" name="Label_Initiative">
     <property name="geometry">
      <rect>
-      <x>480</x>
+      <x>560</x>
       <y>90</y>
       <width>98</width>
       <height>29</height>
@@ -420,7 +728,7 @@
    <widget class="QLabel" name="Label_ArmorClass">
     <property name="geometry">
      <rect>
-      <x>600</x>
+      <x>680</x>
       <y>90</y>
       <width>97</width>
       <height>29</height>
@@ -433,7 +741,7 @@
    <widget class="QLabel" name="Label_MaxHP">
     <property name="geometry">
      <rect>
-      <x>720</x>
+      <x>800</x>
       <y>90</y>
       <width>131</width>
       <height>29</height>
@@ -446,7 +754,7 @@
    <widget class="QLabel" name="Label_Speed">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>450</x>
       <y>90</y>
       <width>98</width>
       <height>29</height>
@@ -456,13 +764,82 @@
      <string>Speed</string>
     </property>
    </widget>
+   <widget class="QMdiArea" name="SpecialChoiceMenu1">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>160</y>
+      <width>211</width>
+      <height>391</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="listWidget">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>160</y>
+      <width>251</width>
+      <height>171</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QListView" name="listView">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>371</y>
+      <width>251</width>
+      <height>181</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>140</y>
+      <width>73</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Special Options</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>140</y>
+      <width>83</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Features &amp; Traits</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>350</y>
+      <width>50</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Equipment</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>861</width>
+     <width>951</width>
      <height>21</height>
     </rect>
    </property>

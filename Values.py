@@ -52,11 +52,25 @@ HalfOrc_plus2 = VMod(lambda x:x+2, "Half Orc: {2:+d}")
 
 
 class Subrace_Dwarf(CRef):
-    states = ("Hill Dwarf","Mountain Dwarf")
+    states = {"Hill Dwarf":{},"Mountain Dwarf":{}}
 
 class Races(CRef):
-    states = {"Human":{"mod":{Human_plus1:("strength","dexterity","constitution","intelligence","wisdom","charisma")}}, "Dwarf":{}, "Elf":{}, "Halfling":{}, "Dragonborn":{},
-             "Gnome":{}, "Half-Elf":{}, "Half-Orc":{}, "Orc":{}, "Tiefling":{}}
+    states = {"Human":{"mod":{Human_plus1:("strength","dexterity","constitution","intelligence","wisdom","charisma")}}, 
+            "Dwarf":{}, 
+            "Elf":{}, 
+            "Halfling":{}, 
+            "Dragonborn":{},
+            "Gnome":{}, 
+            "Half-Elf":{}, 
+            "Half-Orc":{}, 
+            "Orc":{}, 
+            "Tiefling":{}}
+    
+    def enterDwarf(self):
+        self.subrace = Subrace_Dwarf(ui.ComboBox_Subrace,values)
+    def exitDwarf(self):
+        self.subrace.destroy()
+        del self.subrace
 
 """
 ------------------------------------------------------------------

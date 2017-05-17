@@ -61,6 +61,9 @@ class FiniteStateMachine:
                 for dep in dependants:
                     targets = self.objects.get(dependants[dep])
                     dep.disconnect(targets)
+        try:
+            getattr(self, "exit"+state)()
+        except:pass
 
     def _enterState(self,state):
         for key in self._states[state]:
@@ -74,7 +77,11 @@ class FiniteStateMachine:
                 for name in dependants:
                     dep = self.objects.get(name)[0]
                     targets = self.objects.get(dependants[name])
-                    dep.connect(targets)     
+                    dep.connect(targets) 
+        try:
+            getattr(self, "enter"+state)()
+        except BaseException as e:
+            print(e)   
         self.currentState = state
 
 

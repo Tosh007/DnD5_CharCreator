@@ -4,8 +4,8 @@ from PyQt5.QtCore import pyqtSignal, QObject
 class DependentObject(QObject):
     changeSignal = pyqtSignal()
     def __init__(self, widget):
-        QObject.__init__(self, widget)
-        print(str(type(self))+".init")
+        super().__init__(widget)
+        #print(str(type(self))+".init")
         self.widget = widget
         if isinstance(widget, QtWidgets.QSpinBox):
             widget.valueChanged.connect(self.changeSignal)
@@ -13,6 +13,7 @@ class DependentObject(QObject):
             widget.currentIndexChanged.connect(self.changeSignal)
         elif isinstance(widget, QtWidgets.QLabel):
             pass
+        elif (widget is None):pass
         else:
             raise TypeError(str(type(widget))+" is not supported")
         self.changeSignal.connect(self.on_changed)
@@ -31,8 +32,10 @@ class DependentObject(QObject):
         except TypeError:
             self.changeSignal.disconnect(objects.changeSignal)
 
-    def __del__(self):
-        print(str(type(self))+".del")
+    def on_changed(self,*args,**kw):pass
+
+    #def __del__(self):
+        #print(str(type(self))+".del")
 
 class FiniteStateMachine:
     _states = {"Off":{}}
@@ -87,7 +90,7 @@ class FiniteStateMachine:
 class ValueReference(DependentObject):
     # reference to a value stored within a qt widget
     def __init__(self, widget, valueconfig, format=None):
-        DependentObject.__init__(self,widget)
+        super().__init__(widget)
         self.vconf = valueconfig
         self.format = None
         self.modifiers = []
@@ -165,12 +168,18 @@ class ValueReference(DependentObject):
             self._set(v)
         self.widget.setToolTip(mdesc)
 
+
 class ValueConfig:
     @staticmethod
     def checkRequirements(value, oldvalue):
         return False
-
     getMaxValue = None
+
+
+class ValueConfig_allow(ValueConfig):
+    @staticmethod
+    def checkRequirements(value, oldvalue):
+        return True
 
 
 class ValueModifier:
@@ -238,3 +247,44 @@ class ChoiceReference(FiniteStateMachine, DependentObject):
         self.widget.disconnect()
         self.changeSignal.disconnect()
         self.widget.clear()
+
+
+class Proficiency(DependentObject):
+    def __init__(self, name, parent=None, valueref = None):
+        super().__init__(None)
+        self.name = name
+        self.parent = parent
+        self.value = valueref
+        self.subTypes = []
+        if valueref:
+            self.connect(valueref)
+        else:
+            self.value=False
+        if parent:
+            parent.connect(self)
+
+    #check if other proficiency has self in parent chain
+    def contains(self, other):
+        while other:
+            if other == self:
+                return True
+            other = other.parent
+        return False
+
+    def set(self,v):
+        if isinstance(self.value, DependentObject):
+            eq=self.value.get()==v
+        else:
+            eq=self.value==v
+        if eq:
+            if type(self.value) is int:
+                self.value = v
+                self.changeSignal.emit()
+            else:
+                self.value.set(v)
+                self.changeSignal.emit()
+
+    def get(self):
+        v=(self.value if type(self.value) is int else self.value.get())
+        p=self.parent.get()
+        return v or p

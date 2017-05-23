@@ -1,4 +1,5 @@
 from CharacterCore import ValueReference, ValueConfig, ValueModifier, ChoiceReference, FiniteStateMachine
+from proficiencies import ProficiencyTable
 
 VRef = ValueReference
 VConf = ValueConfig

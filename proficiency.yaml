@@ -1,0 +1,122 @@
+# proficiency table
+- strength saving throw
+- athletics
+- dexterity saving throw
+- acrobatics
+- sleight of hand
+- stealth
+- constitution saving throw
+- intelligence saving throw
+- arcana
+- history
+- investigation
+- nature
+- religion
+- wisdom saving throw
+- animal handling
+- insight
+- medicine
+- perception
+- survival
+- charisma saving throw
+- deception
+- performance
+- persuation
+
+- armor:
+    - light armor
+    - medium armor
+    - heavy armor
+- weapons:
+    - martial weapons:
+        - martial melee weapons:
+            - battleaxe
+            - flail
+            - glaive
+            - greataxe
+            - greatsword
+            - halberd
+            - lance
+            - longsword
+            - maul
+            - morningstar
+            - pike
+            - rapier
+            - scimitar
+            - shortsword
+            - trident
+            - war pick
+            - warhammer
+            - whip
+        - martial ranged weapons:
+            - blowgun
+            - hand crossbow
+            - heavy crossbow
+            - longbow
+            - net
+    - simple weapons:
+        - simple melee weapons:
+            - club
+            - dagger
+            - greatclub
+            - handaxe
+            - javelin
+            - light hammer
+            - mace
+            - quarterstaff
+            - sickle
+            - spear
+        - simple ranged weapons:
+            - light crossbow
+            - dart
+            - shortbow
+            - sling
+    - improvised weapons
+- musical instrument:
+    - bagpipes
+    - drum
+    - dulcimer
+    - flute
+    - lute
+    - lyre
+    - shawn
+    - pan flute
+    - horn
+    - viol
+- artisans tools:
+    - alchemist supplies
+    - brewer supplies
+    - calligrapher supplies
+    - carpenter tools
+    - cartographer tools
+    - cobbler tools
+    - cook utensils
+    - glassblower tools
+    - jeweler tools
+    - leatherworker tools
+    - mason tools
+    - painter supplies
+    - potter tools
+    - tinker tools
+    - weaver tools
+    - woodcarve tools
+
+- languages:
+    - standart languages:
+        - common
+        - dwarvish
+        - orcish
+        - elvish
+        - giant
+        - gnomish
+        - goblin
+        - halfling
+    - exotic languages:
+        - abyssal
+        - celestial
+        - draconic
+        - deep speech
+        - infernal
+        - primordial
+        - sylvan
+        - undercommon

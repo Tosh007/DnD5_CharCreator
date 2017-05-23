@@ -136,6 +136,12 @@
           </property>
           <item>
            <widget class="QCheckBox" name="checkBox_strength_saves">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Saving Throws</string>
             </property>
@@ -149,6 +155,12 @@
           </item>
           <item>
            <widget class="QCheckBox" name="checkBox_athletics">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Athletics</string>
             </property>
@@ -233,6 +245,12 @@
           </property>
           <item>
            <widget class="QCheckBox" name="checkBox_dexterity_saves">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Saving Throws</string>
             </property>
@@ -246,6 +264,12 @@
           </item>
           <item>
            <widget class="QCheckBox" name="checkBox_sleight_of_hand">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Sleight of Hand</string>
             </property>
@@ -266,6 +290,12 @@
           </property>
           <item>
            <widget class="QCheckBox" name="checkBox_stealth">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Stealth</string>
             </property>
@@ -279,6 +309,12 @@
           </item>
           <item>
            <widget class="QCheckBox" name="checkBox_acrobatics">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Acrobatics</string>
             </property>
@@ -381,6 +417,12 @@
           </property>
           <item>
            <widget class="QCheckBox" name="checkBox_constitution_saves">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Saving Throws</string>
             </property>
@@ -477,6 +519,12 @@
           </property>
           <item>
            <widget class="QCheckBox" name="checkBox_intelligence_saves">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Saving Throws</string>
             </property>
@@ -490,6 +538,12 @@
           </item>
           <item>
            <widget class="QCheckBox" name="checkBox_investigation">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Investigation</string>
             </property>
@@ -503,6 +557,12 @@
           </item>
           <item>
            <widget class="QCheckBox" name="checkBox_religion">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Religion</string>
             </property>
@@ -523,6 +583,12 @@
           </property>
           <item>
            <widget class="QCheckBox" name="checkBox_arcana">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Arcana</string>
             </property>
@@ -536,6 +602,12 @@
           </item>
           <item>
            <widget class="QCheckBox" name="checkBox_nature">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Nature</string>
             </property>
@@ -549,6 +621,12 @@
           </item>
           <item>
            <widget class="QCheckBox" name="checkBox_history">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>History</string>
             </property>
@@ -639,6 +717,12 @@
           </property>
           <item>
            <widget class="QCheckBox" name="checkBox_insight">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Insight</string>
             </property>
@@ -652,6 +736,12 @@
           </item>
           <item>
            <widget class="QCheckBox" name="checkBox_medicine">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Medicine</string>
             </property>
@@ -665,6 +755,12 @@
           </item>
           <item>
            <widget class="QCheckBox" name="checkBox_perception">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>perception</string>
             </property>
@@ -685,6 +781,12 @@
           </property>
           <item>
            <widget class="QCheckBox" name="checkBox_wisdom_saves">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Saving Throws</string>
             </property>
@@ -698,6 +800,12 @@
           </item>
           <item>
            <widget class="QCheckBox" name="checkBox_animal_handling">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Animal handling</string>
             </property>
@@ -711,6 +819,12 @@
           </item>
           <item>
            <widget class="QCheckBox" name="checkBox_survival">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>survival</string>
             </property>
@@ -801,6 +915,12 @@
           </property>
           <item>
            <widget class="QCheckBox" name="checkBox_deception">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Deception</string>
             </property>
@@ -814,6 +934,12 @@
           </item>
           <item>
            <widget class="QCheckBox" name="checkBox_persuation">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Persuation</string>
             </property>
@@ -834,6 +960,12 @@
           </property>
           <item>
            <widget class="QCheckBox" name="checkBox_charisma_saves">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Saving Throws</string>
             </property>
@@ -847,6 +979,12 @@
           </item>
           <item>
            <widget class="QCheckBox" name="checkBox_intimidation">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Intimidation</string>
             </property>
@@ -860,6 +998,12 @@
           </item>
           <item>
            <widget class="QCheckBox" name="checkBox_performance">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
             <property name="text">
              <string>Performance</string>
             </property>

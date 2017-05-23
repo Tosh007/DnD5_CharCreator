@@ -191,7 +191,7 @@ class ValueModifier:
         self.order = order
         self.ID = self._ID
         ValueModifier._ID+=1
-        print (str(type(self))+":"+str(self.ID))
+        #print (str(type(self))+":"+str(self.ID))
 
     def connect(self, valueref):
         try:

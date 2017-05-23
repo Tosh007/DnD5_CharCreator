@@ -8,6 +8,8 @@ app = QtWidgets.QApplication(sys.argv)
 MainWindow = QtWidgets.QMainWindow()
 ui = Ui_MainWindow()
 ui.setupUi(MainWindow)
+from guiSetup import setup_main_window
+setup_main_window(ui)
 
 from Values import Values
 values = Values(ui)

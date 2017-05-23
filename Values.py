@@ -133,6 +133,7 @@ class Values(FiniteStateMachine):
         # Races
         self.raceSelect = Races(ui.ComboBox_Race,self)
         self.classSelect = Classes(ui.ComboBox_Class,self)
+        
 
     # returns a list of objects as result of a list of strings
     # returns a list with one object if a string is given
@@ -142,6 +143,3 @@ class Values(FiniteStateMachine):
         else:
             return (getattr(self,n) for n in name)
 
-
-
-        

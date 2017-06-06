@@ -1,5 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSignal, QObject
+from acces import *
+import yaml
 
 class DependentObject(QObject):
     changeSignal = pyqtSignal()
@@ -34,17 +36,18 @@ class DependentObject(QObject):
 
     def on_changed(self,*args,**kw):pass
 
-    #def __del__(self):
-        #print(str(type(self))+".del")
-
 class FiniteStateMachine:
+    stateFile=None
     _states = {"Off":{}}
     def initFSM(self):
         self._enterState("Off")
 
-    def __init__(self, objects):
+    def __init__(self):
+        if self.stateFile:
+            f = open(self.stateFile,"r")
+            self.states = yaml.load(f)
+            f.close()
         self._states.update(self.states)
-        self.objects = objects
         self.currentState = ""
 
     def request(self,state):
@@ -59,12 +62,14 @@ class FiniteStateMachine:
             if key=="mod":
                 modifiers = self._states[state][key]
                 for mod in modifiers:
-                    targets = self.objects.get(modifiers[mod])
+                    targets = getValues(modifiers[mod])
+                    mod = getModifier(mod)
                     mod.disconnect(targets)
             elif key=="depend":
                 dependants = self._states[state][key]
                 for dep in dependants:
-                    targets = self.objects.get(dependants[dep])
+                    dep = getValues(name)[0]
+                    targets = getValues(dependants[name])
                     dep.disconnect(targets)
         if hasattr(self,"exit"+state):
             getattr(self, "exit"+state)()
@@ -74,14 +79,15 @@ class FiniteStateMachine:
             if key=="mod":
                 modifiers = self._states[state][key]
                 for mod in modifiers:
-                    targets = self.objects.get(modifiers[mod])
+                    targets = getValues(modifiers[mod])
+                    mod = getModifier(mod)
                     mod.connect(targets)
             elif key=="depend":
                 dependants = self._states[state][key]
                 for name in dependants:
-                    dep = self.objects.get(name)[0]
-                    targets = self.objects.get(dependants[name])
-                    dep.connect(targets) 
+                    dep = getValues(name)[0]
+                    targets = getValues(dependants[name])
+                    dep.connect(targets)
         if hasattr(self,"enter"+state):
             getattr(self, "enter"+state)()
         self.currentState = state
@@ -103,8 +109,10 @@ class ValueReference(DependentObject):
             self._set = widget.setText
             self.format = format
             self._blockSignals = None
+        elif widget is None:
+            self._get = 0
         else:
-            raise NotImplemented("unsupported widget")
+            raise TypeError("unsupported widget "+str(type(widget)))
         self.lastValue = self.get()
 
     def set(self, value):
@@ -231,11 +239,11 @@ class ValueModifier:
 
 
 class ChoiceReference(FiniteStateMachine, DependentObject):
-    def __init__(self, widget, values):
-        widget.addItems(sorted(self.states.keys(),key=str.lower))
-        FiniteStateMachine.__init__(self, values)
+    def __init__(self, widget):
+        FiniteStateMachine.__init__(self)
         DependentObject.__init__(self, widget)
         self.initFSM()
+        widget.addItems(sorted(self.states.keys(),key=str.lower))
         self.on_changed()
 
     def on_changed(self):

@@ -1,0 +1,27 @@
+- Human_plus1:
+    lambda: "x+1"
+    text: "Human: +1"
+- HalfOrc_plus1:
+    lambda: "x+1"
+    text: "Half Orc: +1"
+- HalfOrc_plus2:
+    lambda: "x+2"
+    text: "Half Orc: {2:+d}"
+- Dwarf_plus2:
+    lambda: "x+2"
+    text: "Dwarf: +2"
+- Dwarf_plus1:
+    lambda: "x+1"
+    text: "Dwarf: +1"
+- Dwarf_speed:
+    lambda: "25"
+    text: "Dwarf"
+
+- Barbarian_HP:
+    lambda: "x+12"
+    text: "Barbarian: {2:+d}"
+
+- AbilityScoreHardCap:
+    lambda: "min(20,x)"
+    text: "Hardcap at 20"
+    order: 8

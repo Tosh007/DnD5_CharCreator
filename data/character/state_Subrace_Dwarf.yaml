@@ -1,0 +1,9 @@
+Hill Dwarf:
+    mod:
+        Dwarf_plus1:
+            - wisdom
+            - maxHP
+Mountain Dwarf:
+    mod:
+        Dwarf_plus2:
+            - strength

@@ -1,0 +1,66 @@
+# primary value table
+
+- level:
+    ui: Label_CharLevel
+    format: "Level: {0}"
+    initial: 1
+- proficiencyBonus:
+    ui: Label_ProficiencyBonus
+    format: "Proficiency Bonus: {0}"
+- abilityScorePoints:
+    ui: Label_AbilityScore
+    format: "Ability Score Points: {0}"
+    initial: 27
+# ability scores
+- strength:
+    ui: SpinBox_StrengthScore
+    config: AbilityScoreConfig
+- dexterity:
+    ui: SpinBox_DextScore
+    config: AbilityScoreConfig
+- constitution:
+    ui: SpinBox_ConstScore
+    config: AbilityScoreConfig
+- intelligence:
+    ui: SpinBox_IntelScore
+    config: AbilityScoreConfig
+- wisdom:
+    ui: SpinBox_WisdomScore
+    config: AbilityScoreConfig
+- charisma:
+    ui: SpinBox_CharismaScore
+    config: AbilityScoreConfig
+# ability modifiers
+- strengthMod:
+    ui: Label_EchoStrengthMod
+    config: strengthMod
+- dextMod:
+    ui: Label_EchoDextMod
+    config: dextMod
+- constMod:
+    ui: Label_EchoConstMod
+    config: constMod
+- intelMod:
+    ui: Label_EchoIntelMod
+    config: intelMod
+- wisdomMod:
+    ui: Label_EchoWisdomMod
+    config: wisdomMod
+- charismaMod:
+    ui: Label_EchoCharismaMod
+    config: charismaMod
+# other scores
+- speed:
+    ui: Label_Speed
+    format: "Speed: {0}"
+- armorClass:
+    ui: Label_ArmorClass
+    format: "Armor Class: {0}"
+- initiative:
+    ui: Label_Initiative
+    format: "Initiative: {0}"
+    initial: 30
+- maxHP:
+    ui: Label_MaxHP
+    config: MaxHPConfig
+    format: "Hit Point Maximum: {2}"

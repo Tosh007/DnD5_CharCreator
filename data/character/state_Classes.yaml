@@ -1,0 +1,15 @@
+Barbarian:
+    mod:
+        Barbarian_HP:
+            - maxHP
+Bard: {}
+Cleric: {}
+Monk: {}
+Druid: {}
+Fighter: {}
+Paladin: {}
+Ranger: {}
+Rogue: {}
+Sorcerer: {}
+Warlock: {}
+Wizard: {}

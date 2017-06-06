@@ -8,12 +8,12 @@ app = QtWidgets.QApplication(sys.argv)
 MainWindow = QtWidgets.QMainWindow()
 ui = Ui_MainWindow()
 ui.setupUi(MainWindow)
-from guiSetup import setup_main_window
+from GuiSetup import setup_main_window
 setup_main_window(ui)
 
-from Values import Values
-values = Values(ui)
-values.request("On")
+import CharacterCore
+import acces
+acces.initializeTables(ui)
 
 MainWindow.show()
 sys.exit(app.exec_())

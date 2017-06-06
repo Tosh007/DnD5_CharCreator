@@ -1,0 +1,99 @@
+Background
+PlayerName
+CharacterName
+Race 
+Alignment
+XP
+Inspiration
+STR
+ProfBonus
+AC
+Initiative
+Speed
+PersonalityTraits 
+STRmod
+HPMax
+DEX
+HPCurrent
+Ideals
+DEXmod 
+HPTemp
+Bonds
+CON
+HDTotal
+Check Box 12
+Check Box 13
+Check Box 14
+CONmod
+Check Box 15
+Check Box 16
+Check Box 17
+HD
+Flaws
+INT
+Wpn Name
+Wpn1 AtkBonus
+Wpn1 Damage
+INTmod
+Wpn Name 2
+Wpn2 AtkBonus 
+Wpn2 Damage 
+WIS
+Wpn Name 3
+Wpn3 AtkBonus  
+Wpn3 Damage 
+WISmod
+CHA
+CHamod
+AttacksSpellcasting
+Passive
+ProficienciesLang
+Equipment
+Features and Traits
+Athletics
+SavingThrows
+Check Box 18
+SleightofHand
+Stealth
+ChBx Athletics
+ST Strength
+ChBx Sleight
+ChBx Stealth
+ST Dexterity
+SavingThrows2
+SavingThrows3
+ST Constitution
+ChBx Acrobatics
+Acrobatics
+ChBx Nature
+ST Intelligence
+ChBx Arcana
+ChBx History
+ChBx Investigation
+SavingThrows4
+Arcana
+History
+ChBx Religion
+Investigation
+Nature
+Religion
+Survival
+ChBx Survival
+Animal Handling
+Medicine
+ST Wisdom
+ChBx Animal
+ChBx Insight
+ChBx Perception
+Perception
+SavingThrows5
+SavingThrows6
+Deception
+Intimidation
+Performance
+Persuasion
+ST Charisma
+ChBx Deception
+ChBx Intimidation
+ChBx Performance
+ChBx Persuasion

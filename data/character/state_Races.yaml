@@ -1,0 +1,24 @@
+# primary race list
+Human:
+    mod:
+        Human_plus:
+            - strength
+            - dexterity
+            - constitution
+            - charisma
+            - wisdom
+            - intelligence
+Dwarf:
+    mod:
+        Dwarf_plus2:
+            - constitution
+        Dwarf_speed:
+            - speed
+Elf: {}
+Halfling: {}
+Dragonborn: {}
+Gnome: {}
+Half-Elf: {}
+Half-Orc: {}
+Orc: {}
+Tiefling: {}

@@ -1,11 +1,9 @@
 from CharacterCore import ValueReference, ValueConfig, ValueModifier, ChoiceReference, FiniteStateMachine, Proficiency
 import yaml
+from acces import *
 
 class ProficiencyTable:
-    def __init__(self,Values,UI):
-        global values,ui
-        values = Values
-        ui = UI
+    def __init__(self):
         self.table = {}
         f = open("proficiency.yaml")
         y = yaml.load(f)
@@ -18,12 +16,12 @@ class ProficiencyTable:
             if type(obj) is str:
                 # just a new proficiency
                 self.newProficiency(obj,parent, obj.replace(" ","_"))
-                print(obj)
+                #print(obj)
             elif type(obj) is dict:
                 # a new proficiency with at least one subcategory
                 assert len(obj.keys())==1
                 name = tuple(obj.keys())[0]
-                print(name+":")
+                #print(name+":")
                 sname=name.replace(" ", "_")
                 self.newProficiency(name, parent, sname)
                 self.loadProficiency(obj[name],parent=sname)
@@ -35,6 +33,3 @@ class ProficiencyTable:
 
     def __getattr__(self,name):
         return self.table[name]
-
-if __name__=="__main__":
-    p=ProficiencyTable(None,None)

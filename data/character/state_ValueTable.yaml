@@ -1,0 +1,18 @@
+# default modifiers/dependancies for valuemodifier
+"On":
+    mod:
+        AbilityScoreHardCap:
+            - strength
+            - dexterity
+            - constitution
+            - intelligence
+            - wisdom
+            - charisma
+    depend:
+        strength: [strengthMod]
+        constitution: constMod
+        dexterity: dextMod
+        intelligence: intelMod
+        wisdom: wisdomMod
+        charisma: charismaMod
+        constMod: maxHP

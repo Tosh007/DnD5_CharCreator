@@ -1,7 +1,13 @@
 from acces import *
-from CharacterCore import ValueConfig
+from CharacterCore import *
 
 class ConfigTable:
+    AllowNone = ValueConfig
+    AllowAll  = ValueConfig_allow
+    class ProficiencyListConfig(ValueConfig):
+        hide = lambda v: not bool(v)
+    class HiddenValue(ValueConfig):
+        hide = lambda v: True
     class AbilityScoreConfig(ValueConfig):
         points = None
         text = "Ability Score Points"
@@ -15,7 +21,7 @@ class ConfigTable:
             return False
         @staticmethod
         def getReqPoints(value):
-            assert (value>=8)
+            #assert (value>=8)
             if (value>15):return 100
             return (0,1,2,3,4,5,7,9)[value-8]
 

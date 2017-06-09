@@ -1,6 +1,7 @@
 from PyQt5.QtCore import*
 # disable proficiency checkboxes
 def setup_main_window(ui):
+    return
     l = (ui.checkBox_strength_saves,ui.checkBox_athletics,
         ui.checkBox_dexterity_saves,ui.checkBox_sleight_of_hand,ui.checkBox_stealth,ui.checkBox_acrobatics,
         ui.checkBox_constitution_saves,ui.checkBox_intelligence_saves,ui.checkBox_investigation,ui.checkBox_religion,

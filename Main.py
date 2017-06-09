@@ -14,7 +14,7 @@ setup_main_window(ui)
 import CharacterCore
 import acces
 acces.initializeTables(ui)
-
+acces.getValueTable().flushChanges()
 MainWindow.show()
 sys.exit(app.exec_())
 

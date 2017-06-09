@@ -135,7 +135,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QCheckBox" name="checkBox_strength_saves">
+           <widget class="QCheckBox" name="checkBox_strength_saving_throw">
             <property name="mouseTracking">
              <bool>false</bool>
             </property>
@@ -244,7 +244,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QCheckBox" name="checkBox_dexterity_saves">
+           <widget class="QCheckBox" name="checkBox_dexterity_saving_throw">
             <property name="mouseTracking">
              <bool>false</bool>
             </property>
@@ -416,7 +416,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QCheckBox" name="checkBox_constitution_saves">
+           <widget class="QCheckBox" name="checkBox_constitution_saving_throw">
             <property name="mouseTracking">
              <bool>false</bool>
             </property>
@@ -518,7 +518,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QCheckBox" name="checkBox_intelligence_saves">
+           <widget class="QCheckBox" name="checkBox_intelligence_saving_throw">
             <property name="mouseTracking">
              <bool>false</bool>
             </property>
@@ -780,7 +780,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QCheckBox" name="checkBox_wisdom_saves">
+           <widget class="QCheckBox" name="checkBox_wisdom_saving_throw">
             <property name="mouseTracking">
              <bool>false</bool>
             </property>
@@ -959,7 +959,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QCheckBox" name="checkBox_charisma_saves">
+           <widget class="QCheckBox" name="checkBox_charisma_saving_throw">
             <property name="mouseTracking">
              <bool>false</bool>
             </property>

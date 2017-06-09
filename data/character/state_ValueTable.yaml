@@ -9,7 +9,7 @@
             - wisdom
             - charisma
     depend:
-        strength: [strengthMod]
+        strength: strengthMod
         constitution: constMod
         dexterity: dextMod
         intelligence: intelMod

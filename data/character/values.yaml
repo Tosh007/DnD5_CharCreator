@@ -53,14 +53,17 @@
 - speed:
     ui: Label_Speed
     format: "Speed: {0}"
+    initial: 30
 - armorClass:
     ui: Label_ArmorClass
     format: "Armor Class: {0}"
+    initial: 0
 - initiative:
     ui: Label_Initiative
     format: "Initiative: {0}"
-    initial: 30
+    initial: 0
 - maxHP:
     ui: Label_MaxHP
     config: MaxHPConfig
     format: "Hit Point Maximum: {2}"
+    initial: 0

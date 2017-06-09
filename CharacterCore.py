@@ -7,7 +7,6 @@ class DependentObject(QObject):
     changeSignal = pyqtSignal()
     def __init__(self, widget):
         super().__init__(widget)
-        #print(str(type(self))+".init")
         self.widget = widget
         if isinstance(widget, QtWidgets.QSpinBox):
             widget.valueChanged.connect(self.changeSignal)
@@ -15,6 +14,10 @@ class DependentObject(QObject):
             widget.currentIndexChanged.connect(self.changeSignal)
         elif isinstance(widget, QtWidgets.QLabel):
             pass
+        elif isinstance(widget,QtWidgets.QListWidget):
+            pass
+        elif isinstance(widget,QtWidgets.QCheckBox):
+            widget.toggled.connect(self.changeSignal)
         elif (widget is None):pass
         else:
             raise TypeError(str(type(widget))+" is not supported")
@@ -52,7 +55,7 @@ class FiniteStateMachine:
 
     def request(self,state):
         assert state in self._states
-        print(str(type(self))+":state:"+state)
+        #print(str(type(self))+":state:"+state)
         self._exitState(self.currentState)
         self._enterState(state)
 
@@ -98,8 +101,10 @@ class ValueReference(DependentObject):
     def __init__(self, widget, valueconfig, format=None):
         super().__init__(widget)
         self.vconf = valueconfig
-        self.format = None
+        self.format = format
         self.modifiers = []
+        self._blockSignals = None
+        self.item = None
         if isinstance(widget, QtWidgets.QSpinBox):
             self._get = widget.value
             self._set = widget.setValue
@@ -107,8 +112,15 @@ class ValueReference(DependentObject):
         elif isinstance(widget, QtWidgets.QLabel):
             self._get = 0
             self._set = widget.setText
-            self.format = format
-            self._blockSignals = None
+        elif isinstance(widget, QtWidgets.QListWidget):
+            self.widget = QtWidgets.QListWidgetItem("")
+            self._get = 0
+            self._set = self.widget.setText
+            widget.addItem(self.widget)
+        elif isinstance(widget,QtWidgets.QCheckBox):
+            self._get = self.widget.isChecked
+            self._set = self.widget.setChecked
+            self._blockSignals = widget.blockSignals
         elif widget is None:
             self._get = 0
         else:
@@ -128,7 +140,7 @@ class ValueReference(DependentObject):
         elif isinstance(self._get, int):
             v = self._get
         else: 
-            v = self._get()
+            v = int(self._get())
         if not ignoreModifier:
             v = self.applyMods(v)
         return v
@@ -150,6 +162,8 @@ class ValueReference(DependentObject):
         # uses ValueConfig to verify such a value is possible,
         # and either updates the fallback value, or resets to fallback
         # exception: if valueconfig.getMaxValue the value is just set to the highest possible value.
+        #if type(self.widget)is QtWidgets.QCheckBox:
+            #print("changed:",self.widget.isChecked())
         if self.vconf.getMaxValue:
             maxv = self.vconf.getMaxValue()
             self.set(maxv)
@@ -157,24 +171,30 @@ class ValueReference(DependentObject):
         value = self.get(True)
         if self.vconf.checkRequirements(value, self.lastValue):
             self.lastValue = value
+            v, mstring = self.applyMods(value, True)
+            self.showValue(value,v,mstring)
         else:
             self.set(self.lastValue)
             value = self.lastValue
-        v, mstring = self.applyMods(value, True)
-        self.showValue(value,v,mstring)
 
     def showValue(self,v,vmod,mdesc):
         svmod = " ({0})".format(vmod)
-        
-        if isinstance(self.widget, QtWidgets.QLabel):
-            if self.format:sv = self.format.format(v,(svmod if mdesc else ""),vmod)
-            else:sv=str(v) + (svmod if mdesc else "")
-            s = sv
+        if self._blockSignals:
+            self._blockSignals(True)
+        if isinstance(self.widget, QtWidgets.QLabel) or isinstance(self.widget, QtWidgets.QListWidgetItem):
+            if self.format:s = self.format.format(v,(svmod if mdesc else ""),vmod)
+            else:s=str(v) + (svmod if mdesc else "")
             self._set(s)
         elif isinstance(self.widget, QtWidgets.QSpinBox):
             self.widget.setSuffix((svmod if mdesc else ""))
             self._set(v)
+        elif isinstance(self.widget, QtWidgets.QCheckBox):
+            b = bool(vmod)
+            self._set(b)
+        self.widget.setHidden(self.vconf.hide(vmod))
         self.widget.setToolTip(mdesc)
+        if self._blockSignals:
+            self._blockSignals(False)
 
 
 class ValueConfig:
@@ -182,6 +202,7 @@ class ValueConfig:
     def checkRequirements(value, oldvalue):
         return False
     getMaxValue = None
+    hide=lambda s,v=0:False
 
 
 class ValueConfig_allow(ValueConfig):
@@ -199,7 +220,6 @@ class ValueModifier:
         self.order = order
         self.ID = self._ID
         ValueModifier._ID+=1
-        #print (str(type(self))+":"+str(self.ID))
 
     def connect(self, valueref):
         try:
@@ -258,16 +278,14 @@ class ChoiceReference(FiniteStateMachine, DependentObject):
 
 
 class Proficiency(DependentObject):
-    def __init__(self, name, parent=None, valueref = None):
+    def __init__(self, name, parent, valueref):
         super().__init__(None)
         self.name = name
         self.parent = parent
         self.value = valueref
         self.subTypes = []
-        if valueref:
-            self.connect(valueref)
-        else:
-            self.value=False
+        #self.connect(valueref)
+        valueref.set(0)
         if parent:
             parent.connect(self)
 
@@ -280,19 +298,13 @@ class Proficiency(DependentObject):
         return False
 
     def set(self,v):
-        if isinstance(self.value, DependentObject):
-            eq=self.value.get()==v
-        else:
-            eq=self.value==v
-        if eq:
-            if type(self.value) is int:
-                self.value = v
-                self.changeSignal.emit()
-            else:
-                self.value.set(v)
-                self.changeSignal.emit()
+        if self.value.get()!=v:
+            self.value.set(v)
+            self.changeSignal.emit()
 
     def get(self):
-        v=(self.value if type(self.value) is int else self.value.get())
-        p=self.parent.get()
-        return v or p
+        v=self.value.get()
+        if self.parent:
+            p=self.parent.get()
+        else:p=False
+        return (1 if v or p else 0)

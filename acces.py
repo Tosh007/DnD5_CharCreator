@@ -14,6 +14,10 @@ def initializeTables(ui):
     Choice = ChoiceTable()
     print("global table initialization complete!")
 
+def getValueTable():
+    return Value
+
+
 # returns a list of objects as result of a list of strings
 # returns a list with one object if a string is given
 def _get(obj,name):

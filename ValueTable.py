@@ -13,12 +13,12 @@ class ValueTable:
             ui=None
             config = ValueConfig
             format = None
-            initial=None
-            print (meta)
+            initial=0
+            #print (meta)
             for key in meta:
                 if key=="ui":
                     ui=getUI(meta[key])
-                    print (ui)
+                    #print (ui)
                 if key=="config":
                     config = getConfig(meta[key])
                 if key=="format":
@@ -26,6 +26,9 @@ class ValueTable:
                 if key=="initial":
                     initial = meta[key]
             self.__dict__[name] = ValueReference(ui, config,format)
-            if initial:
-                self.__dict__[name].set(initial)
-            print(name,"=ValueReference(",ui,config, format,")")
+            self.__dict__[name].set(initial)
+            self.__dict__[name].lastValue = initial
+            #print(name,"=ValueReference(",ui,config, format,")")
+    def flushChanges(self):
+        for obj in self.__dict__.values():
+            obj.changeSignal.emit()

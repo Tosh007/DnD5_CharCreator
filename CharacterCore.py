@@ -288,7 +288,7 @@ class Proficiency(DependentObject):
         self.parent = parent
         self.value = valueref
         self.subTypes = []
-        #self.connect(valueref)
+        valueref.connect(self)
         valueref.set(0)
         if parent:
             parent.connect(self)

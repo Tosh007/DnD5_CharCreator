@@ -16,6 +16,9 @@
 - Dwarf_speed:
     lambda: "25"
     text: "Dwarf"
+- Dwarf_Proficient:
+    lambda: "x+1"
+    text: Dwarf
 
 - Barbarian_HP:
     lambda: "x+12"

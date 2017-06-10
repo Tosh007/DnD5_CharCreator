@@ -40,7 +40,7 @@ class ProficiencyTable:
 
         valueref = ValueReference(ui, c, name)
         valueref.set(0)
-        getValueTable().__dict__[name] = valueref
+        getValueTable().__dict__["proficiency_"+sname] = valueref
         self.table[sname] = Proficiency(name, parent, valueref)
         return sname
 

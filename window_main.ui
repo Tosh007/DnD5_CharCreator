@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1269</width>
+    <width>1058</width>
     <height>632</height>
    </rect>
   </property>
@@ -1132,20 +1132,20 @@
    <widget class="QMdiArea" name="SpecialChoiceMenu1">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>440</x>
       <y>160</y>
-      <width>211</width>
-      <height>391</height>
+      <width>261</width>
+      <height>181</height>
      </rect>
     </property>
    </widget>
    <widget class="QListWidget" name="listWidget_traits">
     <property name="geometry">
      <rect>
-      <x>680</x>
+      <x>740</x>
       <y>160</y>
       <width>251</width>
-      <height>171</height>
+      <height>181</height>
      </rect>
     </property>
    </widget>
@@ -1165,7 +1165,7 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>680</x>
+      <x>740</x>
       <y>140</y>
       <width>83</width>
       <height>13</height>
@@ -1178,8 +1178,8 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>350</y>
+      <x>740</x>
+      <y>360</y>
       <width>50</width>
       <height>13</height>
      </rect>
@@ -1191,28 +1191,28 @@
    <widget class="QListWidget" name="listWidget_proficiencies">
     <property name="geometry">
      <rect>
-      <x>960</x>
-      <y>160</y>
-      <width>256</width>
-      <height>171</height>
+      <x>440</x>
+      <y>380</y>
+      <width>261</width>
+      <height>201</height>
      </rect>
     </property>
    </widget>
    <widget class="QListWidget" name="listWidget_inventory">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>370</y>
+      <x>740</x>
+      <y>380</y>
       <width>256</width>
-      <height>211</height>
+      <height>201</height>
      </rect>
     </property>
    </widget>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>960</x>
-      <y>140</y>
+      <x>440</x>
+      <y>360</y>
       <width>59</width>
       <height>13</height>
      </rect>
@@ -1227,7 +1227,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1269</width>
+     <width>1058</width>
      <height>21</height>
     </rect>
    </property>

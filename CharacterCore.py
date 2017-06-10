@@ -125,21 +125,26 @@ class ValueReference(DependentObject):
             self._get = 0
         else:
             raise TypeError("unsupported widget "+str(type(widget)))
-        self.lastValue = self.get()
+        self.lastValue = 0
 
-    def set(self, value):
+    def set(self, value, setLastValue=True):
         v, mstring = self.applyMods(value, True)
+        if setLastValue:
+            self.lastValue = self.get()
         if not callable(self._get):
             self._get = value
-        self.showValue(value,v,mstring) 
-        
+        self.showValue(value,v,mstring)
+
+    def reset(self):
+        self.set(self.lastValue, False)
+
     def get(self, ignoreModifier=False):
         # returns current value from qt widget
         if isinstance(self._get, str):
             v = int(self._get)
         elif isinstance(self._get, int):
             v = self._get
-        else: 
+        else:
             v = int(self._get())
         if not ignoreModifier:
             v = self.applyMods(v)
@@ -174,8 +179,7 @@ class ValueReference(DependentObject):
             v, mstring = self.applyMods(value, True)
             self.showValue(value,v,mstring)
         else:
-            self.set(self.lastValue)
-            value = self.lastValue
+            self.reset()
 
     def showValue(self,v,vmod,mdesc):
         svmod = " ({0})".format(vmod)

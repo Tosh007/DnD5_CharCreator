@@ -7,6 +7,7 @@
 - proficiencyBonus:
     ui: Label_ProficiencyBonus
     format: "Proficiency Bonus: {0}"
+    initial: 2
 - abilityScorePoints:
     ui: Label_AbilityScore
     format: "Ability Score Points: {0}"

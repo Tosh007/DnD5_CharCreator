@@ -1,4 +1,4 @@
-- Human_plus1:
+- Human_plus:
     lambda: "x+1"
     text: "Human: +1"
 - HalfOrc_plus1:

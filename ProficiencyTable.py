@@ -10,7 +10,7 @@ class ProficiencyTable:
         y = yaml.load(f)
         f.close()
         self.loadProficiency(y)
-        
+
     def loadProficiency(self, data, parent=None):
         # always a list as toplevel structure
         for obj in data:
@@ -39,8 +39,7 @@ class ProficiencyTable:
             c = getConfig("HiddenValue")
 
         valueref = ValueReference(ui, c, name)
-        valueref.set(1)
-        valueref.lastValue=1
+        valueref.set(0)
         getValueTable().__dict__[name] = valueref
         self.table[sname] = Proficiency(name, parent, valueref)
         return sname

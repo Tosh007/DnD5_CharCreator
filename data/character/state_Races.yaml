@@ -15,11 +15,18 @@ Dwarf:
         Dwarf_speed:
             - speed
         Dwarf_Proficient:
-            - proficiency_battleaxe
-            - proficiency_light_hammer
-            - proficiency_handaxe
-            - proficiency_warhammer
-Elf: {}
+            - prof_battleaxe
+            - prof_light_hammer
+            - prof_handaxe
+            - prof_warhammer
+            - prof_dwarvish
+Elf:
+    mod:
+        Elf_plus2:
+            - dexterity
+        Elf_Proficient:
+            - prof_perception
+            - prof_elvish
 Halfling: {}
 Dragonborn: {}
 Gnome: {}

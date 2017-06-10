@@ -19,6 +19,15 @@
 - Dwarf_Proficient:
     lambda: "x+1"
     text: Dwarf
+- Elf_plus1:
+    lambda: "x+1"
+    text: "Elf: +1"
+- Elf_plus2:
+    lambda: "x+2"
+    text: "Elf: +2"
+- Elf_Proficient:
+    lambda: "x+1"
+    text: "Elf"
 
 - Barbarian_HP:
     lambda: "x+12"

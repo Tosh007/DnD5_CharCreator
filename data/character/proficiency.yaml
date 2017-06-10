@@ -103,7 +103,7 @@
 
 - languages:
     - standart languages:
-        - common
+        - common!
         - dwarvish
         - orcish
         - elvish

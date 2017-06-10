@@ -25,6 +25,11 @@ class ProficiencyTable:
                 self.loadProficiency(obj[name],attr)
 
     def newProficiency(self, name, parent, hasChildren=False):
+        if name[-1]=="!":
+            initial = 1
+            name  = name[:-1]
+        else:
+            initial=0
         sname=name.replace(" ", "_")
         if parent:
             parent = self.table[parent]
@@ -39,8 +44,8 @@ class ProficiencyTable:
             c = getConfig("HiddenValue")
 
         valueref = ValueReference(ui, c, name)
-        valueref.set(0)
-        getValueTable().__dict__["proficiency_"+sname] = valueref
+        valueref.set(initial)
+        getValueTable().__dict__["prof_"+sname] = valueref
         self.table[sname] = Proficiency(name, parent, valueref)
         return sname
 

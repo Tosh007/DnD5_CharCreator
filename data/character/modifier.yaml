@@ -28,6 +28,9 @@
 - Elf_Proficient:
     lambda: "x+1"
     text: "Elf"
+- Wood_Elf_Speed:
+    text: "Wood Elf"
+    lambda: "35"
 
 - Barbarian_HP:
     lambda: "x+12"

@@ -7,3 +7,6 @@ Mountain Dwarf:
     mod:
         Dwarf_plus2:
             - strength
+        Dwarf_Proficient:
+            - prof_light_armor
+            - prof_medium_armor

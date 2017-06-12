@@ -74,6 +74,9 @@ class FiniteStateMachine:
                     dep = getValues(name)[0]
                     targets = getValues(dependants[name])
                     dep.disconnect(targets)
+        state = state.replace("-","_")
+        state = state.replace(" ","_")
+        self.exit(state)
         if hasattr(self,"exit"+state):
             getattr(self, "exit"+state)()
 
@@ -91,9 +94,14 @@ class FiniteStateMachine:
                     dep = getValues(name)[0]
                     targets = getValues(dependants[name])
                     dep.connect(targets)
-        if hasattr(self,"enter"+state):
-            getattr(self, "enter"+state)()
+        nstate = state.replace("-","_")
+        nstate = nstate.replace(" ","_")
+        self.enter(nstate)
+        if hasattr(self,"enter"+nstate):
+            getattr(self, "enter"+nstate)()
         self.currentState = state
+    def exit(self,state):pass
+    def enter(self,state):pass
 
 
 class ValueReference(DependentObject):

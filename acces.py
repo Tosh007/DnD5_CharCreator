@@ -42,7 +42,7 @@ def getConfig(name):
     return _get(Config,name)[0]
 
 def getProficiency(name):
-    return _get(Proficiency)[0]
+    return _get(Proficiency,name)[0]
 
 def getChoice(name):
-    return _get(Choice)[0]
+    return _get(Choice,name)[0]

@@ -9,8 +9,8 @@ try:
 except ImportError:
     from program.window_main import Ui_MainWindow
     from program.CharacterCore import ValueReference, ValueConfig, ValueModifier
-    import program.CharacterCore
-    import program.acces
+    import program.CharacterCore as CharacterCore
+    import program.acces as acces
 print(sys.version_info)
 app = QtWidgets.QApplication(sys.argv)
 MainWindow = QtWidgets.QMainWindow()

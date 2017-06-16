@@ -1,10 +1,17 @@
 
 def initializeTables(ui):
-    from ValueTable import ValueTable
-    from ChoiceTable import ChoiceTable
-    from ProficiencyTable import ProficiencyTable
-    from ConfigTable import ConfigTable
-    from ModifierTable import ModifierTable
+    try:
+        from ValueTable import ValueTable
+        from ChoiceTable import ChoiceTable
+        from ProficiencyTable import ProficiencyTable
+        from ConfigTable import ConfigTable
+        from ModifierTable import ModifierTable
+    except ImportError:
+        from program.ValueTable import ValueTable
+        from program.ChoiceTable import ChoiceTable
+        from program.ProficiencyTable import ProficiencyTable
+        from program.ConfigTable import ConfigTable
+        from program.ModifierTable import ModifierTable
     global UI,Value,Modifier,Config,Proficiency,Choice
     UI = ui
     Config = ConfigTable

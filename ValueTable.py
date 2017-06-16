@@ -1,10 +1,13 @@
-from CharacterCore import ValueReference, ValueConfig, ValueModifier, ChoiceReference, FiniteStateMachine
+try:
+    from CharacterCore import *
+    from acces import *
+except ImportError:
+    from program.CharacterCore import *
+    from program.acces import *
 import yaml
-from acces import *
-
 class ValueTable:
     def __init__(self):
-        f = open("data/character/values.yaml")
+        f = open(getDirectoryPrefix()+"data/character/values.yaml")
         data = yaml.load(f)
         f.close()
         for obj in data:

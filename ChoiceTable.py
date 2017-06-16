@@ -1,6 +1,9 @@
-from acces import*
-from CharacterCore import ChoiceReference, FiniteStateMachine
-
+try:
+    from acces import*
+    from CharacterCore import ChoiceReference, FiniteStateMachine
+except ImportError:
+    from program.acces import*
+    from program.CharacterCore import*
 class StateTable:
     class Classes(ChoiceReference):
         stateFile = "data/character/state_Classes.yaml"

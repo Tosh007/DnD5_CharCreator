@@ -5,11 +5,16 @@
 #    Barbarian_HP = VMod(lambda x:x+12, "Barbarian: {2:+d}")
 #    AbilityScoreHardCap = VMod(lambda x: min(20,x), "Hardcap at 20", 8)
 import yaml
-from acces import*
-from CharacterCore import *
+try:
+    from acces import*
+    from CharacterCore import *
+except ImportError:
+    from program.acces import*
+    from program.CharacterCore import*
+
 class ModifierTable:
     def __init__(self):
-        f = open("data/character/modifier.yaml")
+        f = open(getDirectoryPrefix()+"data/character/modifier.yaml")
         data = yaml.load(f)
         f.close()
         for d in data:

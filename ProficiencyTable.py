@@ -1,12 +1,16 @@
-from CharacterCore import ValueReference, ValueConfig, ValueModifier, ChoiceReference, FiniteStateMachine, Proficiency
 import yaml
-from acces import *
+try:
+    from CharacterCore import*
+    from acces import *
+except ImportError:
+    from program.CharacterCore import*
+    from program.acces import *
 from PyQt5.QtCore import Qt
 
 class ProficiencyTable:
     def __init__(self):
         self.table = {}
-        f = open("data/character/proficiency.yaml")
+        f = open(getDirectoryPrefix()+"data/character/proficiency.yaml")
         y = yaml.load(f)
         f.close()
         self.loadProficiency(y)

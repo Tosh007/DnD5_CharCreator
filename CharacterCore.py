@@ -1,7 +1,16 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSignal, QObject
-from acces import *
+import os
+try:
+    from acces import *
+except ImportError:
+    from program.acces import *
 import yaml
+def getDirectoryPrefix():
+    if os.path.exists("./data"):
+        return ""
+    else:
+        return "program/"
 
 class DependentObject(QObject):
     changeSignal = pyqtSignal()
@@ -47,7 +56,7 @@ class FiniteStateMachine:
 
     def __init__(self):
         if self.stateFile:
-            f = open(self.stateFile,"r")
+            f = open(getDirectoryPrefix()+self.stateFile,"r")
             self.states = yaml.load(f)
             f.close()
         self._states.update(self.states)

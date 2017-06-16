@@ -8,8 +8,7 @@ app = QtWidgets.QApplication(sys.argv)
 MainWindow = QtWidgets.QMainWindow()
 ui = Ui_MainWindow()
 ui.setupUi(MainWindow)
-from GuiSetup import setup_main_window
-setup_main_window(ui)
+
 
 import CharacterCore
 import acces

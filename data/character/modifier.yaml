@@ -31,10 +31,75 @@
 - Wood_Elf_Speed:
     text: "Wood Elf"
     lambda: "35"
-
+- Halfling_plus1:
+    text: "Halfling +1"
+    lambda: "x+1"
+- Halfling_plus2:
+    text: "Halfling +2"
+    lambda: "x+2"
+- Halfling_speed:
+    text: "Halfling"
+    lambda: "25"
+- Halfling_proficient:
+    text: "Halfling"
+    lambda: "x+1"
+- Dragonborn_plus1:
+    text: "Dragonborn: +1"
+    lambda: "x+1"
+- Dragonborn_plus2:
+    text: "Dragonborn: +2"
+    lambda: "x+2"
+- Dragonborn_proficient:
+    text: "Dragonborn"
+    lambda: "x+1"
 - Barbarian_HP:
     lambda: "x+12"
     text: "Barbarian: {2:+d}"
+- Gnome_plus2:
+    text: "Gnome: +2"
+    lambda: "x+2"
+- Gnome_plus1:
+    text: "Gnome: +1"
+    lambda: "x+1"
+- Gnome_proficient:
+    text: "Gnome"
+    lambda: "x+1"
+- HalfOrc_plus1:
+    text: "Half Orc: +1"
+    lambda: "x+1"
+- HalfOrc_plus2:
+    text: "Half Orc: +2"
+    lambda: "x+2"
+- HalfOrc_proficient:
+    text: "Half Orc"
+    lambda: "x+1"
+- Orc_plus2:
+    text: "Orc: +2"
+    lambda: "x+2"
+- Orc_plus1:
+    text: "Orc: +1"
+    lambda: "x+1"
+- Orc_proficient:
+    text: "Orc"
+    lambda: "x+1"
+- Orc_minus2:
+    text: "Orc: {0}"
+    lambda: "x-2"
+- Tiefling_plus2:
+    text: "Tiefling: +2"
+    lambda: "x+2"
+- Tiefling_plus1:
+    text: "Tiefling: +1"
+    lambda: "x+1"
+- Tiefling_proficient:
+    text: "Tiefling"
+    lambda: "x+1"
+- HalfElf_plus2:
+    text: "Half-Elf: +2"
+    lambda: "x+2"
+- HalfElf_Proficient:
+    text: "Half-Elf"
+    lambda: "x+1"
 
 - AbilityScoreHardCap:
     lambda: "min(20,x)"

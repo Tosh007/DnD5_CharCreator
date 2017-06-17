@@ -27,13 +27,62 @@ Elf:
         Elf_Proficient:
             - prof_perception
             - prof_elvish
-            
 
+Halfling:
+    mod:
+        Halfling_plus2:
+            - dexterity
+        Halfling_speed:
+            - speed
+        Halfling_proficient:
+            - prof_halfling
 
-Halfling: {}
-Dragonborn: {}
-Gnome: {}
-Half-Elf: {}
-Half-Orc: {}
-Orc: {}
-Tiefling: {}
+Dragonborn:
+    mod:
+        Dragonborn_plus2:
+            - strength
+        Dragonborn_plus1:
+            - charisma
+        Dragonborn_proficient:
+            - prof_draconic
+Gnome:
+    mod:
+        Gnome_plus2:
+            - intelligence
+        Gnome_proficient:
+            - prof_gnomish
+
+Half-Elf:
+    mod:
+        HalfElf_plus2:
+            - charisma
+        HalfElf_Proficient:
+            - prof_elvish
+Half-Orc:
+    mod:
+        HalfOrc_plus2:
+            - strength
+        HalfOrc_plus1:
+            - constitution
+        HalfOrc_proficient:
+            - prof_orcish
+            - prof_intimidation
+Orc:
+    mod:
+        Orc_plus2:
+            - strength
+        Orc_plus1:
+            - constitution
+        Orc_minus2:
+            - intelligence
+        Orc_proficient:
+            - prof_orcish
+
+Tiefling:
+    mod:
+        Tiefling_plus1:
+            - intelligence
+        Tiefling_plus2:
+            - charisma
+        Tiefling_proficient:
+            - prof_infernal

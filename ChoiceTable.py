@@ -14,6 +14,12 @@ class StateTable:
     class Subrace_Elf(ChoiceReference):
         stateFile = "data/character/state_Subrace_Elf.yaml"
 
+    class Subrace_Halfling(ChoiceReference):
+        stateFile = "data/character/state_Subrace_Halfling.yaml"
+
+    class Subrace_Gnome(ChoiceReference):
+        stateFile = "data/character/state_Subrace_Gnome.yaml"
+
     class Races(ChoiceReference):
         stateFile = "data/character/state_Races.yaml"
         #def enterDwarf(self):

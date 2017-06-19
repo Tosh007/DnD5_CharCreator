@@ -39,12 +39,15 @@ class DependentObject(QObject):
         except TypeError:
             self.changeSignal.connect(objects.changeSignal)
 
-    def disconnect(self, objects):
-        try:
-            for obj in objects:
-                self.changeSignal.disconnect(obj.changeSignal)
-        except TypeError:
-            self.changeSignal.disconnect(objects.changeSignal)
+    def disconnect(self, objects=None):
+        if objects:
+            try:
+                for obj in objects:
+                    self.changeSignal.disconnect(obj.changeSignal)
+            except TypeError:
+                self.changeSignal.disconnect(objects.changeSignal)
+        else:
+            self.changeSignal.disconnect()
 
     def on_changed(self,*args,**kw):pass
 
@@ -54,12 +57,13 @@ class FiniteStateMachine:
     def initFSM(self):
         self._enterState("Off")
 
-    def __init__(self):
+    def __init__(self, states={}):
         if self.stateFile:
             f = open(getDirectoryPrefix()+self.stateFile,"r")
             self.states = yaml.load(f)
             f.close()
         self._states.update(self.states)
+        self._states.update(states)
         self.props = []
         self.currentState = ""
 
@@ -293,8 +297,8 @@ class ValueModifier:
 
 
 class ChoiceReference(FiniteStateMachine, DependentObject):
-    def __init__(self, widget):
-        FiniteStateMachine.__init__(self)
+    def __init__(self, widget, states={}):
+        FiniteStateMachine.__init__(self,states)
         DependentObject.__init__(self, widget)
         self.initFSM()
         widget.addItems(sorted(self.states.keys(),key=str.lower))

@@ -1,6 +1,9 @@
 - Human_plus:
     lambda: "x+1"
     text: "Human: +1"
+- Human_Proficient:
+    lambda: "x+1"
+    text: "Human"
 - HalfOrc_plus1:
     lambda: "x+1"
     text: "Half Orc: +1"
@@ -99,6 +102,17 @@
     lambda: "x+2"
 - HalfElf_Proficient:
     text: "Half-Elf"
+    lambda: "x+1"
+
+# for feats
+- Alert:
+    text: "Alert"
+    lambda: "x+5"
+- Athlete:
+    text: "Athlete"
+    lambda: "x+1"
+- Actor:
+    text: "Actor"
     lambda: "x+1"
 
 - AbilityScoreHardCap:

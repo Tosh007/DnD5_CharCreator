@@ -1,0 +1,126 @@
+Alert:
+    property:
+        - Alert
+Athlete:
+    property:
+        - Athlete
+Actor:
+    property:
+        - Actor
+Charger:
+    property:
+        - Charger
+Crossbow Expert:
+    property:
+        - Crossbow Expert
+Defensive Duelist:
+    property:
+        - Defensive Duelist
+Dual Wielder:
+    property:
+        - Dual Wielder
+Dungeon Delver:
+    property:
+        - Dungeon Delver
+Durable:
+    property:
+        - Durable
+Elemental Adept:
+    property:
+        - Elemental Adept
+Grappler:
+    property:
+        - Grappler
+Great Weapon Master:
+    property:
+        - Great Weapon Master
+Healer:
+    property:
+        - Healer
+Heavily Armored:
+    property:
+        - Heavily Armored
+heavy Armor Master:
+    property:
+        - heavy Armor Master
+Inspiring Leader:
+    property:
+        - Inspiring Leader
+Keen Mind:
+    property:
+        - Keen Mind
+Lightly Armored:
+    property:
+        - Lightly Armored
+Linguist:
+    property:
+        - Linguist
+Lucky:
+    property:
+        - Lucky
+Mage Slayer:
+    property:
+        - Mage Slayer
+Magic Initiate:
+    property:
+        - Magic Initiate
+Martial Adept:
+    property:
+        - Martial Adept
+Medium Armor Master:
+    property:
+        - Medium Armor Master
+Mobile:
+    property:
+        - Mobile
+Moderately Armored:
+    property:
+        - Moderately Armored
+Mounted Combatant:
+    property:
+        - Mounted Combatant
+Observant:
+    property:
+        - Observant
+Polearm Master:
+    property:
+        - Polearm Master
+Resilient:
+    property:
+        - Resilient
+Ritual Caster:
+    property:
+        - Ritual Caster
+Savage Attacker:
+    property:
+        - Savage Attacker
+Sentinel:
+    property:
+        - Sentinel
+Sharpshooter:
+    property:
+        - Sharpshooter
+Shield Master:
+    property:
+        - Shield Master
+Skilled:
+    property:
+        - Skilled
+Skulker:
+    property:
+        - Skulker
+Spell Sniper:
+    property:
+        - Spell Sniper
+Tavern Brawler:
+    property:
+        - Tavern Brawler
+Tough:
+    property:
+        - Tough
+War Caster:
+    property:
+        - War Caster
+Weapon Master:
+    property:
+        - Weapon Master

@@ -1,0 +1,8 @@
+Forest Gnome:
+    mod:
+        Gnome_plus1:
+            - dexterity
+Rock Gnome:
+    mod:
+        Gnome_plus1:
+            - constitution

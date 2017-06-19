@@ -1,0 +1,8 @@
+Lightfoot Halfling:
+    mod:
+        Halfling_plus1:
+            - charisma
+Stout Halfling:
+    mod:
+        Halfling_plus1:
+            - constitution

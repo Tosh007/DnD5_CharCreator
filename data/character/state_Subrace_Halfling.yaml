@@ -2,7 +2,11 @@ Lightfoot Halfling:
     mod:
         Halfling_plus1:
             - charisma
+    property:
+        - naturally stealthy
 Stout Halfling:
     mod:
         Halfling_plus1:
             - constitution
+    property:
+        - stout resilience

@@ -20,6 +20,10 @@ Dwarf:
             - prof_handaxe
             - prof_warhammer
             - prof_dwarvish
+    property:
+        - Dwarven Resilience
+        - Darkvision
+        - Stonecunning
 Elf:
     mod:
         Elf_plus2:
@@ -27,6 +31,10 @@ Elf:
         Elf_Proficient:
             - prof_perception
             - prof_elvish
+    property:
+        - Keen Senses
+        - Fey Ancestry
+        - Trance
 
 Halfling:
     mod:
@@ -36,6 +44,10 @@ Halfling:
             - speed
         Halfling_proficient:
             - prof_halfling
+    property:
+        - lucky
+        - brave
+        - Halfling Nimbleness
 
 Dragonborn:
     mod:
@@ -45,12 +57,16 @@ Dragonborn:
             - charisma
         Dragonborn_proficient:
             - prof_draconic
+
 Gnome:
     mod:
         Gnome_plus2:
             - intelligence
         Gnome_proficient:
             - prof_gnomish
+    property:
+        - Darkvision
+        - Gnome Cunning
 
 Half-Elf:
     mod:
@@ -58,6 +74,10 @@ Half-Elf:
             - charisma
         HalfElf_Proficient:
             - prof_elvish
+    property:
+        - Darkvision
+        - Fey Ancestry
+
 Half-Orc:
     mod:
         HalfOrc_plus2:
@@ -67,6 +87,10 @@ Half-Orc:
         HalfOrc_proficient:
             - prof_orcish
             - prof_intimidation
+    property:
+        - Darkvision
+        - Relentless Endurance
+        - Savage Attacks
 Orc:
     mod:
         Orc_plus2:
@@ -86,3 +110,7 @@ Tiefling:
             - charisma
         Tiefling_proficient:
             - prof_infernal
+    property:
+        - Darkvision
+        - Hellish Resistance
+        - Infernal Legacy

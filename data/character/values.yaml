@@ -53,15 +53,15 @@
 # other scores
 - speed:
     ui: Label_Speed
-    format: "Speed: {0}"
+    format: "Speed: {2}"
     initial: 30
 - armorClass:
     ui: Label_ArmorClass
-    format: "Armor Class: {0}"
+    format: "Armor Class: {2}"
     initial: 0
 - initiative:
     ui: Label_Initiative
-    format: "Initiative: {0}"
+    format: "Initiative: {2}"
     initial: 0
 - maxHP:
     ui: Label_MaxHP

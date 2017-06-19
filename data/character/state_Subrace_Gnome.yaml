@@ -2,7 +2,13 @@ Forest Gnome:
     mod:
         Gnome_plus1:
             - dexterity
+    property:
+        - natural Illusionist
+        - speak with small Beasts
 Rock Gnome:
     mod:
         Gnome_plus1:
             - constitution
+    property:
+        - "artificer's lore"
+        - Tinker

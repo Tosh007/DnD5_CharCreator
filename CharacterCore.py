@@ -60,6 +60,7 @@ class FiniteStateMachine:
             self.states = yaml.load(f)
             f.close()
         self._states.update(self.states)
+        self.props = []
         self.currentState = ""
 
     def request(self,state):
@@ -83,6 +84,11 @@ class FiniteStateMachine:
                     dep = getValues(name)[0]
                     targets = getValues(dependants[name])
                     dep.disconnect(targets)
+        ui = getUI("listWidget_traits")
+        for item in self.props:
+            i=ui.takeItem(ui.row(item))
+            assert i==item
+        self.props.clear()
         state = state.replace("-","_")
         state = state.replace(" ","_")
         self.exit(state)
@@ -90,6 +96,7 @@ class FiniteStateMachine:
             getattr(self, "exit"+state)()
 
     def _enterState(self,state):
+        ui = getUI("listWidget_traits")
         for key in self._states[state]:
             if key=="mod":
                 modifiers = self._states[state][key]
@@ -103,6 +110,12 @@ class FiniteStateMachine:
                     dep = getValues(name)[0]
                     targets = getValues(dependants[name])
                     dep.connect(targets)
+            elif key=="property":
+                for name in self._states[state][key]:
+                    ui.addItem(name)
+                    item = ui.item(ui.count()-1)
+                    self.props.append(item)
+
         nstate = state.replace("-","_")
         nstate = nstate.replace(" ","_")
         self.enter(nstate)

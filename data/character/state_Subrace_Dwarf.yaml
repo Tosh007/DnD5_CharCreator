@@ -3,6 +3,8 @@ Hill Dwarf:
         Dwarf_plus1:
             - wisdom
             - maxHP
+    property:
+        - Dwarven Toughness
 Mountain Dwarf:
     mod:
         Dwarf_plus2:

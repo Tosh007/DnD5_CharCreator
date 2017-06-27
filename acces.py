@@ -2,23 +2,24 @@
 def initializeTables(ui):
     try:
         from ValueTable import ValueTable
-        from ChoiceTable import ChoiceTable
+        from ChoiceTable import ActiveChoiceTable, StateTable
         from ProficiencyTable import ProficiencyTable
         from ConfigTable import ConfigTable
         from ModifierTable import ModifierTable
     except ImportError:
         from program.ValueTable import ValueTable
-        from program.ChoiceTable import ChoiceTable
+        from program.ChoiceTable import ActiveChoiceTable, StateTable
         from program.ProficiencyTable import ProficiencyTable
         from program.ConfigTable import ConfigTable
         from program.ModifierTable import ModifierTable
-    global UI,Value,Modifier,Config,Proficiency,Choice
+    global UI,Value,Modifier,Config,Proficiency,State,ActiveState
     UI = ui
     Config = ConfigTable
     Modifier = ModifierTable()
     Value = ValueTable()
     Proficiency = ProficiencyTable()
-    Choice = ChoiceTable()
+    State = StateTable
+    ActiveState = ActiveChoiceTable()
     print("global table initialization complete!")
 
 def getValueTable():
@@ -51,5 +52,8 @@ def getConfig(name):
 def getProficiency(name):
     return _get(Proficiency,name)[0]
 
-def getChoice(name):
-    return _get(Choice,name)[0]
+def getState(name):
+    return _get(State, name)[0]
+
+def getActiveState(name):
+    return _get(ActiveState,name)[0]

@@ -1,0 +1,60 @@
+Black:
+    property:
+        - "Black Dragon Ancestry:"
+        - " - Breath Weapon + Damage Resistance"
+        - " - Damage Type: Acid"
+        - " - Breath Weapon: Line, Dex. Save"
+Blue:
+    property:
+        - "Blue Dragon Ancestry:"
+        - " - Breath Weapon + Damage Resistance"
+        - " - Damage Type: Lightning"
+        - " - Breath Weapon: Line, Dex. Save"
+Brass:
+    property:
+        - "Brass Dragon Ancestry:"
+        - " - Breath Weapon + Damage Resistance"
+        - " - Damage Type: Fire"
+        - " - Breath Weapon: Line, Dex. Save"
+Bronze:
+    property:
+        - "Bronze Dragon Ancestry:"
+        - " - Breath Weapon + Damage Resistance"
+        - " - Damage Type: Ligthning"
+        - " - Breath Weapon: Line, Dex. Save"
+Copper:
+    property:
+        - "Copper Dragon Ancestry:"
+        - " - Breath Weapon + Damage Resistance"
+        - " - Damage Type: Acid"
+        - " - Breath Weapon: Line, Dex. Save"
+Gold:
+    property:
+        - "Gold Dragon Ancestry:"
+        - " - Breath Weapon + Damage Resistance"
+        - " - Damage Type: Fire"
+        - " - Breath Weapon: Cone, Dex. Save"
+Green:
+    property:
+        - "Green Dragon Ancestry:"
+        - " - Breath Weapon + Damage Resistance"
+        - " - Damage Type: Poison"
+        - " - Breath Weapon: Cone, Con. Save"
+Red:
+    property:
+        - "Red Dragon Ancestry:"
+        - " - Breath Weapon + Damage Resistance"
+        - " - Damage Type: Fire"
+        - " - Breath Weapon: Cone, Dex. Save"
+Silver:
+    property:
+        - "Silver Dragon Ancestry:"
+        - " - Breath Weapon + Damage Resistance"
+        - " - Damage Type: Cold"
+        - " - Breath Weapon: Cone, Con. Save"
+White:
+    property:
+        - "White Dragon Ancestry:"
+        - " - Breath Weapon + Damage Resistance"
+        - " - Damage Type: Cold"
+        - " - Breath Weapon: Cone, Con. Save"

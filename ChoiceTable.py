@@ -14,6 +14,9 @@ class StateTable:
     class FeatChoice(ChoiceReference):
         stateFile = "data/character/feats.yaml"
 
+    class Subrace_Dragonborn(ChoiceReference):
+        stateFile = "data/character/dragonborn_ancestry.yaml"
+
     class Subrace_Dwarf(ChoiceReference):
         stateFile = "data/character/state_Subrace_Dwarf.yaml"
 
@@ -36,7 +39,7 @@ class StateTable:
         def enter(self,state):
             if state=="Off":return
             try:
-                choice = getChoice("Subrace_"+state)
+                choice = getState("Subrace_"+state)
             except:return
             self.subrace = choice(getUI("ComboBox_Subrace"))
         def exit(self,state):
@@ -47,17 +50,17 @@ class StateTable:
         def enterHuman(self):
             tabRoot = getUI("tabWidget_specialProperties")
             self.tab_human = QWidget()
-            self.ui_human = Ui_Human()
-            self.ui_human.setupUi(self.tab_human)
+            self.extra_ui = Ui_Human()
+            self.extra_ui.setupUi(self.tab_human)
             self.tab = tabRoot.addTab(self.tab_human, "Human")
-            self.ui_human.checkBox_variantTraits.stateChanged.connect(self.altHumanTrait)
+            self.extra_ui.checkBox_variantTraits.stateChanged.connect(self.altHumanTrait)
 
         def exitHuman(self):
-            self.ui_human.checkBox_variantTraits.setCheckState(False)
+            self.extra_ui.checkBox_variantTraits.setCheckState(False)
             getUI("tabWidget_specialProperties").removeTab(self.tab)
             self.tab_human.setParent(None)
             del self.tab_human
-            del self.ui_human
+            del self.extra_ui
             del self.tab
 
         def altHumanTrait(self):
@@ -71,12 +74,10 @@ class StateTable:
     class PrimaryState(FiniteStateMachine):
         stateFile = "data/character/state_ValueTable.yaml"
 
-class ChoiceTable:
+class ActiveChoiceTable:
     def __init__(self):
         self.raceSelect = StateTable.Races(getUI("ComboBox_Race"))
         self.classSelect = StateTable.Classes(getUI("ComboBox_Class"))
         self.baseState = StateTable.PrimaryState()
         self.baseState.initFSM()
         self.baseState.request("On")
-    def __getattr__(self,name):
-        return getattr(StateTable,name)

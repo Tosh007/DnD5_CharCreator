@@ -1,13 +1,6 @@
 # primary race list
-Human:
-    mod:
-        Human_plus:
-            - strength
-            - dexterity
-            - constitution
-            - charisma
-            - wisdom
-            - intelligence
+Human: {}
+
 Dwarf:
     mod:
         Dwarf_plus2:
@@ -114,3 +107,157 @@ Tiefling:
         - Darkvision
         - Hellish Resistance
         - Infernal Legacy
+Aasimar:
+    mod:
+        Aasimar_plus2:
+            - charisma
+        Aasimar_proficient:
+            - prof_celestial
+    property:
+        - Darkvision
+        - Celestial Resistance
+        - Healing Hands
+        - Light Bearer
+Firbolg:
+    mod:
+        Firbolg_plus2:
+            - wisdom
+        Firbolg_plus1:
+            - strength
+        Firbolg_proficient:
+            - prof_elvish
+            - prof_giant
+    property:
+        - Firbolg Magic
+        - Hidden Step
+        - Powerful Build
+        - Speech of Beast and Leaf
+Goliath:
+    mod:
+        Goliath_plus2:
+            - strength
+        Goliath_plus1:
+            - constitution
+        Goliath_proficient:
+            - prof_athletics
+            - prof_giant
+    property:
+        - Mountain Born
+        - Powerful Build
+        - "Stone's Endurance"
+Kenku:
+    mod:
+        Kenku_plus1:
+            - wisdom
+        Kenku_plus2:
+            - dexterity
+    property:
+        - Expert Forgery
+        - Mimicry
+Lizardfolk:
+    mod:
+        Lizardfolk_plus1:
+            - wisdom
+        Lizardfolk_plus2:
+            - constitution
+        Lizardfolk_proficient:
+            - prof_draconic
+    property:
+        - swimming speed 30
+        - Cunning Artisan
+        - Bite
+        - Hold Breath (15min)
+        - Natural Armor
+        - Hungry Jaws
+Tabaxi:
+    mod:
+        Tabaxi_plus2:
+            - dexterity
+        Tabaxi_plus1:
+            - charisma
+        Tabaxi_proficient:
+            - prof_perception
+            - prof_stealth
+    property:
+        - Darkvision
+        - Feline Agility
+        - Climbing Speed 20ft
+        - "Cat's Claws"
+Triton:
+    mod:
+        Triton_plus1:
+            - strength
+            - constitution
+            - charisma
+        Triton_proficient:
+            - prof_primordial
+    property:
+        - Amphibious
+        - Control Air and Water
+        - Emissary of the sea
+        - Guardians of the Depths
+Bugbear:
+    mod:
+        Bugbear_plus2:
+            - strength
+        Bugbear_plus1:
+            - dexterity
+        Bugbear_proficient:
+            - prof_goblin
+    property:
+        - Darkvision
+        - "Long-limbed"
+        - Powerful Build
+        - Sneaky
+        - Surprise Attack
+Goblin:
+    mod:
+        Goblin_plus2:
+            - dexterity
+        Goblin_plus1:
+            - constitution
+        Goblin_proficient:
+            - prof_goblin
+    property:
+        - Darkvision
+        - Fury of the Small
+        - Nimble Escape
+Hobgoblin:
+    mod:
+        Hobgoblin_plus2:
+            - constitution
+        Hobgoblin_plus1:
+            - intelligence
+        Hobgoblin_proficient:
+            - prof_light_armor
+            - prof_goblin
+    property:
+        - Darkvision
+        - Saving Face
+        - Proficient with 2 martial weapons
+Kobold:
+    mod:
+        Kobold_plus2:
+            - dexterity
+        Kobold_minus2:
+            - strength
+        Kobold_proficient:
+            - prof_draconic
+    property:
+        - Sunlight Sensitivity
+        - Pack Tacktics
+        - "Grovel, Cower, and Beg"
+Yuan-Ti Pureblood:
+    mod:
+        Yuan_Ti_Pureblood_plus2:
+            - charisma
+        Yuan_Ti_Pureblood_plus1:
+            - intelligence
+        Yuan_Ti_Pureblood_proficient:
+            - prof_draconic
+            - prof_abyssal
+    property:
+        - Darkvision
+        - Innate Spellcasting
+        - Magic Resistance
+        - Poison Immunity

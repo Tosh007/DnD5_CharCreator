@@ -20,12 +20,15 @@ class StateTable:
                     self.widget.setItemWithNameChecked(i,False)
                 items = self.widget.checkedItems()
             activate = items - self.activeMod
+            print("activate",activate)
             getModifier("Human_plus").connect(getValues(activate))
             deactivate = self.activeMod - items
+            print("deactivate",deactivate)
             getModifier("Human_plus").disconnect(getValues(deactivate))
             self.activeMod = items
 
         def destroy(self):
+            DependentObject.destroy(self)
             self.widget.clear()
             self.on_changed()
 
@@ -34,6 +37,9 @@ class StateTable:
 
     class Human_SkillChoice(ChoiceReference):
         stateFile = "data/character/skills.yaml"
+
+    class Subrace_Aasimar(ChoiceReference):
+        stateFile = "data/character/state_Subrace_Aasimar.yaml"
 
     class Subrace_Dragonborn(ChoiceReference):
         stateFile = "data/character/dragonborn_ancestry.yaml"
@@ -71,6 +77,7 @@ class StateTable:
             self.extra_ui.setupUi(self.tab_human)
             self.tab = tabRoot.addTab(self.tab_human, "Human")
             self.extra_ui.checkBox_variantTraits.stateChanged.connect(self.altHumanTrait)
+            getModifier("Human_plus").connect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")))
 
         def exitHuman(self):
             self.extra_ui.checkBox_variantTraits.setCheckState(False)
@@ -79,16 +86,19 @@ class StateTable:
             del self.tab_human
             del self.extra_ui
             del self.tab
+            getModifier("Human_plus").disconnect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")),True)
 
         def altHumanTrait(self):
             b = self.extra_ui.checkBox_variantTraits.checkState()
             if b:
+                getModifier("Human_plus").disconnect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")),True)
                 self.skill = StateTable.Human_SkillChoice(self.extra_ui.comboBox_skill)
                 self.feat = StateTable.FeatChoice(self.extra_ui.comboBox_feat)
                 self.score = StateTable.Choice2AbilityScore(self.extra_ui.comboBox_abilityScore)
                 for i in range(self.extra_ui.comboBox_abilityScore.count()):
                     self.extra_ui.comboBox_abilityScore.setItemChecked(i, False)
             else:
+                getModifier("Human_plus").connect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")))
                 self.score.destroy()
                 self.skill.destroy()
                 self.feat.destroy()

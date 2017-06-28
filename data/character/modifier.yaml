@@ -103,6 +103,111 @@
 - HalfElf_Proficient:
     text: "Half-Elf"
     lambda: "x+1"
+- Aasimar_plus1:
+    text: "Aasimar: +1"
+    lambda: "x+1"
+- Aasimar_plus2:
+    text: "Aasimar: +2"
+    lambda: "x+2"
+- Aasimar_proficient:
+    text: "Aasimar"
+    lambda: "x+1"
+- Firbolg_plus2:
+    text: "Firbolg: {0}"
+    lambda: "x+2"
+- Firbolg_plus1:
+    text: "Firbolg: {0}"
+    lambda: "x+1"
+- Firbolg_proficient:
+    text: Firbolg
+    lambda: "x+1"
+- Goliath_plus1:
+    text: "Goliath: +1"
+    lambda: "x+1"
+- Goliath_plus2:
+    text: "Goliath: +2"
+    lambda: "x+2"
+- Goliath_proficient:
+    text: "Goliath"
+    lambda: "x+1"
+- Kenku_proficient:
+    text: "Kenku"
+    lambda: "x+1"
+- Kenku_plus2:
+    text: "Kenku: +2"
+    lambda: "x+2"
+- Kenku_plus1:
+    text: "Kenku: +1"
+    lambda: "x+1"
+- Lizardfolk_plus2:
+    text: "Lizardfolk: +2"
+    lambda: "x+2"
+- Lizardfolk_plus1:
+    text: "Lizardfolk: +1"
+    lambda: "x+1"
+- Lizardfolk_proficient:
+    text: "Lizardfolk"
+    lambda: "x+1"
+- Tabaxi_plus1:
+    text: "Tabaxi: +1"
+    lambda: "x+1"
+- Tabaxi_plus2:
+    text: "Tabaxi: +2"
+    lambda: "x+2"
+- Tabaxi_proficient:
+    text: "Tabaxi"
+    lambda: "x+1"
+- Triton_plus1:
+    text: "Triton: +1"
+    lambda: "x+1"
+- Triton_proficient:
+    text: "Triton"
+    lambda: "x+1"
+- Bugbear_plus1:
+    text: "Bugbear: +1"
+    lambda: "x+1"
+- Bugbear_plus2:
+    text: "Bugbear: +2"
+    lambda: "x+2"
+- Bugbear_proficient:
+    text: Bugbear
+    lambda: "x+1"
+- Goblin_plus1:
+    text: "Goblin: +1"
+    lambda: "x+1"
+- Goblin_plus2:
+    text: "Goblin: +2"
+    lambda: "x+2"
+- Goblin_proficient:
+    text: Goblin
+    lambda: "x+1"
+- Hobgoblin_plus1:
+    text: "Hobgoblin: +1"
+    lambda: "x+1"
+- Hobgoblin_plus2:
+    text: "Hobgoblin: +2"
+    lambda: "x+2"
+- Hobgoblin_proficient:
+    text: Hobgoblin
+    lambda: "x+1"
+- Kobold_minus2:
+    text: "Kobold: -2"
+    lambda: "x-2"
+- Kobold_plus2:
+    text: "Kobold: +2"
+    lambda: "x+2"
+- Kobold_proficient:
+    text: Kobold
+    lambda: "x+1"
+- Yuan_Ti_Pureblood_plus1:
+    text: "Yuan_Ti_Pureblood: +1"
+    lambda: "x+1"
+- Yuan_Ti_Pureblood_plus2:
+    text: "Yuan_Ti_Pureblood: +2"
+    lambda: "x+2"
+- Yuan_Ti_Pureblood_proficient:
+    text: Yuan_Ti_Pureblood
+    lambda: "x+1"
 
 # for feats
 - Alert:

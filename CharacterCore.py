@@ -13,10 +13,28 @@ def getDirectoryPrefix():
 
 class DependentObject(QObject):
     changeSignal = pyqtSignal()
+
+    @staticmethod
+    def getWidgetSignal(widget):
+        if isinstance(widget, QtWidgets.QSpinBox):
+            return widget.valueChanged
+        elif isinstance(widget, CheckableComboBox):
+            return widget.view().pressed
+        elif isinstance(widget, QtWidgets.QComboBox):
+            return widget.currentIndexChanged
+        elif isinstance(widget, QtWidgets.QLabel):
+            pass
+        elif isinstance(widget,QtWidgets.QListWidget):
+            pass
+        elif isinstance(widget,QtWidgets.QCheckBox):
+            return widget.toggled
+        elif (widget is None):pass
+        else:
+            raise TypeError(str(type(widget))+" is not supported")
     def __init__(self, widget):
         super().__init__(widget)
         self.widget = widget
-        if isinstance(widget, QtWidgets.QSpinBox):
+        """if isinstance(widget, QtWidgets.QSpinBox):
             widget.valueChanged.connect(self.changeSignal)
         elif isinstance(widget, CheckableComboBox):
             widget.view().pressed.connect(self.changeSignal)
@@ -30,7 +48,10 @@ class DependentObject(QObject):
             widget.toggled.connect(self.changeSignal)
         elif (widget is None):pass
         else:
-            raise TypeError(str(type(widget))+" is not supported")
+            raise TypeError(str(type(widget))+" is not supported")"""
+        s = DependentObject.getWidgetSignal(widget)
+        if s:
+            s.connect(self.changeSignal)
         self.changeSignal.connect(self.on_changed)
 
     def connect(self, objects):
@@ -51,6 +72,10 @@ class DependentObject(QObject):
             self.changeSignal.disconnect()
 
     def on_changed(self,*args,**kw):pass
+
+    def destroy(self):
+        DependentObject.getWidgetSignal(self.widget).disconnect(self.changeSignal)
+        self.disconnect()
 
 class FiniteStateMachine:
     stateFile=None
@@ -267,11 +292,15 @@ class ValueModifier:
             valueref.modifiers.append(self)
             valueref.changeSignal.emit()
 
-    def disconnect(self, valueref):
+    def disconnect(self, valueref, try_=False):
         try:
             for ref in valueref:
-                ref.modifiers.remove(self)
-                ref.changeSignal.emit()
+                try:
+                    ref.modifiers.remove(self)
+                    ref.changeSignal.emit()
+                except ValueError as e:
+                    if not try_:
+                        raise ValueError from e
         except TypeError:
             valueref.modifiers.remove(self)
             valueref.changeSignal.emit()

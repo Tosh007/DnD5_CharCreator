@@ -1,0 +1,18 @@
+Protector Aasimar:
+    mod:
+        Aasimar_plus1:
+            - wisdom
+    property:
+        - Radiant Soul (LVL3)
+Scourge Aasimar:
+    mod:
+        Aasimar_plus1:
+            - constitution
+    property:
+        - Radiant Consumption (LVL3)
+Fallen Aasimar:
+    mod:
+        Aasimar_plus1:
+            - strength
+    property:
+        - Necrotic Shroud (LVL3)

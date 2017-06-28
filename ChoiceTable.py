@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import *
 try:
     from acces import*
-    from CharacterCore import ChoiceReference, FiniteStateMachine, ValueReference,ValueConfig_allow
+    from CharacterCore import *
     from menu_human import Ui_Human
 except ImportError:
     from program.acces import*
@@ -11,8 +11,34 @@ class StateTable:
     class Classes(ChoiceReference):
         stateFile = "data/character/state_Classes.yaml"
 
+    class Choice2AbilityScore(DependentObject):
+        def __init__(self, w):
+            self.activeMod = set()
+            DependentObject.__init__(self,w)
+            self.widget.addItems(("strength","dexterity","constitution","wisdom","intelligence","charisma"))
+
+        def on_changed(self):
+            items = self.widget.checkedItems()
+            if len(items)>2:
+                uncheck = items - self.activeMod
+                for i in uncheck:
+                    self.widget.setItemWithNameChecked(i,False)
+                items = self.widget.checkedItems()
+            activate = items - self.activeMod
+            getModifier("Human_plus").connect(getValues(activate))
+            deactivate = self.activeMod - items
+            getModifier("Human_plus").disconnect(getValues(deactivate))
+            self.activeMod = items
+
+        def destroy(self):
+            self.widget.clear()
+            self.on_changed()
+
     class FeatChoice(ChoiceReference):
         stateFile = "data/character/feats.yaml"
+
+    class Human_SkillChoice(ChoiceReference):
+        stateFile = "data/character/skills.yaml"
 
     class Subrace_Dragonborn(ChoiceReference):
         stateFile = "data/character/dragonborn_ancestry.yaml"
@@ -31,11 +57,7 @@ class StateTable:
 
     class Races(ChoiceReference):
         stateFile = "data/character/state_Races.yaml"
-        #def enterDwarf(self):
-        #    self.subrace = Subrace_Dwarf(getUI("ComboBox_Subrace"))
-        #def exitDwarf(self):
-        #    self.subrace.destroy()
-        #    del self.subrace
+
         def enter(self,state):
             if state=="Off":return
             try:
@@ -64,11 +86,19 @@ class StateTable:
             del self.tab
 
         def altHumanTrait(self):
-            b = self.ui_human.checkBox_variantTraits.checkState()
+            b = self.extra_ui.checkBox_variantTraits.checkState()
             if b:
-                self.skill = StateTable.FeatChoice(self.ui_human.comboBox_feat)
+                self.skill = StateTable.Human_SkillChoice(self.extra_ui.comboBox_skill)
+                self.feat = StateTable.FeatChoice(self.extra_ui.comboBox_feat)
+                self.score = StateTable.Choice2AbilityScore(self.extra_ui.comboBox_abilityScore)
+                for i in range(self.extra_ui.comboBox_abilityScore.count()):
+                    self.extra_ui.comboBox_abilityScore.setItemChecked(i, False)
             else:
+                self.score.destroy()
                 self.skill.destroy()
+                self.feat.destroy()
+                del self.score
+                del self.feat
                 del self.skill
 
     class PrimaryState(FiniteStateMachine):

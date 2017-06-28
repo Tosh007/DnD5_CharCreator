@@ -1,9 +1,3 @@
-#class ModifierTable_:
-#    Human_plus1 = VMod(lambda x:x+1, "Human: {2:+d}")
-#    HalfOrc_plus1 = VMod(lambda x:x+1, "Half Orc: {2:+d}")
-#    HalfOrc_plus2 = VMod(lambda x:x+2, "Half Orc: {2:+d}")
-#    Barbarian_HP = VMod(lambda x:x+12, "Barbarian: {2:+d}")
-#    AbilityScoreHardCap = VMod(lambda x: min(20,x), "Hardcap at 20", 8)
 import yaml
 try:
     from acces import*

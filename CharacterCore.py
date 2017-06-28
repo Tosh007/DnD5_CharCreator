@@ -3,8 +3,10 @@ from PyQt5.QtCore import pyqtSignal, QObject
 import os
 try:
     from acces import *
+    from checkableCombobox import CheckableComboBox
 except ImportError:
     from program.acces import *
+    from program.checkableComboBox import CheckableComboBox
 import yaml
 def getDirectoryPrefix():
     if os.path.exists("./data"):
@@ -19,6 +21,8 @@ class DependentObject(QObject):
         self.widget = widget
         if isinstance(widget, QtWidgets.QSpinBox):
             widget.valueChanged.connect(self.changeSignal)
+        elif isinstance(widget, CheckableComboBox):
+            widget.view().pressed.connect(self.changeSignal)
         elif isinstance(widget, QtWidgets.QComboBox):
             widget.currentIndexChanged.connect(self.changeSignal)
         elif isinstance(widget, QtWidgets.QLabel):
@@ -138,7 +142,6 @@ class ValueReference(DependentObject):
         self.format = format
         self.modifiers = []
         self._blockSignals = None
-        self.item = None
         if isinstance(widget, QtWidgets.QSpinBox):
             self._get = widget.value
             self._set = widget.setValue
@@ -233,7 +236,6 @@ class ValueReference(DependentObject):
         self.widget.setToolTip(mdesc)
         if self._blockSignals:
             self._blockSignals(False)
-
 
 class ValueConfig:
     @staticmethod

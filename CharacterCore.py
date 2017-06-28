@@ -1,12 +1,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSignal, QObject
 import os
-try:
-    from acces import *
-    from checkableCombobox import CheckableComboBox
-except ImportError:
-    from program.acces import *
-    from program.checkableCombobox import CheckableComboBox
+
+from acces import *
+from checkableCombobox import CheckableComboBox
 import yaml
 def getDirectoryPrefix():
     if os.path.exists("./data"):

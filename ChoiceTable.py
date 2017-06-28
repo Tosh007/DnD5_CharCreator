@@ -1,12 +1,7 @@
 from PyQt5.QtWidgets import *
-try:
-    from acces import*
-    from CharacterCore import *
-    from menu_human import Ui_Human
-except ImportError:
-    from program.acces import*
-    from program.CharacterCore import*
-    from program.menu_human import Ui_Human
+from acces import*
+from CharacterCore import *
+from menu_human import Ui_Human
 class StateTable:
     class Classes(ChoiceReference):
         stateFile = "data/character/state_Classes.yaml"

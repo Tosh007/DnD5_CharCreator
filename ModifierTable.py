@@ -1,10 +1,7 @@
 import yaml
-try:
-    from acces import*
-    from CharacterCore import *
-except ImportError:
-    from program.acces import*
-    from program.CharacterCore import*
+
+from acces import*
+from CharacterCore import *
 
 class ModifierTable:
     def __init__(self):

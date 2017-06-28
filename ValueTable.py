@@ -1,9 +1,5 @@
-try:
-    from CharacterCore import *
-    from acces import *
-except ImportError:
-    from program.CharacterCore import *
-    from program.acces import *
+from CharacterCore import *
+from acces import *
 import yaml
 class ValueTable:
     def __init__(self):

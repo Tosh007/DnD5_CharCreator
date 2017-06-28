@@ -12,3 +12,9 @@ Rock Gnome:
     property:
         - "artificer's lore"
         - Tinker
+Deep Gnome:
+    mod:
+        Gnome_plus1:
+            - dexterity
+        Gnome_proficient:
+            - prof_undercommon

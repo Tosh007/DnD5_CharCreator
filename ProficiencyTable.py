@@ -1,10 +1,7 @@
 import yaml
-try:
-    from CharacterCore import*
-    from acces import *
-except ImportError:
-    from program.CharacterCore import*
-    from program.acces import *
+
+from CharacterCore import*
+from acces import *
 from PyQt5.QtCore import Qt
 
 class ProficiencyTable:

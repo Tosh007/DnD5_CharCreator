@@ -10,3 +10,9 @@ Stout Halfling:
             - constitution
     property:
         - stout resilience
+Ghostwise Halfling:
+    mod:
+        Halfling_plus1:
+            - wisdom
+    property:
+        - Silent Speech

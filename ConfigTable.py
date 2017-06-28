@@ -1,9 +1,6 @@
-try:
-    from acces import *
-    from CharacterCore import *
-except ImportError:
-    from program.acces import*
-    from program.CharacterCore import*
+
+from acces import *
+from CharacterCore import *
 
 class ConfigTable:
     AllowNone = ValueConfig

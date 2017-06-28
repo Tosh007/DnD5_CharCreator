@@ -12,3 +12,13 @@ Mountain Dwarf:
         Dwarf_Proficient:
             - prof_light_armor
             - prof_medium_armor
+Gray Dwarf:
+    mod:
+        Dwarf_plus1:
+            - strength
+        Dwarf_Proficient:
+            - prof_undercommon
+    property:
+        - Superior Darkvision
+        - Sunlight Sensitivity
+        - Duergar Resilience

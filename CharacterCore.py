@@ -6,7 +6,7 @@ try:
     from checkableCombobox import CheckableComboBox
 except ImportError:
     from program.acces import *
-    from program.checkableComboBox import CheckableComboBox
+    from program.checkableCombobox import CheckableComboBox
 import yaml
 def getDirectoryPrefix():
     if os.path.exists("./data"):

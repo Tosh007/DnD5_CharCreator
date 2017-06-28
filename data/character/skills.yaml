@@ -1,0 +1,68 @@
+athletics:
+    mod:
+        Human_Proficient:
+            - prof_athletics
+acrobatics:
+    mod:
+        Human_Proficient:
+            - prof_acrobatics
+sleight of hand:
+    mod:
+        Human_Proficient:
+            - prof_sleight_of_hand
+stealth:
+    mod:
+        Human_Proficient:
+            - prof_stealth
+arcana:
+    mod:
+        Human_Proficient:
+            - prof_arcana
+history:
+    mod:
+        Human_Proficient:
+            - prof_history
+investigation:
+    mod:
+        Human_Proficient:
+            - prof_investigation
+nature:
+    mod:
+        Human_Proficient:
+            - prof_nature
+religion:
+    mod:
+        Human_Proficient:
+            - prof_religion
+animal handling:
+    mod:
+        Human_Proficient:
+            - prof_animal_handling
+insight:
+    mod:
+        Human_Proficient:
+            - prof_insight
+medicine:
+    mod:
+        Human_Proficient:
+            - prof_medicine
+perception:
+    mod:
+        Human_Proficient:
+            - prof_perception
+survival:
+    mod:
+        Human_Proficient:
+            - prof_survival
+deception:
+    mod:
+        Human_Proficient:
+            - prof_deception
+performance:
+    mod:
+        Human_Proficient:
+            - prof_performance
+intimidation:
+    mod:
+        Human_Proficient:
+            - prof_intimidation

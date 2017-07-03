@@ -88,6 +88,7 @@ class StateTable:
             del self.tab
             getModifier("Human_plus").disconnect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")),True)
             getModifier("Human_plus").disconnect(getValue("prof_skills_learnChildren"),True)
+            getValue("listWidget_proficiencies_VisualUpdate").changeSignal.emit()
 
         def altHumanTrait(self):
             b = self.extra_ui.checkBox_variantTraits.checkState()
@@ -102,7 +103,7 @@ class StateTable:
             else:
                 getModifier("Human_plus").connect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")))
                 getModifier("Human_plus").disconnect(getValue("prof_skills_learnChildren"),True)
-                print(getValue("prof_skills_learnChildren").get(True))
+                getValue("listWidget_proficiencies_VisualUpdate").changeSignal.emit()
                 self.score.destroy()
                 #self.skill.destroy()
                 self.feat.destroy()

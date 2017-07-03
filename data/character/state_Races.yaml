@@ -1,5 +1,8 @@
 # primary race list
-Human: {}
+Human:
+    mod:
+        Human_Proficient:
+            - prof_standart_languages_learnChildren
 
 Dwarf:
     mod:

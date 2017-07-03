@@ -9,10 +9,10 @@ class ConfigTable:
         def __init__(self, name):
             self.name=name
             self.vmod=0
-        def specialSetup(self,widget,v,vmod,mdesc,maxValue):
-            if "language" in self.name and vmod!=self.vmod:
-                self.vmod = vmod
-                print(self.name,vmod)
+        #def specialSetup(self,widget,v,vmod,mdesc,maxValue):
+        #    if "language" in self.name and vmod!=self.vmod:
+        #        self.vmod = vmod
+        #        print(self.name,vmod)
 
     class ProficiencyConfig(ValueConfig):
         def __init__(self, root):
@@ -22,27 +22,6 @@ class ConfigTable:
             #print ("proficiency requirement check:")
             if value<0 or (not self.root):return 0
             learn = getValue("prof_"+self.root+"_learnChildren")
-            """if value>1:return 1
-            #print(value,oldvalue,learn.get())
-            mod = learn.get()-learn.get(True)
-            diffmod = learn.get()-value+oldvalue
-            if value == oldvalue and value<=self.getMaxValue(oldvalue):
-                return value
-            if value == oldvalue:
-                return value
-            if diffmod>=0:
-
-                #print ("possible",diffmod)
-                learn.set(diffmod-mod)
-                learn.changeSignal.emit()
-                return value
-            else:
-                #print("impossible",diffmod,diffmod+value)
-                if oldvalue<=self.getMaxValue(oldvalue):
-                    return oldvalue
-                learn.set(diffmod-mod+value)
-                #learn.changeSignal.emit()  # do not notify here !recursion!
-                return 0"""
             maxValue = self.getMaxValue(lastValue)
             if value==lastValue:
                 if value>maxValue:

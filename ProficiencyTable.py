@@ -32,23 +32,40 @@ class ProficiencyTable:
         else:
             initial=0
         sname=name.replace(" ", "_")
-        if parent:
-            parent = self.table[parent]
         if sname[-4:]==".UI.":
             sname = sname[:-4]
             ui = getUI("checkBox_"+sname)
-            c = ValueConfig
+            c = getConfig("ProficiencyConfig")(parent)
         else:
-            c = getConfig("ProficiencyListConfig")
+            c = getConfig("ProficiencyListConfig")(parent)
             ui = getUI("listWidget_proficiencies")
         if hasChildren:
-            c = getConfig("HiddenValue")
+            ui = None
+            c = getConfig("AllowNone_debug")(sname)
+        if initial>0:
+            c = getConfig("AllowNone")
+
 
         valueref = ValueReference(ui, c, name)
         valueref.set(initial)
-        getValueTable().__dict__["prof_"+sname] = valueref
-        self.table[sname] = Proficiency(name, parent, valueref)
+        valueref.lastValue = initial
+        vt=getValueTable()
+        vt.newValue("prof_"+sname,valueref)
+        if parent:
+            parentLearn = "prof_"+parent+"_learnChildren"
+            getValue(parentLearn).connect(valueref)
+        if hasChildren:
+            learn = ValueReference(None, c)
+            vt.newValue("prof_"+sname+"_learnChildren",learn)
+            if parent:
+                getValue(parentLearn).connect(learn)
+                self._createPropagateModifier(parentLearn).connect(learn)
+
+        #self.table[sname] = Proficiency(name, parent, valueref)  # now longer use seperate proficiency storage
         return sname
+
+    def _createPropagateModifier(self,parentLearn):
+        return ValueModifier(lambda x,parent=parentLearn:x+getValue(parent).get(),"",0)
 
     def __getattr__(self,name):
         return self.table[name]

@@ -87,24 +87,28 @@ class StateTable:
             del self.extra_ui
             del self.tab
             getModifier("Human_plus").disconnect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")),True)
+            getModifier("Human_plus").disconnect(getValue("prof_skills_learnChildren"),True)
 
         def altHumanTrait(self):
             b = self.extra_ui.checkBox_variantTraits.checkState()
             if b:
                 getModifier("Human_plus").disconnect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")),True)
-                self.skill = StateTable.Human_SkillChoice(self.extra_ui.comboBox_skill)
+                getModifier("Human_plus").connect(getValue("prof_skills_learnChildren"))
+                #self.skill = StateTable.Human_SkillChoice(self.extra_ui.comboBox_skill)
                 self.feat = StateTable.FeatChoice(self.extra_ui.comboBox_feat)
                 self.score = StateTable.Choice2AbilityScore(self.extra_ui.comboBox_abilityScore)
                 for i in range(self.extra_ui.comboBox_abilityScore.count()):
                     self.extra_ui.comboBox_abilityScore.setItemChecked(i, False)
             else:
                 getModifier("Human_plus").connect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")))
+                getModifier("Human_plus").disconnect(getValue("prof_skills_learnChildren"),True)
+                print(getValue("prof_skills_learnChildren").get(True))
                 self.score.destroy()
-                self.skill.destroy()
+                #self.skill.destroy()
                 self.feat.destroy()
                 del self.score
                 del self.feat
-                del self.skill
+                #del self.skill
 
     class PrimaryState(FiniteStateMachine):
         stateFile = "data/character/state_ValueTable.yaml"

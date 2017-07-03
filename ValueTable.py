@@ -6,6 +6,8 @@ class ValueTable:
         f = open(getDirectoryPrefix()+"data/character/values.yaml")
         data = yaml.load(f)
         f.close()
+        self._data = {}
+        self.custom()
         for obj in data:
             name = tuple(obj.keys())[0]
             meta = tuple(obj.values())[0]
@@ -24,10 +26,17 @@ class ValueTable:
                     format = meta[key]
                 if key=="initial":
                     initial = meta[key]
-            self.__dict__[name] = ValueReference(ui, config,format)
-            self.__dict__[name].set(initial)
-            self.__dict__[name].lastValue = initial
+            self._data[name] = ValueReference(ui, config,format)
+            self._data[name].set(initial)
+            self._data[name].lastValue = initial
             #print(name,"=ValueReference(",ui,config, format,")")
+    def newValue(self,name,value):
+        if name in self._data.keys():raise ValueError("value '"+name+"' exists")
+        self._data[name] = value
+    def __getattr__(self, name):
+        return self._data[name]
     def flushChanges(self):
-        for obj in self.__dict__.values():
+        for obj in self._data.values():
             obj.changeSignal.emit()
+    def custom(self):
+        self._data["listWidget_proficiencies_VisualUpdate"] = DependentObject(None)

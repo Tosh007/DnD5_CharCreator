@@ -1,28 +1,29 @@
 # proficiency table
-- strength saving throw.UI.
-- athletics.UI.
-- dexterity saving throw.UI.
-- acrobatics.UI.
-- sleight of hand.UI.
-- stealth.UI.
-- constitution saving throw.UI.
-- intelligence saving throw.UI.
-- arcana.UI.
-- history.UI.
-- investigation.UI.
-- nature.UI.
-- religion.UI.
-- wisdom saving throw.UI.
-- animal handling.UI.
-- insight.UI.
-- medicine.UI.
-- perception.UI.
-- survival.UI.
-- charisma saving throw.UI.
-- deception.UI.
-- performance.UI.
-- persuation.UI.
-- intimidation.UI.
+- skills:
+    - strength saving throw.UI.
+    - athletics.UI.
+    - dexterity saving throw.UI.
+    - acrobatics.UI.
+    - sleight of hand.UI.
+    - stealth.UI.
+    - constitution saving throw.UI.
+    - intelligence saving throw.UI.
+    - arcana.UI.
+    - history.UI.
+    - investigation.UI.
+    - nature.UI.
+    - religion.UI.
+    - wisdom saving throw.UI.
+    - animal handling.UI.
+    - insight.UI.
+    - medicine.UI.
+    - perception.UI.
+    - survival.UI.
+    - charisma saving throw.UI.
+    - deception.UI.
+    - performance.UI.
+    - persuation.UI.
+    - intimidation.UI.
 
 - armor:
     - light armor
@@ -108,11 +109,10 @@
         - dwarvish
         - orcish
         - elvish
-        - giant
         - gnomish
-        - goblin
         - halfling
     - exotic languages:
+        - giant
         - abyssal
         - celestial
         - draconic

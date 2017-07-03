@@ -65,8 +65,10 @@ Half-Elf:
     mod:
         HalfElf_plus2:
             - charisma
+            - prof_skills_learnChildren
         HalfElf_Proficient:
             - prof_elvish
+            - prof_standart_languages_learnChildren
     property:
         - Darkvision
         - Fey Ancestry
@@ -151,6 +153,8 @@ Kenku:
             - wisdom
         Kenku_plus2:
             - dexterity
+        Kenku_proficient:
+            - prof_auran
     property:
         - Expert Forgery
         - Mimicry

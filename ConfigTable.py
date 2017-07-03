@@ -9,7 +9,8 @@ class ConfigTable:
         def __init__(self, name):
             self.name=name
             self.vmod=0
-        #def specialSetup(self,widget,v,vmod,mdesc,maxValue):
+        def specialSetup(self,widget,v,vmod,mdesc,maxValue):
+            pass
         #    if "language" in self.name and vmod!=self.vmod:
         #        self.vmod = vmod
         #        print(self.name,vmod)

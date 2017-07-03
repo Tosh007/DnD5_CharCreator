@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import pyqtSignal, QObject
+from PyQt5.QtCore import *
 import os
 
 from acces import *
@@ -34,21 +34,6 @@ class DependentObject(QObject):
     def __init__(self, widget):
         super().__init__(widget)
         self.widget = widget
-        """if isinstance(widget, QtWidgets.QSpinBox):
-            widget.valueChanged.connect(self.changeSignal)
-        elif isinstance(widget, CheckableComboBox):
-            widget.view().pressed.connect(self.changeSignal)
-        elif isinstance(widget, QtWidgets.QComboBox):
-            widget.currentIndexChanged.connect(self.changeSignal)
-        elif isinstance(widget, QtWidgets.QLabel):
-            pass
-        elif isinstance(widget,QtWidgets.QListWidget):
-            pass
-        elif isinstance(widget,QtWidgets.QCheckBox):
-            widget.toggled.connect(self.changeSignal)
-        elif (widget is None):pass
-        else:
-            raise TypeError(str(type(widget))+" is not supported")"""
         s = DependentObject.getWidgetSignal(widget)
         if s:
             s.connect(self.changeSignal)
@@ -95,7 +80,6 @@ class FiniteStateMachine:
 
     def request(self,state):
         assert state in self._states
-        #print(str(type(self))+":state:"+state)
         self._exitState(self.currentState)
         self._enterState(state)
 
@@ -176,15 +160,36 @@ class ValueReference(DependentObject):
             self._get = 0
             self._set = self.widget.setText
             widget.addItem(self.widget)
+            if valueconfig.forceCheckbox:
+                widget.itemClicked.connect(lambda *args,x=self.widget:self.on_changed(x))
+                self.widget.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
+                self.widget.setCheckState(Qt.Unchecked)
+                self.previousCheckState = Qt.Unchecked
         elif isinstance(widget,QtWidgets.QCheckBox):
             self._get = self.widget.isChecked
             self._set = self.widget.setChecked
-            self._blockSignals = widget.blockSignals
+            self._blockSignals = self.widget.blockSignals
         elif widget is None:
             self._get = 0
         else:
             raise TypeError("unsupported widget "+str(type(widget)))
         self.lastValue = 0
+        if self.vconf.VisualUpdateSignal:
+            getValue(self.vconf.VisualUpdateSignal).changeSignal.connect(self.on_visual_update)
+
+    def __iadd__(self,other):
+        assert type(other) is int
+        if other==0:return self
+        self.set(self.get(True)+other)
+        #self.changeSignal.emit()
+        return self
+
+    def __isub__(self,other):
+        assert type(other) is int
+        if other==0:return self
+        self.set(self.get(True)-other)
+        #self.changeSignal.emit()
+        return self
 
     def set(self, value, setLastValue=True):
         v, mstring = self.applyMods(value, True)
@@ -213,7 +218,6 @@ class ValueReference(DependentObject):
         mstring = ""
         self.modifiers.sort(key=ValueModifier.modOrder)
         for mod in self.modifiers:
-            #print(v)
             nv = mod.mod(v)
             if (nv!=v): mstring += mod.string(v)+"\n"  # only add mod desc to mstring if value is changed
             v = nv
@@ -221,26 +225,41 @@ class ValueReference(DependentObject):
         if not needDescription:return v
         else:return (v,mstring)
 
-    def on_changed(self):
+    def on_changed(self,input_=None):
         # always called when value is changed by gui, or another value changed that may cause this to change
         # uses ValueConfig to verify such a value is possible,
         # and either updates the fallback value, or resets to fallback
         # exception: if valueconfig.getMaxValue the value is just set to the highest possible value.
-        #if type(self.widget)is QtWidgets.QCheckBox:
-            #print("changed:",self.widget.isChecked())
-        if self.vconf.getMaxValue:
-            maxv = self.vconf.getMaxValue()
+        if self.vconf.alwaysMax:
+            maxv = self.vconf.getMaxValue(self.lastValue)
             self.set(maxv)
             return
         value = self.get(True)
-        if self.vconf.checkRequirements(value, self.lastValue):
-            self.lastValue = value
-            v, mstring = self.applyMods(value, True)
-            self.showValue(value,v,mstring)
+        if self.vconf.forceCheckbox:
+            if self.widget.checkState() == Qt.Checked and not self.get():
+                value=1
+            else:
+                value=0
+        closest = self.vconf.checkRequirements(value, self.lastValue)
+        v, mstring = self.applyMods(closest, True)
+        if self.vconf.getMaxValue:
+            maxValue=self.vconf.getMaxValue(self.lastValue)
         else:
-            self.reset()
+            maxValue=None
+        self.lastValue = closest
+        self.showValue(closest,v,mstring,maxValue)
 
-    def showValue(self,v,vmod,mdesc):
+    def on_visual_update(self):
+        v = self.get(True)
+        vmod, mstring= self.applyMods(v,True)
+        if self.vconf.getMaxValue:
+            maxValue = self.vconf.getMaxValue(self.lastValue)
+        else:
+            maxValue=0
+        self.widget.setHidden(self.vconf.hide(v,vmod,maxValue))
+
+    def showValue(self,v,vmod,mdesc,maxValue=None):
+        if not maxValue:maxValue=v
         svmod = " ({0})".format(vmod)
         if self._blockSignals:
             self._blockSignals(True)
@@ -254,23 +273,40 @@ class ValueReference(DependentObject):
         elif isinstance(self.widget, QtWidgets.QCheckBox):
             b = bool(vmod)
             self._set(b)
-        self.widget.setHidden(self.vconf.hide(vmod))
-        self.widget.setToolTip(mdesc)
-        if self._blockSignals:
-            self._blockSignals(False)
+        if self.vconf.forceCheckbox:
+            if vmod:
+                b=Qt.Checked
+                self.previousCheckState = Qt.Checked
+            else:
+                b=Qt.Unchecked
+                self.previousCheckState = Qt.Unchecked
+            self.widget.setCheckState(b)
+        try:
+            self.vconf.specialSetup(self, v, vmod, mdesc, maxValue)
+            if self.widget:
+                self.widget.setHidden(self.vconf.hide(v,vmod,maxValue))
+                self.widget.setToolTip(mdesc)
+            if self._blockSignals:
+                self._blockSignals(False)
 
+        except TypeError as e:
+            raise e
 class ValueConfig:
     @staticmethod
     def checkRequirements(value, oldvalue):
-        return False
+        return oldvalue
     getMaxValue = None
-    hide=lambda s,v=0:False
+    alwaysMax = False
+    forceCheckbox = False
+    VisualUpdateSignal = None
+    hide=lambda v,vmod,maxV:False
+    specialSetup = lambda widget,v,vmod,mdesc,maxValue=None: None# a special ui setup sequence
 
 
 class ValueConfig_allow(ValueConfig):
     @staticmethod
     def checkRequirements(value, oldvalue):
-        return True
+        return value
 
 
 class ValueModifier:
@@ -294,16 +330,16 @@ class ValueModifier:
 
     def disconnect(self, valueref, try_=False):
         try:
-            for ref in valueref:
-                try:
-                    ref.modifiers.remove(self)
-                    ref.changeSignal.emit()
-                except ValueError as e:
-                    if not try_:
-                        raise ValueError from e
-        except TypeError:
-            valueref.modifiers.remove(self)
-            valueref.changeSignal.emit()
+            try:
+                for ref in valueref:
+                        ref.modifiers.remove(self)
+                        ref.changeSignal.emit()
+            except TypeError:
+                valueref.modifiers.remove(self)
+                valueref.changeSignal.emit()
+        except ValueError as e:
+            if not try_:
+                raise ValueError from e
 
     def modOrder(m):
         return m.order

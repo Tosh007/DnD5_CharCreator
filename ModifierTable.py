@@ -8,6 +8,7 @@ class ModifierTable:
         f = open(getDirectoryPrefix()+"data/character/modifier.yaml")
         data = yaml.load(f)
         f.close()
+        self._data = {}
         for d in data:
             name = tuple(d.keys())[0]
             meta = tuple(d.values())[0]
@@ -22,4 +23,6 @@ class ModifierTable:
                     order = meta[key]
                 if key=="text":
                     text = meta[key]
-            self.__dict__[name] = ValueModifier(l, text, order)
+            self._data[name] = ValueModifier(l, text, order)
+    def __getattr__(self,name):
+        return self._data[name]

@@ -2,14 +2,47 @@ Barbarian:
     mod:
         Barbarian_HP:
             - maxHP
-Bard: {}
-Cleric: {}
-Monk: {}
-Druid: {}
-Fighter: {}
-Paladin: {}
-Ranger: {}
-Rogue: {}
-Sorcerer: {}
-Warlock: {}
-Wizard: {}
+Bard:
+    mod:
+        Bard_HP:
+            - maxHP
+Cleric:
+    mod:
+        Cleric_HP:
+            - maxHP
+Monk:
+    mod:
+        Monk_HP:
+            - maxHP
+Druid:
+    mod:
+        Druid_HP:
+            - maxHP
+Fighter:
+    mod:
+        Fighter_HP:
+            - maxHP
+Paladin:
+    mod:
+        Paladin_HP:
+            - maxHP
+Ranger:
+    mod:
+        Ranger_HP:
+            - maxHP
+Rogue:
+    mod:
+        Rogue_HP:
+            - maxHP
+Sorcerer:
+    mod:
+        Sorcerer_HP:
+            - maxHP
+Warlock:
+    mod:
+        Warlock_HP:
+            - maxHP
+Wizard:
+    mod:
+        Wizard_HP:
+            - maxHP

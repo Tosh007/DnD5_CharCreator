@@ -1,7 +1,7 @@
 # primary race list
 Human:
     mod:
-        Human_Proficient:
+        Human_proficient:
             - prof_standart_languages_learnChildren
 
 Dwarf:
@@ -10,7 +10,7 @@ Dwarf:
             - constitution
         Dwarf_speed:
             - speed
-        Dwarf_Proficient:
+        Dwarf_proficient:
             - prof_battleaxe
             - prof_light_hammer
             - prof_handaxe
@@ -24,7 +24,7 @@ Elf:
     mod:
         Elf_plus2:
             - dexterity
-        Elf_Proficient:
+        Elf_proficient:
             - prof_perception
             - prof_elvish
     property:
@@ -69,7 +69,7 @@ Half-Elf:
         HalfElf_plus2:
             - charisma
             - prof_skills_learnChildren
-        HalfElf_Proficient:
+        HalfElf_proficient:
             - prof_elvish
             - prof_standart_languages_learnChildren
     property:
@@ -241,7 +241,7 @@ Hobgoblin:
     property:
         - Darkvision
         - Saving Face
-        - Proficient with 2 martial weapons
+        - proficient with 2 martial weapons
 Kobold:
     mod:
         Kobold_plus2:

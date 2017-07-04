@@ -47,6 +47,10 @@
 - Wizard_HP:
     lambda: "x+6"
     text: "Wizard: {2:+d}"
+- initiative:
+    lambda: 'getValue("dextMod").get()'
+    text: ""
+    order: -1
 
 - plus1:
     text: "+1"

@@ -8,6 +8,8 @@
             - intelligence
             - wisdom
             - charisma
+        initiative:
+            - initiative
     depend:
         strength: strengthMod
         constitution: constMod
@@ -16,3 +18,4 @@
         wisdom: wisdomMod
         charisma: charismaMod
         constMod: maxHP
+        dextMod: initiative

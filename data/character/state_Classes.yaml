@@ -2,47 +2,148 @@ Barbarian:
     mod:
         Barbarian_HP:
             - maxHP
+        Barbarian_proficient:
+            - prof_light_armor
+            - prof_medium_armor
+            - prof_shields
+            - prof_simple_weapons
+            - prof_martial_weapons
+            - prof_strength_saving_throw
+            - prof_constitution_saving_throw
+
 Bard:
     mod:
         Bard_HP:
             - maxHP
+        Bard_proficient:
+            - prof_simple_weapons
+            - prof_hand_crossbow
+            - prof_longsword
+            - prof_rapier
+            - prof_shortsword
+            - prof_dexterity_saving_throw
+            - prof_charisma_saving_throw
+        plus3:
+            - prof_musical_instrument_learnChildren
+            - prof_skills_learnChildren
+
 Cleric:
     mod:
         Cleric_HP:
             - maxHP
+        Cleric_proficient:
+            - prof_light_armor
+            - prof_medium_armor
+            - prof_shields
+            - prof_simple_weapons
+            - prof_wisdom_saving_throw
+            - prof_charisma_saving_throw
+
 Monk:
     mod:
         Monk_HP:
             - maxHP
+        Monk_proficient:
+            - prof_simple_weapons
+            - prof_shortsword
+            - prof_strength_saving_throw
+            - prof_dexterity_saving_throw
+
 Druid:
     mod:
         Druid_HP:
             - maxHP
+        Druid_proficient:
+            - prof_light_armor
+            - prof_medium_armor
+            - prof_club
+            - prof_quarterstaff
+            - prof_scimitar
+            - prof_sickle
+            - prof_sling
+            - prof_spear
+            - prof_herbalism_kit
+            - prof_intelligence_saving_throw
+            - prof_wisdom_saving_throw
 Fighter:
     mod:
         Fighter_HP:
             - maxHP
+        Fighter_proficient:
+            - prof_armor
+            - prof_shields
+            - prof_simple_weapons
+            - prof_martial_weapons
+            - prof_strength_saving_throw
+            - prof_constitution_saving_throw
+
 Paladin:
     mod:
         Paladin_HP:
             - maxHP
+        Paladin_proficient:
+            - prof_armor
+            - prof_shields
+            - prof_simple_weapons
+            - prof_martial_weapons
+            - prof_wisdom_saving_throw
+            - prof_charisma_saving_throw
+
 Ranger:
     mod:
         Ranger_HP:
             - maxHP
+        Ranger_proficient:
+            - prof_light_armor
+            - prof_medium_armor
+            - prof_simple_weapons
+            - prof_martial_weapons
+            - prof_strength_saving_throw
+            - prof_dexterity_saving_throw
+
 Rogue:
     mod:
         Rogue_HP:
             - maxHP
+        Rogue_proficient:
+            - prof_light_armor
+            - prof_simple_weapons
+            - prof_hand_crossbow
+            - prof_shortsword
+            - prof_rapier
+            - prof_thief_tools
 Sorcerer:
     mod:
         Sorcerer_HP:
             - maxHP
+        Sorcerer_proficient:
+            - prof_dagger
+            - prof_dart
+            - prof_sling
+            - prof_quarterstaff
+            - prof_light_crossbow
+            - prof_constitution_saving_throw
+            - prof_charisma_saving_throw
+
 Warlock:
     mod:
         Warlock_HP:
             - maxHP
+        Warlock_proficient:
+            - prof_light_armor
+            - prof_simple_weapons
+            - prof_wisdom_saving_throw
+            - prof_charisma_saving_throw
 Wizard:
     mod:
         Wizard_HP:
             - maxHP
+        Wizard_proficient:
+            - prof_dagger
+            - prof_dart
+            - prof_sling
+            - prof_quarterstaff
+            - prof_light_crossbow
+            - prof_intelligence_saving_throw
+            - prof_wisdom_saving_throw
+            - prof_spellcasting

@@ -48,6 +48,15 @@
     lambda: "x+6"
     text: "Wizard: {2:+d}"
 
+- plus1:
+    text: "+1"
+    lambda: "x+1"
+- plus2:
+    text: "+2"
+    lambda: "x+2"
+- plus3:
+    text: "+3"
+    lambda: "x+3"
 # for feats
 - Alert:
     text: "Alert"

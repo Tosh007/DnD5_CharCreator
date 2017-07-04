@@ -29,6 +29,7 @@
     - light armor
     - medium armor
     - heavy armor
+    - shields
 - weapons:
     - martial weapons:
         - martial melee weapons:
@@ -102,6 +103,9 @@
     - tinker tools
     - weaver tools
     - woodcarve tools
+
+- thief tools
+- spellcasting
 
 - languages:
     - standart languages:

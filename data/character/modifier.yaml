@@ -11,6 +11,10 @@
     text: "Kobold: -2"
     lambda: "x-2"
 
+- Dwarf_speed:
+    lambda: "25"
+    text: "Dwarf"
+
 - Barbarian_HP:
     lambda: "x+12"
     text: "Barbarian: {2:+d}"

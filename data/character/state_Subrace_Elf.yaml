@@ -2,21 +2,21 @@ High Elf:
     mod:
         Elf_plus1:
             - intelligence
-        Elf_Proficient:
+        Elf_proficient:
             - prof_shortbow
             - prof_longbow
             - prof_shortsword
             - prof_longsword
     property:
         - Darkvision
-        
+
 Wood Elf:
     mod:
         Elf_plus1:
             - wisdom
         Wood_Elf_Speed:
             - speed
-        Elf_Proficient:
+        Elf_proficient:
             - prof_shortbow
             - prof_longbow
             - prof_shortsword
@@ -29,7 +29,7 @@ Dark Elf:
     mod:
         Elf_plus1:
             - charisma
-        Elf_Proficient:
+        Elf_proficient:
             - prof_rapier
             - prof_shortsword
             - prof_hand_crossbow

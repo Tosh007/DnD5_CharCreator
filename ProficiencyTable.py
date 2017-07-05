@@ -39,23 +39,18 @@ class ProficiencyTable:
         else:
             c = getConfig("ProficiencyListConfig")(parent)
             ui = getUI("listWidget_proficiencies")
-        if hasChildren:
-            ui = None
-            c = getConfig("AllowNone_debug")(sname)
-        if initial>0:
-            c = getConfig("AllowNone")
 
 
         valueref = ValueReference(ui, c, name)
-        valueref.set(initial)
-        valueref.lastValue = initial
         vt=getValueTable()
         vt.newValue("prof_"+sname,valueref)
+        if initial>0:
+            getModifier("plus1").connect(valueref)
         if parent:
             parentLearn = "prof_"+parent+"_learnChildren"
             getValue(parentLearn).connect(valueref)
         if hasChildren:
-            learn = ValueReference(None, c)
+            learn = ValueReference(None, getConfig("AllowNone"))
             vt.newValue("prof_"+sname+"_learnChildren",learn)
             if parent:
                 getValue(parentLearn).connect(learn)

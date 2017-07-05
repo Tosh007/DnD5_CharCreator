@@ -99,6 +99,13 @@ Orc:
             - intelligence
         Orc_proficient:
             - prof_orcish
+            - prof_intimidation
+    property:
+        - Darkvision
+        - Aggressive
+        - Powerful Build
+
+
 
 Tiefling:
     mod:

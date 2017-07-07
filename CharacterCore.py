@@ -76,6 +76,7 @@ class FiniteStateMachine:
         self._states.update(self.states)
         self._states.update(states)
         self.props = []
+        self.profs = []
         self.currentState = ""
 
     def request(self,state):
@@ -102,6 +103,9 @@ class FiniteStateMachine:
         for item in self.props:
             i=ui.takeItem(ui.row(item))
             assert i==item
+        for choice in self.profs:
+            getProficiencyTable().removeChoice(choice)
+        self.profs.clear()
         self.props.clear()
         state = state.replace("-","_")
         state = state.replace(" ","_")
@@ -129,7 +133,18 @@ class FiniteStateMachine:
                     ui.addItem(name)
                     item = ui.item(ui.count()-1)
                     self.props.append(item)
-
+            elif key=="ProfChoice":
+                choices = self._states[state][key]
+                for choice in choices:
+                    choice = tuple(choice.values())[0]
+                    n = choice["n"]
+                    profs = choice["profs"]
+                    #print(n,profs)
+                    c = ProficiencyChoice(n, profs)
+                    name = str(c)
+                    self.profs.append(name)
+                    getProficiencyTable().addChoice(c)
+                    getUI("listWidget_proficiencies").itemClicked.emit(None)
         nstate = state.replace("-","_")
         nstate = nstate.replace(" ","_")
         self.enter(nstate)
@@ -148,6 +163,7 @@ class ValueReference(DependentObject):
         self.format = format
         self.modifiers = []
         self._blockSignals = None
+        self.lastValue = 0
         if isinstance(widget, QtWidgets.QSpinBox):
             self._get = widget.value
             self._set = widget.setValue
@@ -161,7 +177,7 @@ class ValueReference(DependentObject):
             self._set = self.widget.setText
             widget.addItem(self.widget)
             if valueconfig.forceCheckbox:
-                widget.itemClicked.connect(lambda *args,x=self.widget:self.on_changed(x))
+                widget.itemClicked.connect(self.changeSignal)
                 self.widget.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
                 self.widget.setCheckState(Qt.Unchecked)
                 self.previousCheckState = Qt.Unchecked
@@ -173,7 +189,6 @@ class ValueReference(DependentObject):
             self._get = 0
         else:
             raise TypeError("unsupported widget "+str(type(widget)))
-        self.lastValue = 0
         if self.vconf.VisualUpdateSignal:
             getValue(self.vconf.VisualUpdateSignal).changeSignal.connect(self.on_visual_update)
 
@@ -225,7 +240,7 @@ class ValueReference(DependentObject):
         if not needDescription:return v
         else:return (v,mstring)
 
-    def on_changed(self,input_=None):
+    def on_changed(self):
         # always called when value is changed by gui, or another value changed that may cause this to change
         # uses ValueConfig to verify such a value is possible,
         # and either updates the fallback value, or resets to fallback
@@ -410,3 +425,49 @@ class Proficiency(DependentObject):
             p=self.parent.get()
         else:p=False
         return (1 if v or p else 0)
+
+class ProficiencyChoice:
+    def __init__(self, n, profs):
+        self.maxN = n
+        self.profs = {p:0 for p in profs}   # lastValue associated with this choice element
+
+    def __str__(self):
+        s = "prof_" + str(self.maxN)
+        for i in sorted(self.profs.keys(), key=str.lower):
+            s += "_"+i
+        return s
+
+    def proficient(self,name, v):
+        if str(self) not in getProficiencyTable().table.keys():return 0
+        if name not in self.profs.keys():
+            return 0
+        if self.profs[name] == v:   # nothing changed
+            return v
+        elif self.profs[name] > v:
+            assert self.profs[name]==1 and v==0 # assume bool
+            self.profs[name] = v
+            getValue("listWidget_proficiencies_VisualUpdate").changeSignal.emit()
+            return v
+        elif self.profs[name] < v:
+            assert self.profs[name]==0 and v==1
+            if self.maxN - self.getUsedPoints() > 0:
+                self.profs[name] = v#1
+                getValue("listWidget_proficiencies_VisualUpdate").changeSignal.emit()
+                return v
+            else:
+                return self.profs[name]
+        else:
+            raise ValueError("invalid case for ProficiencyChoice!")
+
+    def possible(self,name,v):
+        if str(self) not in getProficiencyTable().table.keys():
+            return 0
+        if name not in self.profs.keys():
+            #print(name,self.profs.keys())
+            return 0
+        else:
+            #print("exe")
+            return self.maxN - self.getUsedPoints() + self.profs[name]
+
+    def getUsedPoints(self):
+        return sum(self.profs.values())

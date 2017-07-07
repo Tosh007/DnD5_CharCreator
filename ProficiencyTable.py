@@ -10,6 +10,7 @@ class ProficiencyTable:
         f = open(getDirectoryPrefix()+"data/character/proficiency.yaml")
         y = yaml.load(f)
         f.close()
+        self.table = {}
         self.loadProficiency(y)
 
     def loadProficiency(self, data, parent=None):
@@ -35,9 +36,10 @@ class ProficiencyTable:
         if sname[-4:]==".UI.":
             sname = sname[:-4]
             ui = getUI("checkBox_"+sname)
-            c = getConfig("ProficiencyConfig")(parent)
+            print("constructing proficiency ",sname)
+            c = getConfig("ProficiencyConfig")(sname, parent)
         else:
-            c = getConfig("ProficiencyListConfig")(parent)
+            c = getConfig("ProficiencyListConfig")(sname, parent)
             ui = getUI("listWidget_proficiencies")
 
 
@@ -64,3 +66,11 @@ class ProficiencyTable:
 
     def __getattr__(self,name):
         return self.table[name]
+
+    def addChoice(self, choice):
+        name = str(choice)
+        assert name not in self.table.keys()
+        self.table[name] = choice
+
+    def removeChoice(self,name):
+        del self.table[name]

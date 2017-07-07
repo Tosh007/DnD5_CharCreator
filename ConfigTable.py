@@ -16,35 +16,78 @@ class ConfigTable:
         #        print(self.name,vmod)
 
     class ProficiencyConfig(ValueConfig):
-        def __init__(self, root):
+        def __init__(self, name, root):
+            self.name = name
             self.root = root    # name of parent proficiency
+            self.choice = None  # choice from which value is drawn
 
         def checkRequirements(self,value,lastValue):
             #print ("proficiency requirement check:")
             if value<0 or (not self.root):return 0
-            learn = getValue("prof_"+self.root+"_learnChildren")
+            #learn = getValue("prof_"+self.root+"_learnChildren")
+            try:
+                choices = getProficiencyTable().table.values()
+            except:
+                return lastValue
             maxValue = self.getMaxValue(lastValue)
+            #if value==lastValue:
+            #    if value>maxValue:
+            #        learn+=lastValue-maxValue
+            #        getValue("listWidget_proficiencies_VisualUpdate").changeSignal.emit()
+            #        return maxValue
+            #    else:
+            #        return value
+            #else:
+            #    if value>maxValue:
+            #        assert lastValue<=maxValue
+            #        return lastValue
+            #    else:
+            #        learn += lastValue - value
+            #        getValue("listWidget_proficiencies_VisualUpdate").changeSignal.emit()
+            #        return value
             if value==lastValue:
-                if value>maxValue:
-                    learn+=lastValue-maxValue
-                    getValue("listWidget_proficiencies_VisualUpdate").changeSignal.emit()
-                    return maxValue
-                else:
-                    return value
+                if value>0:
+                    assert self.choice
+                    v=self.choice.proficient(self.name, value) #dont search for other choices for takeover
+                    if not v:self.choice=None
+                    return v
+                #else: value==lastValue==0
             else:
-                if value>maxValue:
-                    assert lastValue<=maxValue
-                    return lastValue
+                #value!=lastValue
+                if value>0:
+                    assert lastValue==0
+                    #assert not self.choice
+                    for choice in getProficiencyTable().table.values():
+                        v = choice.proficient(self.name, value)
+                        if v:
+                            self.choice=choice
+                            return v
                 else:
-                    learn += lastValue - value
-                    getValue("listWidget_proficiencies_VisualUpdate").changeSignal.emit()
-                    return value
+                    # value=0
+                    assert lastValue>0
+                    assert self.choice
+                    return self.choice.proficient(self.name,0)
+                    self.choice = None
+            return 0
 
         def getMaxValue(self, lastValue):
-            if self.root:
-                return max(0,getValue("prof_"+self.root+"_learnChildren").get()+lastValue)
-            else:
+            try:
+                choices = getProficiencyTable().table.values()
+            except:
+                #print("fail")
                 return 0
+            for choice in choices:
+                v=max(0,choice.possible(self.name,1))
+                if v:
+                    #print("1")
+                    return 1
+                else:
+                    pass
+                    #print(v)
+            return 0
+
+
+
         hide = lambda self,v,vmod,maxValue:False
         specialSetup = lambda self,widget,v,vmod,mdesc,maxValue: None
 
@@ -53,8 +96,7 @@ class ConfigTable:
         VisualUpdateSignal = "listWidget_proficiencies_VisualUpdate"
         forceCheckbox = True
         def specialSetup(self,widget,v,vmod,mdesc,maxValue):
-            return
-            if "standart_language" in self.root:
+            if self.root and "standart_language" in self.root:
                 print(widget.widget.text(),v,vmod,maxValue,self.hide(v,vmod,maxValue))
 
 

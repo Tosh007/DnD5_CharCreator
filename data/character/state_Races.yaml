@@ -1,8 +1,11 @@
 # primary race list
 Human:
-    mod:
-        Human_proficient:
-            - prof_standart_languages_learnChildren
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - "dwarvish"
+                - "elvish"
 
 Dwarf:
     mod:
@@ -16,6 +19,14 @@ Dwarf:
             - prof_handaxe
             - prof_warhammer
             - prof_dwarvish
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - "smith_tools"
+                - "brewer_supplies"
+                - "mason_tools"
+
     property:
         - Dwarven Resilience
         - Darkvision

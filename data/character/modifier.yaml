@@ -14,6 +14,9 @@
 - Dwarf_speed:
     lambda: "25"
     text: "Dwarf"
+- Aarakocra_speed:
+    lambda: "25"
+    text: "Aarakocra"
 
 - Barbarian_HP:
     lambda: "x+12"

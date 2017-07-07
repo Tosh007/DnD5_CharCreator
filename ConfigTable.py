@@ -96,6 +96,7 @@ class ConfigTable:
         VisualUpdateSignal = "listWidget_proficiencies_VisualUpdate"
         forceCheckbox = True
         def specialSetup(self,widget,v,vmod,mdesc,maxValue):
+            return
             if self.root and "standart_language" in self.root:
                 print(widget.widget.text(),v,vmod,maxValue,self.hide(v,vmod,maxValue))
 

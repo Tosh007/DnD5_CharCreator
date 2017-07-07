@@ -36,7 +36,6 @@ class ProficiencyTable:
         if sname[-4:]==".UI.":
             sname = sname[:-4]
             ui = getUI("checkBox_"+sname)
-            print("constructing proficiency ",sname)
             c = getConfig("ProficiencyConfig")(sname, parent)
         else:
             c = getConfig("ProficiencyListConfig")(sname, parent)

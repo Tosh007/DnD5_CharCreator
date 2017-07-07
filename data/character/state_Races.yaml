@@ -72,7 +72,6 @@ Gnome:
         Gnome_proficient:
             - prof_gnomish
     property:
-        - Darkvision
         - Gnome Cunning
 
 Half-Elf:
@@ -82,7 +81,14 @@ Half-Elf:
             - prof_skills_learnChildren
         HalfElf_proficient:
             - prof_elvish
-            - prof_standart_languages_learnChildren
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - dwarvish
+                - orcish
+                - gnomish
+                - halfling
     property:
         - Darkvision
         - Fey Ancestry
@@ -206,7 +212,6 @@ Tabaxi:
     property:
         - Darkvision
         - Feline Agility
-        - Climbing Speed 20ft
         - "Cat's Claws"
 Triton:
     mod:
@@ -229,11 +234,11 @@ Bugbear:
             - dexterity
         Bugbear_proficient:
             - prof_goblin
+            - prof_stealth
     property:
         - Darkvision
         - "Long-limbed"
         - Powerful Build
-        - Sneaky
         - Surprise Attack
 Goblin:
     mod:
@@ -272,6 +277,7 @@ Kobold:
         - Sunlight Sensitivity
         - Pack Tacktics
         - "Grovel, Cower, and Beg"
+        - Darkvision
 Yuan-Ti Pureblood:
     mod:
         Yuan_Ti_Pureblood_plus2:
@@ -286,3 +292,23 @@ Yuan-Ti Pureblood:
         - Innate Spellcasting
         - Magic Resistance
         - Poison Immunity
+Aarakocra:
+    mod:
+        Aarakocra_plus2:
+            - dexterity
+        Aarakocra_plus1:
+            - wisdom
+        Aarakocra_speed:
+            - speed
+        Aarakocra_proficient:
+            - prof_aarakocra
+            - prof_auran
+    property:
+        - Flight
+        - Talons
+Genasi:
+    mod:
+        Genasi_plus2:
+            - constitution
+        Genasi_proficient:
+            - prof_primordial

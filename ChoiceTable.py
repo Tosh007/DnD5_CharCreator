@@ -38,6 +38,9 @@ class StateTable:
     class Human_SkillChoice(ChoiceReference):
         stateFile = "data/character/skills.yaml"
 
+    class Subrace_Genasi(ChoiceReference):
+        stateFile = "data/character/state_Subrace_Genasi.yaml"
+
     class Subrace_Aasimar(ChoiceReference):
         stateFile = "data/character/state_Subrace_Aasimar.yaml"
 

@@ -5,16 +5,24 @@ Forest Gnome:
     property:
         - natural Illusionist
         - speak with small Beasts
+        - Darkvision
 Rock Gnome:
     mod:
         Gnome_plus1:
             - constitution
+        Gnome_proficient:
+            - prof_tinker_tools
     property:
         - "artificer's lore"
         - Tinker
+        - Darkvision
 Deep Gnome:
     mod:
         Gnome_plus1:
             - dexterity
         Gnome_proficient:
             - prof_undercommon
+    property:
+        - Superior Darkvision
+        - Stone Camouflage
+        - Deep Gnome Magic

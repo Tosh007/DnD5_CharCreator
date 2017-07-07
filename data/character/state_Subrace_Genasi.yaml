@@ -1,0 +1,31 @@
+Air Genasi:
+    mod:
+        Genasi_plus1:
+            - dexterity
+    property:
+        - unending breath
+        - mingle with the wind
+Earth Genasi:
+    mod:
+        Genasi_plus1:
+            - strength
+    property:
+        - Earth Walk
+        - Merge with Stone
+Fire Genasi:
+    mod:
+        Genasi_plus1:
+            - intelligence
+    property:
+        - Darkvision
+        - Fire Resistance
+        - Reach to the Blaze
+Water Genasi:
+    mod:
+        Genasi_plus1:
+            - wisdom
+    property:
+        - Acid Resistance
+        - Amphibious
+        - Swim
+        - Call to the Wave

@@ -140,5 +140,6 @@ class ConfigTable:
     charismaMod = AbilityModConfig("charisma")
 
     class MaxHPConfig(ValueConfig):
+        alwaysMax = True
         def getMaxValue(lastValue):
             return getValue("constMod").get()

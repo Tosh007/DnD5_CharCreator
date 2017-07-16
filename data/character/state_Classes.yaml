@@ -23,9 +23,15 @@ Bard:
             - prof_shortsword
             - prof_dexterity_saving_throw
             - prof_charisma_saving_throw
-        plus3:
-            - prof_musical_instrument_learnChildren
-            - prof_skills_learnChildren
+    ProfChoice:
+        - a:
+            n: 3
+            profs:
+                - musical_instrument
+        - b:
+            n: 3
+            profs:
+                - skills
 
 Cleric:
     mod:

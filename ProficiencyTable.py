@@ -13,6 +13,10 @@ class ProficiencyTable:
         self.table = {}
         self.childTable = defaultdict(list)
         self.loadProficiency(y)
+        f = open(getDirectoryPrefix()+"data/character/spellList.yaml")
+        y = yaml.load(f)
+        f.close()
+        self.loadProficiency(y)
 
     def loadProficiency(self, data, parent=None):
         # always a list as toplevel structure
@@ -43,6 +47,10 @@ class ProficiencyTable:
                 sname = sname[:-6]
                 name = name[:-6]
                 ui = getUI("listWidget_languages")
+            elif sname[-7:]==".SPELL.":
+                sname = sname[:-7]
+                name = name[:-7]
+                ui = getUI("listWidget_spells")
             else:
                 ui = getUI("listWidget_proficiencies")
             c = getConfig("ProficiencyListConfig")(sname, parent)

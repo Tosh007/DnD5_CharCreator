@@ -153,6 +153,8 @@ Wizard:
             - prof_intelligence_saving_throw
             - prof_wisdom_saving_throw
             - prof_spellcasting
+    property:
+        - arcane recovery
     ProfChoice:
         - a:
             n: 2
@@ -163,3 +165,11 @@ Wizard:
                 - investigation
                 - medicine
                 - religion
+        - b:
+            n: 3
+            profs:
+                - wizard_cantrips
+        - c:
+            n: 6
+            profs:
+                - wizard_spells_lvl1

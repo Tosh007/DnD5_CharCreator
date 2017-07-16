@@ -4,8 +4,7 @@ Human:
         - a:
             n: 1
             profs:
-                - "dwarvish"
-                - "elvish"
+                - standart_languages
 
 Dwarf:
     mod:
@@ -78,17 +77,17 @@ Half-Elf:
     mod:
         HalfElf_plus2:
             - charisma
-            - prof_skills_learnChildren
         HalfElf_proficient:
             - prof_elvish
     ProfChoice:
         - a:
             n: 1
             profs:
-                - dwarvish
-                - orcish
-                - gnomish
-                - halfling
+                - standart_languages
+        - b:
+            n: 2
+            profs:
+                - skills
     property:
         - Darkvision
         - Fey Ancestry

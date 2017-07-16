@@ -35,9 +35,6 @@ class StateTable:
     class FeatChoice(ChoiceReference):
         stateFile = "data/character/feats.yaml"
 
-    class Human_SkillChoice(ChoiceReference):
-        stateFile = "data/character/skills.yaml"
-
     class Subrace_Genasi(ChoiceReference):
         stateFile = "data/character/state_Subrace_Genasi.yaml"
 
@@ -90,29 +87,32 @@ class StateTable:
             del self.extra_ui
             del self.tab
             getModifier("Human_plus1").disconnect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")),True)
-            getModifier("Human_plus1").disconnect(getValue("prof_skills_learnChildren"),True)
-            getValue("listWidget_proficiencies_VisualUpdate").changeSignal.emit()
+            try:
+                getProficiencyTable().removeChoice(self.Human_SkillChoice)
+            except:pass
 
         def altHumanTrait(self):
             b = self.extra_ui.checkBox_variantTraits.checkState()
             if b:
                 getModifier("Human_plus1").disconnect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")),True)
-                getModifier("Human_plus1").connect(getValue("prof_skills_learnChildren"))
-                #self.skill = StateTable.Human_SkillChoice(self.extra_ui.comboBox_skill)
+                #getModifier("Human_plus1").connect(getValue("prof_skills_learnChildren"))#deprecated
+                choice = ProficiencyChoice(1,("skills",))
+                self.Human_SkillChoice = str(choice)
+                getProficiencyTable().addChoice(choice)
                 self.feat = StateTable.FeatChoice(self.extra_ui.comboBox_feat)
                 self.score = StateTable.Choice2AbilityScore(self.extra_ui.comboBox_abilityScore)
                 for i in range(self.extra_ui.comboBox_abilityScore.count()):
                     self.extra_ui.comboBox_abilityScore.setItemChecked(i, False)
             else:
                 getModifier("Human_plus1").connect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")))
-                getModifier("Human_plus1").disconnect(getValue("prof_skills_learnChildren"),True)
-                getValue("listWidget_proficiencies_VisualUpdate").changeSignal.emit()
+                #getModifier("Human_plus1").disconnect(getValue("prof_skills_learnChildren"),True)#deprecated
+                try:
+                    getProficiencyTable().removeChoice(self.Human_SkillChoice)
+                except BaseException as e:print(e)
                 self.score.destroy()
-                #self.skill.destroy()
                 self.feat.destroy()
                 del self.score
                 del self.feat
-                #del self.skill
 
     class PrimaryState(FiniteStateMachine):
         stateFile = "data/character/state_ValueTable.yaml"

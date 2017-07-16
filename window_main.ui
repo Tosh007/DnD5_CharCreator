@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1058</width>
+    <width>1305</width>
     <height>632</height>
    </rect>
   </property>
@@ -1132,9 +1132,9 @@
    <widget class="QListWidget" name="listWidget_traits">
     <property name="geometry">
      <rect>
-      <x>740</x>
+      <x>1020</x>
       <y>160</y>
-      <width>251</width>
+      <width>261</width>
       <height>181</height>
      </rect>
     </property>
@@ -1155,7 +1155,7 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>740</x>
+      <x>1020</x>
       <y>140</y>
       <width>83</width>
       <height>13</height>
@@ -1168,7 +1168,7 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>740</x>
+      <x>440</x>
       <y>360</y>
       <width>50</width>
       <height>13</height>
@@ -1181,9 +1181,9 @@
    <widget class="QListWidget" name="listWidget_proficiencies">
     <property name="geometry">
      <rect>
-      <x>440</x>
+      <x>740</x>
       <y>380</y>
-      <width>261</width>
+      <width>251</width>
       <height>201</height>
      </rect>
     </property>
@@ -1191,9 +1191,9 @@
    <widget class="QListWidget" name="listWidget_inventory">
     <property name="geometry">
      <rect>
-      <x>740</x>
+      <x>440</x>
       <y>380</y>
-      <width>256</width>
+      <width>261</width>
       <height>201</height>
      </rect>
     </property>
@@ -1201,7 +1201,7 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>440</x>
+      <x>740</x>
       <y>360</y>
       <width>59</width>
       <height>13</height>
@@ -1226,13 +1226,72 @@
      </attribute>
     </widget>
    </widget>
+   <widget class="QListWidget" name="listWidget_spells">
+    <property name="geometry">
+     <rect>
+      <x>1020</x>
+      <y>380</y>
+      <width>261</width>
+      <height>201</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>1020</x>
+      <y>360</y>
+      <width>91</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Cantrips and Spells</string>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="listWidget_languages">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>160</y>
+      <width>251</width>
+      <height>181</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>140</y>
+      <width>52</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Languages</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_allowMonsterLanguage">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>140</y>
+      <width>145</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Allow Monster Languages</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1058</width>
+     <width>1305</width>
      <height>21</height>
     </rect>
    </property>

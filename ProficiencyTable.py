@@ -1,5 +1,5 @@
 import yaml
-
+from collections import *
 from CharacterCore import*
 from acces import *
 from PyQt5.QtCore import Qt
@@ -11,7 +11,9 @@ class ProficiencyTable:
         y = yaml.load(f)
         f.close()
         self.table = {}
+        self.childTable = defaultdict(list)
         self.loadProficiency(y)
+        #print(tuple(self.getChildProficiencies("skills")))
 
     def loadProficiency(self, data, parent=None):
         # always a list as toplevel structure
@@ -33,29 +35,41 @@ class ProficiencyTable:
         else:
             initial=0
         sname=name.replace(" ", "_")
-        if sname[-4:]==".UI.":
-            sname = sname[:-4]
+        if sname[-6:]==".SKIL.":
+            sname = sname[:-6]
             ui = getUI("checkBox_"+sname)
+            print(sname)
             c = getConfig("ProficiencyConfig")(sname, parent)
         else:
+            if sname[-6:]==".LANG.":
+                sname = sname[:-6]
+                name = name[:-6]
+                ui = getUI("listWidget_languages")
+            else:
+                ui = getUI("listWidget_proficiencies")
             c = getConfig("ProficiencyListConfig")(sname, parent)
-            ui = getUI("listWidget_proficiencies")
+
+        if hasChildren:
+            c = getConfig("ProficiencyCategoryConfig")(sname, parent)
+
 
 
         valueref = ValueReference(ui, c, name)
+        getValue("listWidget_proficiencies_update").connect(valueref)
         vt=getValueTable()
         vt.newValue("prof_"+sname,valueref)
         if initial>0:
             getModifier("plus1").connect(valueref)
         if parent:
-            parentLearn = "prof_"+parent+"_learnChildren"
-            getValue(parentLearn).connect(valueref)
-        if hasChildren:
-            learn = ValueReference(None, getConfig("AllowNone"))
-            vt.newValue("prof_"+sname+"_learnChildren",learn)
-            if parent:
-                getValue(parentLearn).connect(learn)
-                self._createPropagateModifier(parentLearn).connect(learn)
+            self.childTable[parent].append(sname)
+            #parentLearn = "prof_"+parent+"_learnChildren"
+            #getValue(parentLearn).connect(valueref)
+        #if hasChildren:
+        #    learn = ValueReference(None, getConfig("AllowNone"))
+        #    vt.newValue("prof_"+sname+"_learnChildren",learn)
+            #if parent:
+            #    getValue(parentLearn).connect(learn)
+            #    self._createPropagateModifier(parentLearn).connect(learn)
 
         #self.table[sname] = Proficiency(name, parent, valueref)  # now longer use seperate proficiency storage
         return sname
@@ -70,6 +84,20 @@ class ProficiencyTable:
         name = str(choice)
         assert name not in self.table.keys()
         self.table[name] = choice
+        getValue("listWidget_proficiencies_update").changeSignal.emit()
 
-    def removeChoice(self,name):
-        del self.table[name]
+    def removeChoice(self,name, try_=False):
+        if try_:
+            try:
+                del self.table[name]
+            except:pass
+        else:
+            del self.table[name]
+        getValue("listWidget_proficiencies_update").changeSignal.emit()
+
+    def getChildProficiencies(self,name):
+        if name in self.childTable:
+            for child in self.childTable[name]:
+                yield child
+                for i in self.getChildProficiencies(child):
+                    yield i

@@ -1,29 +1,29 @@
 # proficiency table
 - skills:
-    - strength saving throw.UI.
-    - athletics.UI.
-    - dexterity saving throw.UI.
-    - acrobatics.UI.
-    - sleight of hand.UI.
-    - stealth.UI.
-    - constitution saving throw.UI.
-    - intelligence saving throw.UI.
-    - arcana.UI.
-    - history.UI.
-    - investigation.UI.
-    - nature.UI.
-    - religion.UI.
-    - wisdom saving throw.UI.
-    - animal handling.UI.
-    - insight.UI.
-    - medicine.UI.
-    - perception.UI.
-    - survival.UI.
-    - charisma saving throw.UI.
-    - deception.UI.
-    - performance.UI.
-    - persuation.UI.
-    - intimidation.UI.
+    - strength saving throw.SKIL.
+    - athletics.SKIL.
+    - dexterity saving throw.SKIL.
+    - acrobatics.SKIL.
+    - sleight of hand.SKIL.
+    - stealth.SKIL.
+    - constitution saving throw.SKIL.
+    - intelligence saving throw.SKIL.
+    - arcana.SKIL.
+    - history.SKIL.
+    - investigation.SKIL.
+    - nature.SKIL.
+    - religion.SKIL.
+    - wisdom saving throw.SKIL.
+    - animal handling.SKIL.
+    - insight.SKIL.
+    - medicine.SKIL.
+    - perception.SKIL.
+    - survival.SKIL.
+    - charisma saving throw.SKIL.
+    - deception.SKIL.
+    - performance.SKIL.
+    - persuation.SKIL.
+    - intimidation.SKIL.
 
 - armor:
     - light armor
@@ -109,49 +109,49 @@
 - herbalism kit
 - spellcasting
 
-- languages:
-    - standart languages:
-        - common!
-        - dwarvish
-        - orcish
-        - elvish
-        - gnomish
-        - halfling
-    - exotic languages:
-        - giant
-        - abyssal
-        - celestial
-        - draconic
-        - deep speech
-        - infernal
-        - primordial
-        - sylvan
-        - undercommon
-        - auran
-    - monster languages:
-        - aarakocra
-        - ignan
-        - terran
-        - gith
-        - gnoll
-        - grell
-        - bullywug
-        - aquan
-        - hook horror
-        - modron
-        - otyugh
-        - sahuagin
-        - slaad
-        - sphinx
-        - thri-kreen
-        - troglodyte
-        - umber hulk
-        - yeti
-        - blink dog
-        - giant eagle
-        - giant elk
-        - giant owl
-        - winter Wolf
-        - worg
-        - druidic
-        - goblin
+- languages.LANG.:
+    - standart languages.LANG.:
+        - common.LANG.!
+        - dwarvish.LANG.
+        - orcish.LANG.
+        - elvish.LANG.
+        - gnomish.LANG.
+        - halfling.LANG.
+    - exotic languages.LANG.:
+        - giant.LANG.
+        - abyssal.LANG.
+        - celestial.LANG.
+        - draconic.LANG.
+        - deep speech.LANG.
+        - infernal.LANG.
+        - primordial.LANG.
+        - sylvan.LANG.
+        - undercommon.LANG.
+        - auran.LANG.
+    - monster languages.LANG.:
+        - aarakocra.LANG.
+        - ignan.LANG.
+        - terran.LANG.
+        - gith.LANG.
+        - gnoll.LANG.
+        - grell.LANG.
+        - bullywug.LANG.
+        - aquan.LANG.
+        - hook horror.LANG.
+        - modron.LANG.
+        - otyugh.LANG.
+        - sahuagin.LANG.
+        - slaad.LANG.
+        - sphinx.LANG.
+        - thri-kreen.LANG.
+        - troglodyte.LANG.
+        - umber hulk.LANG.
+        - yeti.LANG.
+        - blink dog.LANG.
+        - giant eagle.LANG.
+        - giant elk.LANG.
+        - giant owl.LANG.
+        - winter Wolf.LANG.
+        - worg.LANG.
+        - druidic.LANG.
+        - goblin.LANG.

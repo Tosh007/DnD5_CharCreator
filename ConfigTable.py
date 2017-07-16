@@ -17,6 +17,7 @@ class ConfigTable:
 
     class ProficiencyConfig(ValueConfig):
         def __init__(self, name, root):
+            #print(name)
             self.name = name
             self.root = root    # name of parent proficiency
             self.choice = None  # choice from which value is drawn
@@ -100,7 +101,10 @@ class ConfigTable:
             if self.root and "standart_language" in self.root:
                 print(widget.widget.text(),v,vmod,maxValue,self.hide(v,vmod,maxValue))
 
-
+    class ProficiencyCategoryConfig(ProficiencyListConfig):
+        def checkRequirements(self,value,lastValue):
+            return lastValue
+        hide = lambda self,v,vmod,maxValue:vmod==0
 
     class HiddenValue(ValueConfig): #can be achieved by setting ui element to none
         hide = lambda v,vmod,maxV: True

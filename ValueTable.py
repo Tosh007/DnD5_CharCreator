@@ -40,3 +40,4 @@ class ValueTable:
             obj.changeSignal.emit()
     def custom(self):
         self._data["listWidget_proficiencies_VisualUpdate"] = DependentObject(None)
+        self._data["listWidget_proficiencies_update"] = DependentObject(None)

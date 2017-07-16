@@ -429,7 +429,11 @@ class Proficiency(DependentObject):
 class ProficiencyChoice:
     def __init__(self, n, profs):
         self.maxN = n
-        self.profs = {p:0 for p in profs}   # lastValue associated with this choice element
+        profs_ = list(profs)
+        for prof in profs:
+            profs_ += tuple(getProficiencyTable().getChildProficiencies(prof))
+        self.profs = {p:0 for p in profs_}   # lastValue associated with this choice element
+        print(self.profs)
 
     def __str__(self):
         s = "prof_" + str(self.maxN)
@@ -439,6 +443,7 @@ class ProficiencyChoice:
 
     def proficient(self,name, v):
         if str(self) not in getProficiencyTable().table.keys():return 0
+        print(name)
         if name not in self.profs.keys():
             return 0
         if self.profs[name] == v:   # nothing changed

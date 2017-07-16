@@ -5,6 +5,7 @@ Human:
             n: 1
             profs:
                 - standart_languages
+                - exotic_languages
 
 Dwarf:
     mod:
@@ -84,6 +85,7 @@ Half-Elf:
             n: 1
             profs:
                 - standart_languages
+                - exotic_languages
         - b:
             n: 2
             profs:

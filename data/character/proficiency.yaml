@@ -128,8 +128,8 @@
         - sylvan.LANG.
         - undercommon.LANG.
         - auran.LANG.
-    - monster languages.LANG.:
         - aarakocra.LANG.
+    - monster languages.LANG.:
         - ignan.LANG.
         - terran.LANG.
         - gith.LANG.

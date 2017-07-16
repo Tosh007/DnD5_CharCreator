@@ -251,7 +251,7 @@ class ValueReference(DependentObject):
             return
         value = self.get(True)
         if self.vconf.forceCheckbox:
-            if self.widget.checkState() == Qt.Checked and not self.get():
+            if self.widget.checkState() == Qt.Checked and self.get()==value:
                 value=1
             else:
                 value=0
@@ -433,7 +433,6 @@ class ProficiencyChoice:
         for prof in profs:
             profs_ += tuple(getProficiencyTable().getChildProficiencies(prof))
         self.profs = {p:0 for p in profs_}   # lastValue associated with this choice element
-        print(self.profs)
 
     def __str__(self):
         s = "prof_" + str(self.maxN)

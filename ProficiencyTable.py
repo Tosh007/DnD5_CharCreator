@@ -38,7 +38,6 @@ class ProficiencyTable:
         if sname[-6:]==".SKIL.":
             sname = sname[:-6]
             ui = getUI("checkBox_"+sname)
-            print(sname)
             c = getConfig("ProficiencyConfig")(sname, parent)
         else:
             if sname[-6:]==".LANG.":

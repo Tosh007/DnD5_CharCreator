@@ -16,6 +16,7 @@ class ConfigTable:
         #        print(self.name,vmod)
 
     class ProficiencyConfig(ValueConfig):
+        forceCheckbox = True
         def __init__(self, name, root):
             #print(name)
             self.name = name
@@ -95,7 +96,6 @@ class ConfigTable:
     class ProficiencyListConfig(ProficiencyConfig):
         hide = lambda self,v,vmod,maxValue:(v==0) and (vmod==0) and (maxValue==0)
         VisualUpdateSignal = "listWidget_proficiencies_VisualUpdate"
-        forceCheckbox = True
         def specialSetup(self,widget,v,vmod,mdesc,maxValue):
             return
             if self.root and "standart_language" in self.root:

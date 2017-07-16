@@ -5,48 +5,21 @@ from CharacterCore import *
 class ConfigTable:
     AllowNone = ValueConfig
     AllowAll  = ValueConfig_allow
-    class AllowNone_debug(AllowNone):
-        def __init__(self, name):
-            self.name=name
-            self.vmod=0
-        def specialSetup(self,widget,v,vmod,mdesc,maxValue):
-            pass
-        #    if "language" in self.name and vmod!=self.vmod:
-        #        self.vmod = vmod
-        #        print(self.name,vmod)
 
     class ProficiencyConfig(ValueConfig):
         forceCheckbox = True
         def __init__(self, name, root):
-            #print(name)
             self.name = name
             self.root = root    # name of parent proficiency
             self.choice = None  # choice from which value is drawn
 
         def checkRequirements(self,value,lastValue):
-            #print ("proficiency requirement check:")
             if value<0 or (not self.root):return 0
-            #learn = getValue("prof_"+self.root+"_learnChildren")
             try:
                 choices = getProficiencyTable().table.values()
             except:
                 return lastValue
             maxValue = self.getMaxValue(lastValue)
-            #if value==lastValue:
-            #    if value>maxValue:
-            #        learn+=lastValue-maxValue
-            #        getValue("listWidget_proficiencies_VisualUpdate").changeSignal.emit()
-            #        return maxValue
-            #    else:
-            #        return value
-            #else:
-            #    if value>maxValue:
-            #        assert lastValue<=maxValue
-            #        return lastValue
-            #    else:
-            #        learn += lastValue - value
-            #        getValue("listWidget_proficiencies_VisualUpdate").changeSignal.emit()
-            #        return value
             if value==lastValue:
                 if value>0:
                     assert self.choice
@@ -76,20 +49,14 @@ class ConfigTable:
             try:
                 choices = getProficiencyTable().table.values()
             except:
-                #print("fail")
                 return 0
             for choice in choices:
                 v=max(0,choice.possible(self.name,1))
                 if v:
-                    #print("1")
                     return 1
                 else:
                     pass
-                    #print(v)
             return 0
-
-
-
         hide = lambda self,v,vmod,maxValue:False
         specialSetup = lambda self,widget,v,vmod,mdesc,maxValue: None
 
@@ -114,7 +81,6 @@ class ConfigTable:
         @classmethod
         def checkRequirements(self, value, oldvalue):
             total = getValue("abilityScorePoints").get() - self.getReqPoints(value) + self.getReqPoints(oldvalue)
-            #print(total if total>0 else 0)
             if (total>=0):
                 getValue("abilityScorePoints").set(total)
                 return value

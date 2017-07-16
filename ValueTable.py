@@ -15,11 +15,9 @@ class ValueTable:
             config = ValueConfig
             format = None
             initial=0
-            #print (meta)
             for key in meta:
                 if key=="ui":
                     ui=getUI(meta[key])
-                    #print (ui)
                 if key=="config":
                     config = getConfig(meta[key])
                 if key=="format":
@@ -29,7 +27,6 @@ class ValueTable:
             self._data[name] = ValueReference(ui, config,format)
             self._data[name].set(initial)
             self._data[name].lastValue = initial
-            #print(name,"=ValueReference(",ui,config, format,")")
     def newValue(self,name,value):
         if name in self._data.keys():raise ValueError("value '"+name+"' exists")
         self._data[name] = value

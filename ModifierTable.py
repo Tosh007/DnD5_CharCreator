@@ -24,7 +24,6 @@ class ModifierTable:
                 if key=="text":
                     text = meta[key]
             self.newModifier(name, ValueModifier(l, text, order))
-
         for auto in (AutoModRace,AutoModClass):
             c = auto()
             self.autoModInit(c)

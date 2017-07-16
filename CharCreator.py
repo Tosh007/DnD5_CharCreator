@@ -11,8 +11,6 @@ MainWindow = QtWidgets.QMainWindow()
 ui = Ui_MainWindow()
 ui.setupUi(MainWindow)
 
-
-
 acces.initializeTables(ui)
 acces.getValueTable().flushChanges()
 MainWindow.show()

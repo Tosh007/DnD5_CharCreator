@@ -13,7 +13,6 @@ class ProficiencyTable:
         self.table = {}
         self.childTable = defaultdict(list)
         self.loadProficiency(y)
-        #print(tuple(self.getChildProficiencies("skills")))
 
     def loadProficiency(self, data, parent=None):
         # always a list as toplevel structure
@@ -47,12 +46,8 @@ class ProficiencyTable:
             else:
                 ui = getUI("listWidget_proficiencies")
             c = getConfig("ProficiencyListConfig")(sname, parent)
-
         if hasChildren:
             c = getConfig("ProficiencyCategoryConfig")(sname, parent)
-
-
-
         valueref = ValueReference(ui, c, name)
         getValue("listWidget_proficiencies_update").connect(valueref)
         vt=getValueTable()
@@ -61,16 +56,6 @@ class ProficiencyTable:
             getModifier("plus1").connect(valueref)
         if parent:
             self.childTable[parent].append(sname)
-            #parentLearn = "prof_"+parent+"_learnChildren"
-            #getValue(parentLearn).connect(valueref)
-        #if hasChildren:
-        #    learn = ValueReference(None, getConfig("AllowNone"))
-        #    vt.newValue("prof_"+sname+"_learnChildren",learn)
-            #if parent:
-            #    getValue(parentLearn).connect(learn)
-            #    self._createPropagateModifier(parentLearn).connect(learn)
-
-        #self.table[sname] = Proficiency(name, parent, valueref)  # now longer use seperate proficiency storage
         return sname
 
     def _createPropagateModifier(self,parentLearn):

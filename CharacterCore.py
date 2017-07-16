@@ -139,7 +139,6 @@ class FiniteStateMachine:
                     choice = tuple(choice.values())[0]
                     n = choice["n"]
                     profs = choice["profs"]
-                    #print(n,profs)
                     c = ProficiencyChoice(n, profs)
                     name = str(c)
                     self.profs.append(name)
@@ -442,7 +441,6 @@ class ProficiencyChoice:
 
     def proficient(self,name, v):
         if str(self) not in getProficiencyTable().table.keys():return 0
-        print(name)
         if name not in self.profs.keys():
             return 0
         if self.profs[name] == v:   # nothing changed
@@ -467,10 +465,8 @@ class ProficiencyChoice:
         if str(self) not in getProficiencyTable().table.keys():
             return 0
         if name not in self.profs.keys():
-            #print(name,self.profs.keys())
             return 0
         else:
-            #print("exe")
             return self.maxN - self.getUsedPoints() + self.profs[name]
 
     def getUsedPoints(self):

@@ -20,10 +20,8 @@ class StateTable:
                     self.widget.setItemWithNameChecked(i,False)
                 items = self.widget.checkedItems()
             activate = items - self.activeMod
-            print("activate",activate)
             getModifier("Human_plus1").connect(getValues(activate))
             deactivate = self.activeMod - items
-            print("deactivate",deactivate)
             getModifier("Human_plus1").disconnect(getValues(deactivate))
             self.activeMod = items
 
@@ -58,7 +56,6 @@ class StateTable:
 
     class Races(ChoiceReference):
         stateFile = "data/character/state_Races.yaml"
-
         def enter(self,state):
             if state=="Off":return
             try:
@@ -95,7 +92,6 @@ class StateTable:
             b = self.extra_ui.checkBox_variantTraits.checkState()
             if b:
                 getModifier("Human_plus1").disconnect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")),True)
-                #getModifier("Human_plus1").connect(getValue("prof_skills_learnChildren"))#deprecated
                 choice = ProficiencyChoice(1,("skills",))
                 self.Human_SkillChoice = str(choice)
                 getProficiencyTable().addChoice(choice)
@@ -105,10 +101,9 @@ class StateTable:
                     self.extra_ui.comboBox_abilityScore.setItemChecked(i, False)
             else:
                 getModifier("Human_plus1").connect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")))
-                #getModifier("Human_plus1").disconnect(getValue("prof_skills_learnChildren"),True)#deprecated
                 try:
                     getProficiencyTable().removeChoice(self.Human_SkillChoice)
-                except BaseException as e:print(e)
+                except BaseException as e:pass
                 self.score.destroy()
                 self.feat.destroy()
                 del self.score

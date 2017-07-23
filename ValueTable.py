@@ -27,6 +27,7 @@ class ValueTable:
             self._data[name] = ValueReference(ui, config,format)
             self._data[name].set(initial)
             self._data[name].lastValue = initial
+            self._data[name].connect(self._data["anythingChanged"])
     def newValue(self,name,value):
         if name in self._data.keys():raise ValueError("value '"+name+"' exists")
         self._data[name] = value
@@ -38,3 +39,4 @@ class ValueTable:
     def custom(self):
         self._data["listWidget_proficiencies_VisualUpdate"] = DependentObject(None)
         self._data["listWidget_proficiencies_update"] = DependentObject(None)
+        self._data["anythingChanged"] = DependentObject(None)

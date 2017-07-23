@@ -64,11 +64,11 @@ class DependentObject(QObject):
 
 class FiniteStateMachine:
     stateFile=None
-    _states = {"Off":{}}
     def initFSM(self):
         self._enterState("Off")
 
     def __init__(self, states={}):
+        self._states = {"Off":{}}
         if self.stateFile:
             f = open(getDirectoryPrefix()+self.stateFile,"r")
             self.states = yaml.load(f)
@@ -373,18 +373,40 @@ class ValueModifier:
         return self.ID==other.ID
 
 
-
 class ChoiceReference(FiniteStateMachine, DependentObject):
+    usePrerequisite = False
     def __init__(self, widget, states={}):
         FiniteStateMachine.__init__(self,states)
+        if self.usePrerequisite:
+            widget.addItem("None")
+            for state in self._states:
+                if "prerequisite" in self._states[state].keys():
+                    self._states[state]["prerequisite"] = eval("lambda: "+self._states[state]["prerequisite"])
+                else:
+                    self._states[state]["prerequisite"] = lambda: True
+        widget.addItems(sorted(self.states.keys(),key=str.lower))
         DependentObject.__init__(self, widget)
         self.initFSM()
-        widget.addItems(sorted(self.states.keys(),key=str.lower))
         self.on_changed()
 
     def on_changed(self):
         item = self.widget.currentText()
-        self.request(item)
+        if self.usePrerequisite:
+            for state in self._states:
+                if state=="Off":continue
+                enabled = self._states[state]["prerequisite"]()
+                index = self.widget.findText(state)
+                self.widget.model().item(index).setEnabled(enabled)
+            if item=="None":
+                self.request("Off")
+            elif item == self.currentState:
+                if not self._states[item]["prerequisite"]():
+                    self.widget.setCurrentIndex(0)
+                    self.request("Off")
+            else:
+                self.request(item)
+        else:
+            self.request(item)
 
     def destroy(self):
         self.request("Off")
@@ -392,38 +414,6 @@ class ChoiceReference(FiniteStateMachine, DependentObject):
         self.changeSignal.disconnect()
         self.widget.clear()
 
-
-class Proficiency(DependentObject):
-    def __init__(self, name, parent, valueref):
-        super().__init__(None)
-        self.name = name
-        self.parent = parent
-        self.value = valueref
-        self.subTypes = []
-        valueref.connect(self)
-        valueref.set(0)
-        if parent:
-            parent.connect(self)
-
-    #check if other proficiency has self in parent chain
-    def contains(self, other):
-        while other:
-            if other == self:
-                return True
-            other = other.parent
-        return False
-
-    def set(self,v):
-        if self.value.get()!=v:
-            self.value.set(v)
-            self.changeSignal.emit()
-
-    def get(self):
-        v=self.value.get()
-        if self.parent:
-            p=self.parent.get()
-        else:p=False
-        return (1 if v or p else 0)
 
 class ProficiencyChoice:
     def __init__(self, n, profs):

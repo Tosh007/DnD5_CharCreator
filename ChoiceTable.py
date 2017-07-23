@@ -32,6 +32,7 @@ class StateTable:
 
     class FeatChoice(ChoiceReference):
         stateFile = "data/character/feats.yaml"
+        usePrerequisite = True
 
     class Subrace_Genasi(ChoiceReference):
         stateFile = "data/character/state_Subrace_Genasi.yaml"
@@ -96,11 +97,15 @@ class StateTable:
                 self.Human_SkillChoice = str(choice)
                 getProficiencyTable().addChoice(choice)
                 self.feat = StateTable.FeatChoice(self.extra_ui.comboBox_feat)
+                getValue("anythingChanged").connect(self.feat)
                 self.score = StateTable.Choice2AbilityScore(self.extra_ui.comboBox_abilityScore)
                 for i in range(self.extra_ui.comboBox_abilityScore.count()):
                     self.extra_ui.comboBox_abilityScore.setItemChecked(i, False)
             else:
                 getModifier("Human_plus1").connect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")))
+                try:
+                    getValue("anythingChanged").disconnect(self.feat)
+                except:pass
                 try:
                     getProficiencyTable().removeChoice(self.Human_SkillChoice)
                 except BaseException as e:pass

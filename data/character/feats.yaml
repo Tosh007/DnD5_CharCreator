@@ -38,6 +38,7 @@ Healer:
     property:
         - Healer
 Heavily Armored:
+    prerequisite: bool(getValue("prof_medium_armor").get())
     property:
         - Heavily Armored
 heavy Armor Master:

@@ -63,6 +63,8 @@ class DependentObject(QObject):
         self.disconnect()
 
 class FiniteStateMachine:
+    class AlreadyInTransition(Exception):pass
+
     stateFile=None
     def initFSM(self):
         self._enterState("Off")
@@ -81,10 +83,13 @@ class FiniteStateMachine:
 
     def request(self,state):
         assert state in self._states
-        self._exitState(self.currentState)
+        if self.currentState is None:
+            raise self.AlreadyInTransition(str(type(self)))
+        self._exitState()
         self._enterState(state)
 
-    def _exitState(self,state):
+    def _exitState(self):
+        state = self.currentState
         self.currentState = None
         for key in self._states[state]:
             if key=="mod":
@@ -376,7 +381,12 @@ class ValueModifier:
 class ChoiceReference(FiniteStateMachine, DependentObject):
     usePrerequisite = False
     def __init__(self, widget, states={}):
+        if self.usePrerequisite:
+            states.update({"None":{}})
         FiniteStateMachine.__init__(self,states)
+        if self.usePrerequisite:
+            assert "None" in self._states
+            print("OK")
         if self.usePrerequisite:
             widget.addItem("None")
             for state in self._states:
@@ -397,13 +407,13 @@ class ChoiceReference(FiniteStateMachine, DependentObject):
                 enabled = self._states[state]["prerequisite"]()
                 index = self.widget.findText(state)
                 self.widget.model().item(index).setEnabled(enabled)
-            if item=="None":
-                self.request("Off")
-            elif item == self.currentState:
+            #if item=="None":
+            #    self.request("Off")
+            if item == self.currentState:
                 if not self._states[item]["prerequisite"]():
                     self.widget.setCurrentIndex(0)
-                    self.request("Off")
-            else:
+                    self.request("None")
+            elif self.currentState:
                 self.request(item)
         else:
             self.request(item)

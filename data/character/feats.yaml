@@ -1,10 +1,17 @@
 Alert:
+    mod:
+        Alert:
+            - initiative
     property:
         - Alert
 Athlete:
+    # not yet!
     property:
         - Athlete
 Actor:
+    mod:
+        Actor:
+            - charisma
     property:
         - Actor
 Charger:
@@ -14,6 +21,7 @@ Crossbow Expert:
     property:
         - Crossbow Expert
 Defensive Duelist:
+    prerequisite: 'getValue("dexterity").get()>12'
     property:
         - Defensive Duelist
 Dual Wielder:
@@ -23,12 +31,17 @@ Dungeon Delver:
     property:
         - Dungeon Delver
 Durable:
+    mod:
+        plus1:
+            - constitution
     property:
         - Durable
 Elemental Adept:
+    prerequisite: 'bool(getValue("prof_spellcasting").get())'
     property:
         - Elemental Adept
 Grappler:
+    prerequisite: 'getValue("strength").get()>12'
     property:
         - Grappler
 Great Weapon Master:
@@ -39,21 +52,41 @@ Healer:
         - Healer
 Heavily Armored:
     prerequisite: bool(getValue("prof_medium_armor").get())
+    mod:
+        plus1:
+            - strength
+            - prof_heavy_armor
     property:
         - Heavily Armored
 heavy Armor Master:
+    prerequisite: 'getValue("prof_heavy_armor").get()>0'
+    mod:
+        plus1:
+            - strength
     property:
         - heavy Armor Master
 Inspiring Leader:
+    prerequisite: 'getValue("charisma").get()>12'
     property:
         - Inspiring Leader
 Keen Mind:
+    mod:
+        plus1:
+            - intelligence
     property:
         - Keen Mind
 Lightly Armored:
+    # todo
     property:
         - Lightly Armored
 Linguist:
+    plus1:
+        - intelligence
+    ProfChoice:
+        - a:
+            n: 3
+            profs:
+                - languages
     property:
         - Linguist
 Lucky:
@@ -63,33 +96,49 @@ Mage Slayer:
     property:
         - Mage Slayer
 Magic Initiate:
+    # todo
     property:
         - Magic Initiate
 Martial Adept:
+    # todo
     property:
         - Martial Adept
 Medium Armor Master:
+    prerequisite: 'getValue("prof_medium_armor").get()>0'
     property:
         - Medium Armor Master
 Mobile:
+    mod:
+        mobile:
+            - speed
     property:
         - Mobile
 Moderately Armored:
+    prerequisite: 'getValue("prof_light_armor").get()>0'
+    # todo strength or dex +1
+    mod:
+        plus1:
+            prof_medium_armor
+            prof_shields
     property:
         - Moderately Armored
 Mounted Combatant:
     property:
         - Mounted Combatant
 Observant:
+    # todo
     property:
         - Observant
 Polearm Master:
     property:
         - Polearm Master
 Resilient:
+    # todo
     property:
         - Resilient
 Ritual Caster:
+    prerequisite: 'getValue("intelligence").get()>12 or getValue("wisdom").get()>12'
+    # todo
     property:
         - Ritual Caster
 Savage Attacker:
@@ -105,18 +154,30 @@ Shield Master:
     property:
         - Shield Master
 Skilled:
+    ProfChoice:
+        - a:
+            n: 3
+            profs:
+                - skills
     property:
         - Skilled
 Skulker:
+    prerequisite: 'getValue("dexterity").get()>12'
     property:
         - Skulker
 Spell Sniper:
+    prerequisite: 'getValue("prof_spellcasting").get()>0'
+    # todo
     property:
         - Spell Sniper
 Tavern Brawler:
+    mod:
+        plus1:
+            - improvised weapons
     property:
         - Tavern Brawler
 Tough:
+
     property:
         - Tough
 War Caster:

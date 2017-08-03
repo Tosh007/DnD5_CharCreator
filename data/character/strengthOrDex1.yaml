@@ -1,0 +1,9 @@
+strength:
+    mod:
+        plus1:
+            - strength
+dexterity:
+    mod:
+        plus1:
+            - dexterity
+            

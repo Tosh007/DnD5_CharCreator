@@ -5,7 +5,6 @@ Alert:
     property:
         - Alert
 Athlete:
-    # not yet!
     property:
         - Athlete
 Actor:
@@ -36,10 +35,26 @@ Durable:
             - constitution
     property:
         - Durable
-Elemental Adept:
+Elemental Adept (acid):
     prerequisite: 'bool(getValue("prof_spellcasting").get())'
     property:
-        - Elemental Adept
+        - Elemental Adept (acid)
+Elemental Adept (cold):
+    prerequisite: 'bool(getValue("prof_spellcasting").get())'
+    property:
+        - Elemental Adept (cold)
+Elemental Adept (fire):
+    prerequisite: 'bool(getValue("prof_spellcasting").get())'
+    property:
+        - Elemental Adept (fire)
+Elemental Adept (lightning):
+    prerequisite: 'bool(getValue("prof_spellcasting").get())'
+    property:
+        - Elemental Adept (lightning)
+Elemental Adept (thunder):
+    prerequisite: 'bool(getValue("prof_spellcasting").get())'
+    property:
+        - Elemental Adept (thunder)
 Grappler:
     prerequisite: 'getValue("strength").get()>12'
     property:
@@ -76,12 +91,12 @@ Keen Mind:
     property:
         - Keen Mind
 Lightly Armored:
-    # todo
     property:
         - Lightly Armored
 Linguist:
-    plus1:
-        - intelligence
+    mod:
+        plus1:
+            - intelligence
     ProfChoice:
         - a:
             n: 3
@@ -115,27 +130,22 @@ Mobile:
         - Mobile
 Moderately Armored:
     prerequisite: 'getValue("prof_light_armor").get()>0'
-    # todo strength or dex +1
     mod:
         plus1:
-            prof_medium_armor
-            prof_shields
+            - prof_medium_armor
+            - prof_shields
     property:
         - Moderately Armored
 Mounted Combatant:
     property:
         - Mounted Combatant
 Observant:
-    # todo
     property:
         - Observant
 Polearm Master:
     property:
         - Polearm Master
-Resilient:
-    # todo
-    property:
-        - Resilient
+Resilient: {}
 Ritual Caster:
     prerequisite: 'getValue("intelligence").get()>12 or getValue("wisdom").get()>12'
     # todo
@@ -173,7 +183,7 @@ Spell Sniper:
 Tavern Brawler:
     mod:
         plus1:
-            - improvised weapons
+            - prof_improvised_weapons
     property:
         - Tavern Brawler
 Tough:

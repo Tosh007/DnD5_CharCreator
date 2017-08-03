@@ -1,0 +1,8 @@
+intelligence:
+    mod:
+        plus1:
+            - intelligence
+wisdom:
+    mod:
+        plus1:
+            - wisdom

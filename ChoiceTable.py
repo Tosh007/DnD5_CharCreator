@@ -2,6 +2,8 @@ from PyQt5.QtWidgets import *
 from acces import*
 from CharacterCore import *
 from menu_human import Ui_Human
+from menu_singleCombobox import Ui_singleCombobox
+
 class StateTable:
     class Classes(ChoiceReference):
         stateFile = "data/character/state_Classes.yaml"
@@ -33,6 +35,42 @@ class StateTable:
     class FeatChoice(ChoiceReference):
         stateFile = "data/character/feats.yaml"
         usePrerequisite = True
+        def _enterSubmenu(self, name, choice):
+            tabRoot = getUI("tabWidget_specialProperties")
+            self.tabWidget = QWidget()
+            self.extra_ui = Ui_singleCombobox()
+            self.extra_ui.setupUi(self.tabWidget)
+            self.tab = tabRoot.addTab(self.tabWidget, name)
+            self.choice1 = choice(self.extra_ui.comboBox1)
+        def _exitSubmenu(self):
+            self.choice1.destroy()
+            del self.choice1
+            getUI("tabWidget_specialProperties").removeTab(self.tab)
+
+        def enterAthlete(self):
+            self._enterSubmenu("Athlete", StateTable.StrengthOrDex1)
+        exitAthlete = _exitSubmenu
+        def enterLightly_Armored(self):
+            self._enterSubmenu("Lightly Armored", StateTable.StrengthOrDex1)
+        exitLightly_Armored = _exitSubmenu
+        def enterModerately_Armored(self):
+            self._enterSubmenu("Moderately Armored", StateTable.StrengthOrDex1)
+        exitModerately_Armored = _exitSubmenu
+        def enterObservant(self):
+            self._enterSubmenu("Observant", StateTable.IntelligenceOrWisdom1)
+        exitObservant = _exitSubmenu
+        def enterResilient(self):
+            self._enterSubmenu("Resilient", StateTable.Feat_Resilient)
+        exitResilient = _exitSubmenu
+
+    class StrengthOrDex1(ChoiceReference):
+        stateFile = "data/character/strengthOrDex1.yaml"
+
+    class IntelligenceOrWisdom1(ChoiceReference):
+        stateFile = "data/character/intOrWis1.yaml"
+
+    class Feat_Resilient(ChoiceReference):
+        stateFile = "data/character/feat_resilient.yaml"
 
     class Subrace_Genasi(ChoiceReference):
         stateFile = "data/character/state_Subrace_Genasi.yaml"

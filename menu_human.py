@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'menu_human.ui'
 #
-# Created by: PyQt5 UI code generator 5.8.2
+# Created by: PyQt5 UI code generator 5.9
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -13,19 +13,19 @@ class Ui_Human(object):
         Human.setObjectName("Human")
         Human.resize(261, 151)
         self.comboBox_abilityScore = CheckableComboBox(Human)
-        self.comboBox_abilityScore.setGeometry(QtCore.QRect(20, 90, 121, 22))
+        self.comboBox_abilityScore.setGeometry(QtCore.QRect(20, 90, 141, 22))
         self.comboBox_abilityScore.setObjectName("comboBox_abilityScore")
         self.checkBox_variantTraits = QtWidgets.QCheckBox(Human)
         self.checkBox_variantTraits.setGeometry(QtCore.QRect(20, 10, 91, 17))
         self.checkBox_variantTraits.setObjectName("checkBox_variantTraits")
         self.comboBox_feat = QtWidgets.QComboBox(Human)
-        self.comboBox_feat.setGeometry(QtCore.QRect(20, 50, 121, 22))
+        self.comboBox_feat.setGeometry(QtCore.QRect(20, 50, 201, 22))
         self.comboBox_feat.setObjectName("comboBox_feat")
         self.label_2 = QtWidgets.QLabel(Human)
-        self.label_2.setGeometry(QtCore.QRect(150, 50, 20, 13))
+        self.label_2.setGeometry(QtCore.QRect(230, 50, 20, 13))
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(Human)
-        self.label_3.setGeometry(QtCore.QRect(150, 90, 91, 20))
+        self.label_3.setGeometry(QtCore.QRect(170, 90, 91, 20))
         self.label_3.setObjectName("label_3")
 
         self.retranslateUi(Human)

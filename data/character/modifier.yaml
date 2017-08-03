@@ -78,6 +78,10 @@
 - Actor:
     text: "Actor"
     lambda: "x+1"
+- mobile:
+    text: "mobile: +10"
+    lambda: "x+10"
+    order: 5
 
 - AbilityScoreHardCap:
     lambda: "min(20,x)"

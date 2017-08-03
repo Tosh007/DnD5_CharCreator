@@ -386,7 +386,6 @@ class ChoiceReference(FiniteStateMachine, DependentObject):
         FiniteStateMachine.__init__(self,states)
         if self.usePrerequisite:
             assert "None" in self._states
-            print("OK")
         if self.usePrerequisite:
             widget.addItem("None")
             for state in self._states:

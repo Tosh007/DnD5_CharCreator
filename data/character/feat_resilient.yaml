@@ -1,0 +1,42 @@
+intelligence:
+    mod:
+        plus1:
+            - intelligence
+            - prof_intelligence_saving_throw
+    property:
+        - Resilient (intelligence)
+strength:
+    mod:
+        plus1:
+            - strength
+            - prof_strength_saving_throw
+    property:
+        - Resilient (strength)
+dexterity:
+    mod:
+        plus1:
+            - dexterity
+            - prof_dexterity_saving_throw
+    property:
+        - Resilient (dexterity)
+constitution:
+    mod:
+        plus1:
+            - constitution
+            - prof_constitution_saving_throw
+    property:
+        - Resilient (constitution)
+wisdom:
+    mod:
+        plus1:
+            - wisdom
+            - prof_wisdom_saving_throw
+    property:
+        - Resilient (wisdom)
+charisma:
+    mod:
+        plus1:
+            - charisma
+            - prof_charisma_saving_throw
+    property:
+        - Resilient (charisma)

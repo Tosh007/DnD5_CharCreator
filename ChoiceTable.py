@@ -62,6 +62,9 @@ class StateTable:
         def enterResilient(self):
             self._enterSubmenu("Resilient", StateTable.Feat_Resilient)
         exitResilient = _exitSubmenu
+        def enterWeapon_Master(self):
+            self._enterSubmenu("Weapon Master", StateTable.StrengthOrDex1)
+        exitWeapon_Master = _exitSubmenu
 
     class StrengthOrDex1(ChoiceReference):
         stateFile = "data/character/strengthOrDex1.yaml"

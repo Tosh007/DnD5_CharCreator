@@ -1,9 +1,8 @@
-strength:
+"strength +1":
     mod:
         plus1:
             - strength
-dexterity:
+"dexterity +1":
     mod:
         plus1:
             - dexterity
-            

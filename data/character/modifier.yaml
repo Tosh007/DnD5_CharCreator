@@ -82,6 +82,9 @@
     text: "mobile: +10"
     lambda: "x+10"
     order: 5
+- Tough:
+    text: "Tough: +2*level ({2})"
+    lambda: "x+2*getValue('level').get()"
 
 - AbilityScoreHardCap:
     lambda: "min(20,x)"

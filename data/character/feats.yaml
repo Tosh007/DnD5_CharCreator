@@ -187,12 +187,20 @@ Tavern Brawler:
     property:
         - Tavern Brawler
 Tough:
-
+    mod:
+        tough:
+            - maxHP
     property:
         - Tough
 War Caster:
     property:
         - War Caster
 Weapon Master:
+    ProfChoice:
+        - a:
+            n: 4
+            profs:
+                - martial_weapons
+                - simple_weapons
     property:
         - Weapon Master

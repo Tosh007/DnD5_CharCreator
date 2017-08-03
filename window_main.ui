@@ -1301,7 +1301,7 @@
     </property>
     <addaction name="action_new"/>
     <addaction name="action_open_file"/>
-    <addaction name="actionSpeichern"/>
+    <addaction name="action_save_file"/>
     <addaction name="actionSpeichern_unter"/>
    </widget>
    <addaction name="menuDatei"/>
@@ -1329,7 +1329,7 @@
     <string>Ctrl+O</string>
    </property>
   </action>
-  <action name="actionSpeichern">
+  <action name="action_save_file">
    <property name="text">
     <string>Speichern</string>
    </property>

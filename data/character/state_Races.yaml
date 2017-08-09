@@ -183,6 +183,14 @@ Kenku:
             - dexterity
         Kenku_proficient:
             - prof_auran
+    ProfChoice:
+        - a:
+            n: 2
+            profs:
+                - acrobatics
+                - deception
+                - stealth
+                - sleight of hand
     property:
         - Expert Forgery
         - Mimicry

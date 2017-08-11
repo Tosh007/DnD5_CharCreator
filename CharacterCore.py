@@ -470,3 +470,7 @@ class ProficiencyChoice:
 
     def getUsedPoints(self):
         return sum(self.profs.values())
+
+class BaseMenu:
+    typename = "BaseMenu"
+    

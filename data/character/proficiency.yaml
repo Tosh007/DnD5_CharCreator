@@ -1,29 +1,30 @@
 # proficiency table
 - skills:
-    - strength saving throw.SKIL.
     - athletics.SKIL.
-    - dexterity saving throw.SKIL.
     - acrobatics.SKIL.
     - sleight of hand.SKIL.
     - stealth.SKIL.
-    - constitution saving throw.SKIL.
-    - intelligence saving throw.SKIL.
     - arcana.SKIL.
     - history.SKIL.
     - investigation.SKIL.
     - nature.SKIL.
     - religion.SKIL.
-    - wisdom saving throw.SKIL.
     - animal handling.SKIL.
     - insight.SKIL.
     - medicine.SKIL.
     - perception.SKIL.
     - survival.SKIL.
-    - charisma saving throw.SKIL.
     - deception.SKIL.
     - performance.SKIL.
     - persuation.SKIL.
     - intimidation.SKIL.
+- saving throws:
+    - strength saving throw.SKIL.
+    - dexterity saving throw.SKIL.
+    - constitution saving throw.SKIL.
+    - intelligence saving throw.SKIL.
+    - wisdom saving throw.SKIL.
+    - charisma saving throw.SKIL.
 
 - armor:
     - light armor

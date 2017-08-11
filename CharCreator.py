@@ -15,15 +15,17 @@ class storage_:
     def saveFile(self):
         filename, _ = QtWidgets.QFileDialog.getSaveFileName(filter="CharCreator format (*.dnd5)")
         print("save filename: "+filename)
-        values = {}
-        choice = {}
+        data = {"values":{},"choice":{}}
+        values = data["values"]
+        choice = data["choice"]
         vdata = acces.getValueTable()._data
         for name in vdata.keys():
             value = vdata[name]
             if isinstance(value, CharacterCore.ValueReference):
                 values[name] = value.get(True)
                 f = open(filename,"w")
-                yaml.write(values,f)
+                yaml.dump(data,f,default_flow_style = False)
+                f.close()
     def openFile(self):
         filename, _ = QtWidgets.QFileDialog.getOpenFileName()
         print("open filename: "+filename)

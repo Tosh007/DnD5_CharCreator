@@ -64,10 +64,11 @@ class ProficiencyTable:
             getModifier("plus1").connect(valueref)
         if parent:
             self.childTable[parent].append(sname)
+            self._createPropagateModifier(parent).connect(valueref)
         return sname
 
     def _createPropagateModifier(self,parentLearn):
-        return ValueModifier(lambda x,parent=parentLearn:x+getValue(parent).get(),"",0)
+        return ValueModifier(lambda x,parent=parentLearn:x+getValue("prof_"+parent).get(),"proficient in category "+parentLearn,0)
 
     def __getattr__(self,name):
         return self.table[name]

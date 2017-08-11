@@ -71,7 +71,7 @@ class ConfigTable:
     class ProficiencyCategoryConfig(ProficiencyListConfig):
         def checkRequirements(self,value,lastValue):
             return lastValue
-        hide = lambda self,v,vmod,maxValue:vmod==0
+        hide = lambda self,v,vmod,maxValue:True#vmod==0 #now all subelements are shown
 
     class HiddenValue(ValueConfig): #can be achieved by setting ui element to none
         hide = lambda v,vmod,maxV: True

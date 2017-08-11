@@ -273,7 +273,11 @@ Hobgoblin:
     property:
         - Darkvision
         - Saving Face
-        - proficient with 2 martial weapons
+    ProfChoice:
+        - a:
+            n: 2
+            profs:
+                - martial_weapons
 Kobold:
     mod:
         Kobold_plus2:

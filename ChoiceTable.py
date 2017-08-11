@@ -3,16 +3,20 @@ from acces import*
 from CharacterCore import *
 from menu_human import Ui_Human
 from menu_singleCombobox import Ui_singleCombobox
+from menu_singleCheckableCombobox import Ui_singleCheckableCombobox
 
 class StateTable:
     class Classes(ChoiceReference):
         stateFile = "data/character/state_Classes.yaml"
 
     class Choice2AbilityScore(DependentObject):
-        def __init__(self, w):
+        def __init__(self, w, items, mod):
             self.activeMod = set()
             DependentObject.__init__(self,w)
-            self.widget.addItems(("strength","dexterity","constitution","wisdom","intelligence","charisma"))
+            self.widget.addItems(items)
+            self.mod = mod
+            for i in range(self.widget.count()):
+                self.widget.setItemChecked(i, False)
 
         def on_changed(self):
             items = self.widget.checkedItems()
@@ -22,9 +26,9 @@ class StateTable:
                     self.widget.setItemWithNameChecked(i,False)
                 items = self.widget.checkedItems()
             activate = items - self.activeMod
-            getModifier("Human_plus1").connect(getValues(activate))
+            self.mod.connect(getValues(activate))
             deactivate = self.activeMod - items
-            getModifier("Human_plus1").disconnect(getValues(deactivate))
+            self.mod.disconnect(getValues(deactivate))
             self.activeMod = items
 
         def destroy(self):
@@ -139,9 +143,7 @@ class StateTable:
                 getProficiencyTable().addChoice(choice)
                 self.feat = StateTable.FeatChoice(self.extra_ui.comboBox_feat)
                 getValue("anythingChanged").connect(self.feat)
-                self.score = StateTable.Choice2AbilityScore(self.extra_ui.comboBox_abilityScore)
-                for i in range(self.extra_ui.comboBox_abilityScore.count()):
-                    self.extra_ui.comboBox_abilityScore.setItemChecked(i, False)
+                self.score = StateTable.Choice2AbilityScore(self.extra_ui.comboBox_abilityScore,("strength","dexterity","constitution","wisdom","intelligence","charisma"),getModifier("Human_plus1"))
             else:
                 getModifier("Human_plus1").connect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")))
                 try:
@@ -154,14 +156,30 @@ class StateTable:
                 self.feat.destroy()
                 del self.score
                 del self.feat
+        def enterHalf_Elf(self):
+            tabRoot = getUI("tabWidget_specialProperties")
+            self.tab_halfelf = QWidget()
+            self.extra_ui = Ui_singleCheckableCombobox()
+            self.extra_ui.setupUi(self.tab_halfelf)
+            self.tab = tabRoot.addTab(self.tab_halfelf, "Half-Elf")
+            self.score = StateTable.Choice2AbilityScore(self.extra_ui.comboBox1,("strength","dexterity","constitution","wisdom","intelligence"),getModifier("HalfElf_plus1"))
+        def exitHalf_Elf(self):
+            getUI("tabWidget_specialProperties").removeTab(self.tab)
+            self.tab_halfelf.setParent(None)
+            self.score.destroy()
+            del self.score
 
     class PrimaryState(FiniteStateMachine):
         stateFile = "data/character/state_ValueTable.yaml"
 
-class ActiveChoiceTable:
+class ActiveChoiceTable(dict):
     def __init__(self):
+        dict.__init__(self)
         self.raceSelect = StateTable.Races(getUI("ComboBox_Race"))
         self.classSelect = StateTable.Classes(getUI("ComboBox_Class"))
         self.baseState = StateTable.PrimaryState()
         self.baseState.initFSM()
         self.baseState.request("On")
+
+    def __getattr__(self,name):
+        return self[name]

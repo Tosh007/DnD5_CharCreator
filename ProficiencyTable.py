@@ -65,6 +65,7 @@ class ProficiencyTable:
         if parent:
             self.childTable[parent].append(sname)
             self._createPropagateModifier(parent).connect(valueref)
+            getValue("prof_"+parent).connect(valueref)
         return sname
 
     def _createPropagateModifier(self,parentLearn):

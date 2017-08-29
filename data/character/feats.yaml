@@ -142,6 +142,10 @@ Mounted Combatant:
 Observant:
     property:
         - Observant
+    mod:
+        Observant_plus5:
+            - perception
+
 Polearm Master:
     property:
         - Polearm Master

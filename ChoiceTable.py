@@ -69,6 +69,9 @@ class StateTable:
         def enterWeapon_Master(self):
             self._enterSubmenu("Weapon Master", StateTable.StrengthOrDex1)
         exitWeapon_Master = _exitSubmenu
+        def enterObservant(self):
+            self._enterSubmenu("Observant", StateTable.IntelligenceOrWisdom1)
+        exitObservant = _exitSubmenu
 
     class StrengthOrDex1(ChoiceReference):
         stateFile = "data/character/strengthOrDex1.yaml"

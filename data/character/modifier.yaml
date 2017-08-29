@@ -92,6 +92,9 @@
 - Tough:
     text: "Tough: +2*level ({2})"
     lambda: "x+2*getValue('level').get()"
+- Observant_plus5:
+    text: "Observant: +5"
+    lambda: "x+5"
 
 - AbilityScoreHardCap:
     lambda: "min(20,x)"

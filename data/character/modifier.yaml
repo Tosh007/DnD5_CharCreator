@@ -59,6 +59,13 @@
     text: ""
     order: -1
 
+- perception_wisdom:
+    text: "wis mod + 10"
+    lambda: 'x+getValue("wisdomMod").get()+10'
+    order: -1
+- perception_proficient:
+    text: "+ prof bonus"
+    lambda: 'x+(getValue("proficiencyBonus").get() if getValue("prof_perception").get() else 0)'
 - plus1:
     text: "+1"
     lambda: "x+1"

@@ -10,6 +10,10 @@
             - charisma
         initiative:
             - initiative
+        perception_wisdom:
+            - perception
+        perception_proficient:
+            - perception
     depend:
         strength: strengthMod
         constitution: constMod
@@ -19,3 +23,5 @@
         charisma: charismaMod
         constMod: maxHP
         dextMod: initiative
+        wisdom: perception
+        prof_perception: perception

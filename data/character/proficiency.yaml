@@ -32,6 +32,7 @@
     - heavy armor
     - shields
 - weapons:
+    - unarmed strike
     - martial weapons:
         - martial melee weapons:
             - battleaxe

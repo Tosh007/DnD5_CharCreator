@@ -316,6 +316,7 @@ Aarakocra:
         Aarakocra_proficient:
             - prof_aarakocra
             - prof_auran
+            - prof_unarmed_strike
     property:
         - Flight
         - Talons

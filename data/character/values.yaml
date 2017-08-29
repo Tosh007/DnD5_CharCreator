@@ -63,6 +63,9 @@
     ui: Label_Initiative
     format: "Initiative: {2}"
     initial: 0
+- perception:
+    ui: Label_Perception
+    format: "Perception: {2}"
 - maxHP:
     ui: Label_MaxHP
     config: MaxHPConfig

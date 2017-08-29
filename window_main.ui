@@ -1080,7 +1080,7 @@
    <widget class="QLabel" name="Label_Initiative">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>540</x>
       <y>90</y>
       <width>98</width>
       <height>29</height>
@@ -1093,7 +1093,7 @@
    <widget class="QLabel" name="Label_ArmorClass">
     <property name="geometry">
      <rect>
-      <x>680</x>
+      <x>760</x>
       <y>90</y>
       <width>97</width>
       <height>29</height>
@@ -1106,7 +1106,7 @@
    <widget class="QLabel" name="Label_MaxHP">
     <property name="geometry">
      <rect>
-      <x>800</x>
+      <x>880</x>
       <y>90</y>
       <width>131</width>
       <height>29</height>
@@ -1283,6 +1283,19 @@
     </property>
     <property name="text">
      <string>Allow Monster Languages</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Label_Perception">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>90</y>
+      <width>98</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Perception</string>
     </property>
    </widget>
   </widget>

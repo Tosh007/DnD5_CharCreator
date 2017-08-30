@@ -24,7 +24,9 @@ class DependentObject(QObject):
             return widget.currentIndexChanged
         elif isinstance(widget, QtWidgets.QLabel):
             pass
-        elif isinstance(widget,QtWidgets.QListWidget):
+        elif isinstance(widget,QtWidgets.QListWidgetItem):
+            pass
+        elif isinstance(widget,QtWidgets.QTreeWidgetItem):
             pass
         elif isinstance(widget,QtWidgets.QCheckBox):
             return widget.toggled
@@ -32,7 +34,7 @@ class DependentObject(QObject):
         else:
             raise TypeError(str(type(widget))+" is not supported")
     def __init__(self, widget):
-        super().__init__(widget)
+        super().__init__()
         self.widget = widget
         s = DependentObject.getWidgetSignal(widget)
         if s:
@@ -148,7 +150,7 @@ class FiniteStateMachine:
                     name = str(c)
                     self.profs.append(name)
                     getProficiencyTable().addChoice(c)
-                    getUI("listWidget_proficiencies").itemClicked.emit(None)
+                    getUI("treeWidget_proficiencies").itemClicked.emit(None,0)
         nstate = state.replace("-","_")
         nstate = nstate.replace(" ","_")
         self.enter(nstate)
@@ -175,15 +177,20 @@ class ValueReference(DependentObject):
         elif isinstance(widget, QtWidgets.QLabel):
             self._get = 0
             self._set = widget.setText
-        elif isinstance(widget, QtWidgets.QListWidget):
-            self.widget = QtWidgets.QListWidgetItem("")
+        elif isinstance(widget, QtWidgets.QListWidgetItem) or isinstance(widget,QtWidgets.QTreeWidgetItem):
             self._get = 0
-            self._set = self.widget.setText
-            widget.addItem(self.widget)
+            self._set = (self.widget.setText if isinstance(widget, QtWidgets.QListWidgetItem) else lambda text:self.widget.setText(0,text))
             if valueconfig.forceCheckbox:
+                if isinstance(widget, QtWidgets.QListWidgetItem):
+                    widget = widget.listWidget()
+                else:
+                    widget = widget.treeWidget()
                 widget.itemClicked.connect(self.changeSignal)
                 self.widget.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-                self.widget.setCheckState(Qt.Unchecked)
+                try:
+                    self.widget.setCheckState(Qt.Unchecked)
+                except TypeError:
+                    self.widget.setCheckState(0,Qt.Unchecked)
                 self.previousCheckState = Qt.Unchecked
         elif isinstance(widget,QtWidgets.QCheckBox):
             self._get = self.widget.isChecked
@@ -255,7 +262,11 @@ class ValueReference(DependentObject):
             return
         value = self.get(True)
         if self.vconf.forceCheckbox:
-            if self.widget.checkState() == Qt.Checked and self.get()==value:
+            try:
+                checkState = self.widget.checkState()
+            except TypeError:
+                checkState = self.widget.checkState(0)
+            if checkState == Qt.Checked and self.get()==value:
                 value=1
             else:
                 value=0
@@ -269,20 +280,14 @@ class ValueReference(DependentObject):
         self.showValue(closest,v,mstring,maxValue)
 
     def on_visual_update(self):
-        v = self.get(True)
-        vmod, mstring= self.applyMods(v,True)
-        if self.vconf.getMaxValue:
-            maxValue = self.vconf.getMaxValue(self.lastValue)
-        else:
-            maxValue=0
-        self.widget.setHidden(self.vconf.hide(v,vmod,maxValue))
+        self.widget.setHidden(self.canBeHidden())
 
     def showValue(self,v,vmod,mdesc,maxValue=None):
         if not maxValue:maxValue=v
         svmod = " ({0})".format(vmod)
         if self._blockSignals:
             self._blockSignals(True)
-        if isinstance(self.widget, QtWidgets.QLabel) or isinstance(self.widget, QtWidgets.QListWidgetItem):
+        if isinstance(self.widget, QtWidgets.QLabel) or isinstance(self.widget, QtWidgets.QListWidgetItem) or isinstance(self.widget, QtWidgets.QTreeWidgetItem):
             if self.format:s = self.format.format(v,(svmod if mdesc else ""),vmod)
             else:s=str(v) + (svmod if mdesc else "")
             self._set(s)
@@ -299,17 +304,33 @@ class ValueReference(DependentObject):
             else:
                 b=Qt.Unchecked
                 self.previousCheckState = Qt.Unchecked
-            self.widget.setCheckState(b)
+            try:
+                self.widget.setCheckState(b)
+            except TypeError:
+                self.widget.setCheckState(0,b)
         try:
             self.vconf.specialSetup(self, v, vmod, mdesc, maxValue)
             if self.widget:
                 self.widget.setHidden(self.vconf.hide(v,vmod,maxValue))
-                self.widget.setToolTip(mdesc)
+                try:
+                    self.widget.setToolTip(mdesc)
+                except TypeError:
+                    self.widget.setToolTip(0,mdesc)
             if self._blockSignals:
                 self._blockSignals(False)
 
         except TypeError as e:
             raise e
+
+    def canBeHidden(self):
+        v = self.get(True)
+        vmod, mstring= self.applyMods(v,True)
+        if self.vconf.getMaxValue:
+            maxValue = self.vconf.getMaxValue(self.lastValue)
+        else:
+            maxValue=0
+        return self.vconf.hide(v,vmod,maxValue)
+
 class ValueConfig:
     @staticmethod
     def checkRequirements(value, oldvalue):
@@ -473,4 +494,3 @@ class ProficiencyChoice:
 
 class BaseMenu:
     typename = "BaseMenu"
-    

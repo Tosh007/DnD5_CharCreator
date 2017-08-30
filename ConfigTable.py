@@ -69,9 +69,21 @@ class ConfigTable:
                 print(widget.widget.text(),v,vmod,maxValue,self.hide(v,vmod,maxValue))
 
     class ProficiencyCategoryConfig(ProficiencyListConfig):
+        forceCheckbox=False
         def checkRequirements(self,value,lastValue):
             return lastValue
-        hide = lambda self,v,vmod,maxValue:True#vmod==0 #now all subelements are shown
+        def hide(self,v,vmod,maxValue:False):
+            try:
+                pt = getProficiencyTable()
+                vt = getValueTable()
+            except NameError:
+                print("failed to get prof table")
+                return True
+            for prof in pt.getChildProficiencies(self.name):
+                if not getValue("prof_"+prof).canBeHidden():
+                    return False
+            return True
+
 
     class HiddenValue(ValueConfig): #can be achieved by setting ui element to none
         hide = lambda v,vmod,maxV: True

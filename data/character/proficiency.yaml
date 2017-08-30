@@ -25,11 +25,11 @@
     - intelligence saving throw.SKIL.
     - wisdom saving throw.SKIL.
     - charisma saving throw.SKIL.
-
-- armor:
-    - light armor
-    - medium armor
-    - heavy armor
+- protection:
+    - armor:
+        - light armor
+        - medium armor
+        - heavy armor
     - shields
 - weapons:
     - unarmed strike
@@ -106,10 +106,11 @@
     - weaver tools
     - woodcarve tools
     - smith tools
-
-- thief tools
-- herbalism kit
-- spellcasting
+- other tools:
+    - thief tools
+    - herbalism kit
+- magical ability:
+    - spellcasting
 
 - languages.LANG.:
     - standart languages.LANG.:

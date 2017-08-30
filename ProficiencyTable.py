@@ -3,6 +3,7 @@ from collections import *
 from CharacterCore import*
 from acces import *
 from PyQt5.QtCore import Qt
+from PyQt5 import QtWidgets
 
 class ProficiencyTable:
     def __init__(self):
@@ -40,22 +41,32 @@ class ProficiencyTable:
         sname=name.replace(" ", "_")
         if sname[-6:]==".SKIL.":
             sname = sname[:-6]
-            ui = getUI("checkBox_"+sname)
+            ui = getUI("checkBox_"+sname)   # QCheckBox
             c = getConfig("ProficiencyConfig")(sname, parent)
         else:
             if sname[-6:]==".LANG.":
                 sname = sname[:-6]
                 name = name[:-6]
-                ui = getUI("listWidget_languages")
+                ui = getUI("treeWidget_languages")
             elif sname[-7:]==".SPELL.":
                 sname = sname[:-7]
                 name = name[:-7]
-                ui = getUI("listWidget_spells")
+                ui = getUI("treeWidget_spells")
             else:
-                ui = getUI("listWidget_proficiencies")
+                ui = getUI("treeWidget_proficiencies")
             c = getConfig("ProficiencyListConfig")(sname, parent)
         if hasChildren:
             c = getConfig("ProficiencyCategoryConfig")(sname, parent)
+            if sname == "skills" or sname == "saving_throws":
+                c = getConfig("HiddenValue")
+        if isinstance(ui, QtWidgets.QTreeWidget):
+            widget=ui
+            if parent:
+                ui = QtWidgets.QTreeWidgetItem()
+                getValue("prof_"+parent).widget.addChild(ui)
+            else:
+                ui = QtWidgets.QTreeWidgetItem()
+                widget.addTopLevelItem(ui)
         valueref = ValueReference(ui, c, name)
         getValue("listWidget_proficiencies_update").connect(valueref)
         vt=getValueTable()

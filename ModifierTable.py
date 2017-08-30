@@ -75,7 +75,7 @@ class AutoModRace(AutoModBase):
     def new(self,value):
         yield self.newFromFormat(("+1",), (value+": +1"), (value, "plus1"))
         yield self.newFromFormat(("+2",), (value+": +2"), (value, "plus2"))
-        yield self.newFromFormat(("+1",), (value), (value, "proficient"))
+        yield self.newFromFormat(("+1",), (value,), (value, "proficient"))
 
 class AutoModClass(AutoModBase):
     lambdaBase = "x{0}"

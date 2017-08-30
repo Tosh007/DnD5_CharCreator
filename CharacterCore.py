@@ -309,13 +309,14 @@ class ValueReference(DependentObject):
             except TypeError:
                 self.widget.setCheckState(0,b)
         try:
-            self.vconf.specialSetup(self, v, vmod, mdesc, maxValue)
+
             if self.widget:
                 self.widget.setHidden(self.vconf.hide(v,vmod,maxValue))
                 try:
                     self.widget.setToolTip(mdesc)
                 except TypeError:
                     self.widget.setToolTip(0,mdesc)
+            self.vconf.specialSetup(self, v, vmod, mdesc, maxValue)
             if self._blockSignals:
                 self._blockSignals(False)
 

@@ -64,9 +64,15 @@ class ConfigTable:
         hide = lambda self,v,vmod,maxValue:(v==0) and (vmod==0) and (maxValue==0)
         VisualUpdateSignal = "listWidget_proficiencies_VisualUpdate"
         def specialSetup(self,widget,v,vmod,mdesc,maxValue):
-            return
-            if self.root and "standart_language" in self.root:
-                print(widget.widget.text(),v,vmod,maxValue,self.hide(v,vmod,maxValue))
+            try:
+                races = getProficiencyTable().whoSpeaksWhat[self.name]
+            except BaseException as e:
+                return
+            s = widget.widget.toolTip(0)
+            s+="\nspoken by:"
+            for race in races:
+                s+="\n"+race
+            widget.widget.setToolTip(0,s)
 
     class ProficiencyCategoryConfig(ProficiencyListConfig):
         forceCheckbox=False
@@ -77,7 +83,6 @@ class ConfigTable:
                 pt = getProficiencyTable()
                 vt = getValueTable()
             except NameError:
-                print("failed to get prof table")
                 return True
             for prof in pt.getChildProficiencies(self.name):
                 if not getValue("prof_"+prof).canBeHidden():

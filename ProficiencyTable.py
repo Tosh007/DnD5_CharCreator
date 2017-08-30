@@ -18,6 +18,14 @@ class ProficiencyTable:
         y = yaml.load(f)
         f.close()
         self.loadProficiency(y)
+        l = open(getDirectoryPrefix()+"data/character/language.yaml")
+        whoSpeaksWhat = yaml.load(l)
+        l.close()
+        self.whoSpeaksWhat={}
+        for key in whoSpeaksWhat:
+            value = whoSpeaksWhat[key]
+            key= key.replace(" ","_")
+            self.whoSpeaksWhat[key]=value
 
     def loadProficiency(self, data, parent=None):
         # always a list as toplevel structure
@@ -76,7 +84,9 @@ class ProficiencyTable:
         if parent:
             self.childTable[parent].append(sname)
             self._createPropagateModifier(parent).connect(valueref)
-            getValue("prof_"+parent).connect(valueref)
+            pv = getValue("prof_"+parent)
+            pv.connect(valueref)
+            valueref.changeSignal.connect(pv.on_visual_update)
         return sname
 
     def _createPropagateModifier(self,parentLearn):

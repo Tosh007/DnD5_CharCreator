@@ -32,7 +32,6 @@
         - heavy armor
     - shields
 - weapons:
-    - unarmed strike
     - martial weapons:
         - martial melee weapons:
             - battleaxe
@@ -61,6 +60,7 @@
             - net
     - simple weapons:
         - simple melee weapons:
+            - unarmed strike
             - club
             - dagger
             - greatclub
@@ -154,7 +154,7 @@
         - giant eagle.LANG.
         - giant elk.LANG.
         - giant owl.LANG.
-        - winter Wolf.LANG.
+        - winter wolf.LANG.
         - worg.LANG.
         - druidic.LANG.
         - goblin.LANG.

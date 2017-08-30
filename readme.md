@@ -1,7 +1,12 @@
 # DnD5_CharCreator
 This is a helper program to create Characters for Dungeons and Dragons 5
-
-
+still WIP, features working:
+*tracking all depending values (strength score => mod => ...)
+*selection of race, class (1st lvl class specialization missing)
+*score computation
+*feats
+*proficiencies
+*spells (wip)
 
 for windows users, there is a standalone application including required binaries
 it automatically downloads the latest files from this repo

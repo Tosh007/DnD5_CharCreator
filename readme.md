@@ -1,9 +1,13 @@
 # DnD5_CharCreator
 This is a helper program to create Characters for Dungeons and Dragons 5
-to run it you need python3 and PyQt5
-Still work in progress, and many things are not yet fully implementented  
-(Racial Traits for all races) and some (e.g. starting items)  
-not even touched yet)
 
-for windows users, the zip BUILD_exe.win-amd64-3.5.zip is available.  
-should anyone want a package for a different platform, just tell me.
+
+
+for windows users, there is a standalone application including required binaries
+it automatically downloads the latest files from this repo
+and starts CharCreator.py
+download link here:
+https://mega.nz/#!gdhR2AiC!QOk6fV91L9srs1Zq9dOwIfj_1D6P45nqUtiEQQ7vl5s
+
+for linux users, you should be able to run this from source (python3 CharCreator.py)
+this program depends on PyQt5 and python3, make sure they're installed

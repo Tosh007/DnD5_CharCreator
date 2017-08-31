@@ -1,72 +1,75 @@
-aarakocra: [aarakocra, all angels, areanaloth, empyrean, ki-rin, shield guards]
-abyssal: [cambion, hezrou, death knight, manes, balor, marilith, barloura, falfeshnee,
-  chasme, quasit, dretch, shadow demons, glabrezu, urock, goristro, yachlol, nycaloth,
-  ultroloth, night hag, merrow, kraken, minotaur, lamia, spirit naga, lizardfolk queen/king,
-  nightmare, succubus/inccubus, yuan-ti, mezzoloth, all angels, areanaloth, empyrean,
-  shield guards, barghest, babau, bodak, maw demon, shoosuva, devourer, draegloth,
-  leucrotta, tanarukk, vargouille, xvart, ki-rin]
-aquan: [dragon turtle, mud mephit, water elemental, smoke mephit, marid, steam mephit,
-  sea hag, merfolk, ice mephit, merrow, water weird, all angels, areanaloth, empyrean,
-  shield guards, deep scion, sea spawn, ki-rin]
-auran: [aarakocra, air elemental, all angels, areanaloth, breur hag, djinni, dust
-    mephit, empyrean, giant eagle, ice mephit, invisible stalker, kenku, ki-rin, shield
-    guards]
-blink dog: [blink dog, all angels, areanaloth, empyrean, shield guards, ki-rin]
-bullywug: [bullywug, all angels, areanaloth, empyrean, ki-rin, shield guards]
-celestial: [kraken, guardian naga, pegasus, unicorn, all angels, areanaloth, empyrean,
-  shield guards, ki-rin]
-deep speech: [aboleth, alhoon, all angels, areanaloth, beholder, chull, cloaker, death
-    kiss, elder brain, empyrean, intellect devourer, ki-rin, mind flayer, mindwitness,
-  neogi, shield guards, ulitharid]
-dragonic: [all dragons, all angels, areanaloth, behir, chimera, empyrean, firenewt,
-  green hag, ki-rin, kobold, lizardfolk, pseudodragon, shield guards, yuan-ti]
-dwarvish: [duergar, all angels, areanaloth, empyrean, shield guards, korred, ki-rin]
-elvish: [banshee, all angels, areanaloth, centaur, darkling, draegloth, drider, drow,
-  dryad, empyrean, giant elk, giant owl, ki-rin, pegasus, peryton, satyr, shield guards,
-  sprite, treant, unicorn, yeth hound, yochlol]
-giant: [cyclop, winter wolf, etin, fomorian, all giants, sea hag, ogre, oni, troll,
-  all angels, areanaloth, empyrean, shield guards, annis hag, ki-rin]
-giant eagle: [giant eagle, all angels, areanaloth, empyrean, shield guards, ki-rin]
-giant elk: [giant elk, all angels, areanaloth, empyrean, shield guards, ki-rin]
-giant owl: [giant owl, all angels, areanaloth, empyrean, shield guards, ki-rin]
-gith: [githyanki, all angels, areanaloth, empyrean, githzerai, ki-rin, shield guards]
-gnoll: [gnoll, all angels, areanaloth, empyrean, ki-rin, leucrotta, shield guards,
-  shoosuva]
-gnomish: [korred, all angels, areanaloth, empyrean, shield guards, ki-rin]
-goblin: [bugbear, all angels, areanaloth, barghest, empyrean, goblin, hobgoblin, ki-rin,
-  nilbog, shield guards, worg]
-grell: [grell, all angels, areanaloth, empyrean, ki-rin, shield guards]
-grung: [grung, all angels, areanaloth, empyrean, shield guards, ki-rin]
-hook horror: [hook horror, all angels, areanaloth, empyrean, shield guards, ki-rin]
-ignan: [azer, all angels, areanaloth, efreeti, empyrean, fire elemental, fire snake,
-  firenewt, ki-rin, magma mephit, magnin, salamander, shield guards, smoke mephit,
-  steam mephit]
-infernal: [cambion, lemure, barbed devil, pit fiend, bearded devil, spined devil,
-  bone devil, night hag, chain devil, hell hound, erinyes, kraken, hornet devil, nightmare,
-  ice devil, rakshasa, imp, succubus/inccubus, mezzoloth, nycaloth, ultroloth, all
-    angels, areanaloth, empyrean, shield guards, barghest, vargouille, ki-rin]
-modron: [modron, all angels, areanaloth, empyrean, shield guards, ki-rin]
-orc: [etin, all angels, areanaloth, empyrean, ki-rin, orc, orog, shield guards, tanarukk]
-otyugh: [otyugh, all angels, areanaloth, empyrean, shield guards, ki-rin]
-primordial: [night hag, kraken, all angels, areanaloth, empyrean, shield guards, ki-rin]
-sahuagin: [sahuagin, all angels, areanaloth, empyrean, shield guards, ki-rin]
-slaad: [slaad, all angels, areanaloth, empyrean, shield guards, ki-rin]
-sphinx: [sphinx, all angels, areanaloth, empyrean, shield guards, ki-rin]
-sylvan: [unicorn, centaur, giant elk, dryad, giant owl, faerie dragon, green hag,
-  pegasus, pixie, satyr, sprite, treant, blink dog, all angels, areanaloth, empyrean,
-  shield guards, boggle, darkling, annis hag, bheur hag, korred, quickling, redcap,
-  wood wood, yeth hound, ki-rin]
-terran: [earth elemental, all angels, areanaloth, dao, deep gnome, dust mephit, empyrean,
-  galeb durr, gargoyle, ki-rin, korred, magma mephit, mud mephit, shield guards, xorn]
-thri-kreen: [thri-kreen, all angels, areanaloth, empyrean, shield guards, ki-rin]
-tlincalli: [tlincalli, all angels, areanaloth, empyrean, shield guards, ki-rin]
-troglodyte: [troglodyte, all angels, areanaloth, empyrean, shield guards, ki-rin]
-umber hulk: [umber hulk, all angels, areanaloth, empyrean, shield guards, ki-rin]
-undercommon: [beholder, alboon, all angels, areanaloth, chitine, choldrith, cloaker,
-  death kiss, deep gnome, draegloth, drider, drow, duergar, elder brain, empyrean,
-  flumph, fomorian, grimlock, ki-rin, korred, kuo-toa, mind flayer, mindwitness, neogi,
-  nothic, quaggoth, shield guards, ulitharid, yochlol]
-vegepygmy: [vegepygmy, all angels, areanaloth, empyrean, shield guards, ki-rin]
-winter wolf: [winter wolf, all angels, areanaloth, empyrean, shield guards, ki-rin]
-worg: [worg, all angels, areanaloth, empyrean, shield guards, ki-rin]
-yeti: [yeti, all angels, areanaloth, empyrean, shield guards, ki-rin]
+Aarakocra: [Aarakocra, all Angels, Areanaloth, Empyrean, Ki-Rin, Shield Guards]
+Abyssal: [Cambion, Hezrou, Death Knight, Manes, Balor, Marilith, Barloura, Falfeshnee,
+  Chasme, Quasit, Dretch, Shadow Demons, Glabrezu, Urock, Goristro, Yachlol, Nycaloth,
+  Ultroloth, Night Hag, Merrow, Kraken, Minotaur, Lamia, Spirit Naga, Lizardfolk Queen/King,
+  Nightmare, Succubus/Inccubus, Yuan-Ti, Mezzoloth, all Angels, Areanaloth, Empyrean,
+  Shield Guards, Barghest, Babau, Bodak, Maw Demon, Shoosuva, Devourer, Draegloth,
+  Leucrotta, Tanarukk, Vargouille, Xvart, Ki-Rin]
+Aquan: [Dragon Turtle, Mud Mephit, Water Elemental, Smoke Mephit, Marid, Steam Mephit,
+  Sea Hag, Merfolk, Ice Mephit, Merrow, Water Weird, all Angels, Areanaloth, Empyrean,
+  Shield Guards, Deep Scion, Sea Spawn, Ki-Rin]
+Auran: [Aarakocra, Air Elemental, all Angels, Areanaloth, Breur Hag, Djinni, Dust
+    Mephit, Empyrean, Giant Eagle, Ice Mephit, Invisible Stalker, Kenku, Ki-Rin, Shield
+    Guards]
+Blink Dog: [Blink Dog, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin]
+Bullywug: [Bullywug, all Angels, Areanaloth, Empyrean, Ki-Rin, Shield Guards]
+Celestial: [Kraken, Guardian Naga, Pegasus, Unicorn, all Angels, Areanaloth, Empyrean,
+  Shield Guards, Ki-Rin, Asimar]
+Deep Speech: [Aboleth, Alhoon, all Angels, Areanaloth, Beholder, Chull, Cloaker, Death
+    Kiss, Elder Brain, Empyrean, Intellect Devourer, Ki-Rin, Mind Flayer, Mindwitness,
+  Neogi, Shield Guards, Ulitharid]
+Dragonic: [All Dragons, all Angels, Areanaloth, Behir, Chimera, Empyrean, Firenewt,
+  Green Hag, Ki-Rin, Kobold, Lizardfolk, Pseudodragon, Shield Guards, Yuan-Ti, Dragonborn]
+Dwarvish: [Duergar, all Angels, Areanaloth, Empyrean, Shield Guards, Korred, Ki-Rin,
+  Dwarvs]
+Elvish: [Banshee, all Angels, Areanaloth, Centaur, Darkling, Draegloth, Drider, Drow,
+  Dryad, Empyrean, Giant Elk, Giant Owl, Ki-Rin, Pegasus, Peryton, Satyr, Shield Guards,
+  Sprite, Treant, Unicorn, Yeth Hound, Yochlol, Elf, Firbolg]
+Giant: [Cyclop, Winter Wolf, Etin, Fomorian, all Giants, Sea Hag, Ogre, Oni, Troll,
+  all Angels, Areanaloth, Empyrean, Shield Guards, Annis Hag, Ki-Rin, Firbolg, Goliath]
+Giant Eagle: [Giant Eagle, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin]
+Giant Elk: [Giant Elk, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin]
+Giant Owl: [Giant Owl, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin]
+Gith: [Githyanki, all Angels, Areanaloth, Empyrean, Githzerai, Ki-Rin, Shield Guards]
+Gnoll: [Gnoll, all Angels, Areanaloth, Empyrean, Ki-Rin, Leucrotta, Shield Guards,
+  Shoosuva]
+Gnomish: [Korred, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin, Gnome]
+Goblin: [Bugbear, all Angels, Areanaloth, Barghest, Empyrean, Goblin, Hobgoblin, Ki-Rin,
+  Nilbog, Shield Guards, Worg]
+Grell: [Grell, all Angels, Areanaloth, Empyrean, Ki-Rin, Shield Guards]
+Grung: [Grung, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin]
+Halfling: [Halfling, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin]
+Hook Horror: [Hook Horror, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin]
+Ignan: [Azer, all Angels, Areanaloth, Efreeti, Empyrean, Fire Elemental, Fire Snake,
+  Firenewt, Ki-Rin, Magma Mephit, Magnin, Salamander, Shield Guards, Smoke Mephit,
+  Steam Mephit]
+Infernal: [Cambion, Lemure, Barbed Devil, Pit Fiend, Bearded Devil, Spined Devil,
+  Bone Devil, Night Hag, Chain Devil, Hell Hound, Erinyes, Kraken, Hornet Devil, Nightmare,
+  Ice Devil, Rakshasa, Imp, Succubus/Inccubus, Mezzoloth, Nycaloth, Ultroloth, all
+    Angels, Areanaloth, Empyrean, Shield Guards, Barghest, Vargouille, Ki-Rin, Tiefling]
+Modron: [Modron, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin]
+Orc: [Etin, all Angels, Areanaloth, Empyrean, Ki-Rin, Orc, Orog, Shield Guards, Tanarukk]
+Otyugh: [Otyugh, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin]
+Primordial: [Night Hag, Kraken, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin,
+  Genasi, Triton]
+Sahuagin: [Sahuagin, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin]
+Slaad: [Slaad, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin]
+Sphinx: [Sphinx, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin]
+Sylvan: [Unicorn, Centaur, Giant Elk, Dryad, Giant Owl, Faerie Dragon, Green Hag,
+  Pegasus, Pixie, Satyr, Sprite, Treant, Blink Dog, all Angels, Areanaloth, Empyrean,
+  Shield Guards, Boggle, Darkling, Annis Hag, Bheur Hag, Korred, Quickling, Redcap,
+  Wood Wood, Yeth Hound, Ki-Rin]
+Terran: [Earth Elemental, all Angels, Areanaloth, Dao, Deep Gnome, Dust Mephit, Empyrean,
+  Galeb Durr, Gargoyle, Ki-Rin, Korred, Magma Mephit, Mud Mephit, Shield Guards, Xorn]
+Thri-Kreen: [Thri-Kreen, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin]
+Tlincalli: [Tlincalli, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin]
+Troglodyte: [Troglodyte, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin]
+Umber Hulk: [Umber Hulk, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin]
+Undercommon: [Beholder, Alboon, all Angels, Areanaloth, Chitine, Choldrith, Cloaker,
+  Death Kiss, Deep Gnome, Draegloth, Drider, Drow, Duergar, Elder Brain, Empyrean,
+  Flumph, Fomorian, Grimlock, Ki-Rin, Korred, Kuo-Toa, Mind Flayer, Mindwitness, Neogi,
+  Nothic, Quaggoth, Shield Guards, Ulitharid, Yochlol]
+Vegepygmy: [Vegepygmy, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin]
+Winter Wolf: [Winter Wolf, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin]
+Worg: [Worg, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin]
+Yeti: [Yeti, all Angels, Areanaloth, Empyrean, Shield Guards, Ki-Rin]

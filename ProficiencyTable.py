@@ -24,7 +24,7 @@ class ProficiencyTable:
         self.whoSpeaksWhat={}
         for key in whoSpeaksWhat:
             value = whoSpeaksWhat[key]
-            key= key.replace(" ","_")
+            key= key.replace(" ","_").lower()
             self.whoSpeaksWhat[key]=value
 
     def loadProficiency(self, data, parent=None):

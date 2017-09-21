@@ -7,7 +7,6 @@ from PyQt5 import QtWidgets
 
 class ProficiencyTable:
     def __init__(self):
-        self.table = {}
         f = open(getDirectoryPrefix()+"data/character/proficiency.yaml")
         y = yaml.load(f)
         f.close()
@@ -18,6 +17,10 @@ class ProficiencyTable:
         y = yaml.load(f)
         f.close()
         self.loadProficiency(y)
+        f = open(getDirectoryPrefix()+"data/character/spellGroups.yaml")
+        y = yaml.load(f)
+        f.close()
+        self.loadProficiency(y,virtualParent=True)
         l = open(getDirectoryPrefix()+"data/character/language.yaml")
         whoSpeaksWhat = yaml.load(l)
         l.close()
@@ -27,18 +30,42 @@ class ProficiencyTable:
             key= key.replace(" ","_").lower()
             self.whoSpeaksWhat[key]=value
 
-    def loadProficiency(self, data, parent=None):
+    def loadProficiency(self, data, parent=None, virtualParent=False):  # "virtual" parent => category only for ProfChoice
         # always a list as toplevel structure
         for obj in data:
             if type(obj) is str:
                 # just a new proficiency
-                self.newProficiency(obj,parent)
+                if not virtualParent:
+                    self.newProficiency(obj,parent)
+                else:
+                    self.newVirtualProfParent(obj,parent)
             elif type(obj) is dict:
                 # a new category with subproficiencies
                 assert len(obj.keys())==1
                 name = tuple(obj.keys())[0]
-                attr=self.newProficiency(name, parent, True)
-                self.loadProficiency(obj[name],attr)
+                if not virtualParent:   # only if we are actually creating a prof tree
+                    attr=self.newProficiency(name, parent, True)
+                else:
+                    attr = self.newVirtualProfParent(name,parent)
+                self.loadProficiency(obj[name],attr,virtualParent)
+
+    def newVirtualProfParent(self,name,parent):
+        if name[-1]=="!":
+            initial = 1
+            name  = name[:-1]
+        else:
+            initial=0
+        sname=name.replace(" ", "_")
+        if sname[-6:]==".SKIL.":
+            sname = sname[:-6]
+        else:
+            if sname[-6:]==".LANG.":
+                sname = sname[:-6]
+            elif sname[-7:]==".SPELL.":
+                sname = sname[:-7]
+        if parent:
+            self.childTable[parent].append(sname)
+        return sname
 
     def newProficiency(self, name, parent, hasChildren=False):
         if name[-1]=="!":

@@ -140,6 +140,25 @@ Warlock:
             - prof_simple_weapons
             - prof_wisdom_saving_throw
             - prof_charisma_saving_throw
+    ProfChoice:
+        - a:
+            n: 2
+            profs:
+                - arcana
+                - deception
+                - history
+                - intimidation
+                - investigation
+                - nature
+                - religion
+        - b:
+            n: 2
+            profs:
+                - warlock_cantrips
+        - c:
+            n: 2
+            profs:
+                - warlock_spells_lvl1
 Wizard:
     mod:
         Wizard_HP:

@@ -63,16 +63,22 @@ class ConfigTable:
     class ProficiencyListConfig(ProficiencyConfig):
         hide = lambda self,v,vmod,maxValue:(v==0) and (vmod==0) and (maxValue==0)
         VisualUpdateSignal = "listWidget_proficiencies_VisualUpdate"
+        setToolTip = False
+        def __init__(self,name,root):
+            ConfigTable.ProficiencyConfig.__init__(self,name,root)
+            self.toolTipText = ""
+
         def specialSetup(self,widget,v,vmod,mdesc,maxValue):
             try:
                 races = getProficiencyTable().whoSpeaksWhat[self.name]
             except BaseException as e:
                 return
-            s = widget.widget.toolTip(0)
-            s+="\nspoken by:"
+            mdesc += "\nspoken by:"
             for race in races:
-                s+="\n"+race
-            widget.widget.setToolTip(0,s)
+                mdesc += "\n"+race
+            if mdesc != self.toolTipText:
+                self.toolTipText = mdesc
+                widget.widget.setToolTip(0,mdesc)   # note:  setToolTip(int,str) only for QTreeWidget!
 
     class ProficiencyCategoryConfig(ProficiencyListConfig):
         forceCheckbox=False

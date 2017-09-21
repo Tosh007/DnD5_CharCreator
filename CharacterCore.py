@@ -312,10 +312,11 @@ class ValueReference(DependentObject):
 
             if self.widget:
                 self.widget.setHidden(self.vconf.hide(v,vmod,maxValue))
-                try:
-                    self.widget.setToolTip(mdesc)
-                except TypeError:
-                    self.widget.setToolTip(0,mdesc)
+                if self.vconf.setToolTip:
+                    try:
+                        self.widget.setToolTip(mdesc)
+                    except TypeError:
+                        self.widget.setToolTip(0,mdesc)
             self.vconf.specialSetup(self, v, vmod, mdesc, maxValue)
             if self._blockSignals:
                 self._blockSignals(False)
@@ -340,6 +341,7 @@ class ValueConfig:
     alwaysMax = False
     forceCheckbox = False
     VisualUpdateSignal = None
+    setToolTip = True
     hide=lambda v,vmod,maxV:False
     specialSetup = lambda widget,v,vmod,mdesc,maxValue=None: None# a special ui setup sequence
 

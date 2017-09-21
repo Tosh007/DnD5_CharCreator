@@ -1,48 +1,95 @@
-- "wizard cantrips":
-    - "acid splash.SPELL."
-    - "blade ward.SPELL."
-    - "chilling touch.SPELL."
-    - "fire bolt.SPELL."
-    - "dancing lights.SPELL."
-    - "friends.SPELL."
-    - "light.SPELL."
-    - "mage hand.SPELL."
-    - "mending.SPELL."
-    - "message.SPELL."
-    - "minor illusion.SPELL."
-    - "poison spray.SPELL."
-    - "prestidigitation.SPELL."
-    - "ray of frost.SPELL."
-    - "shocking grasp.SPELL."
-    - "true strike.SPELL."
-- "wizard spells lvl1":
-    - "alarm.SPELL."
-    - "burning hands.SPELL."
-    - "charm person.SPELL."
-    - "chromatic orb.SPELL."
-    - "color spray.SPELL."
-    - "comprehend languages.SPELL."
-    - "detect magic.SPELL."
-    - "disguise self.SPELL."
-    - "expeditious retreat.SPELL."
-    - "false life.SPELL."
-    - "feather fall.SPELL."
-    - "find familiar.SPELL."
-    - "fog cloud.SPELL."
-    - "grease.SPELL."
-    - "identify.SPELL."
-    - "illusory script.SPELL."
-    - "jump.SPELL."
-    - "longstrider.SPELL."
-    - "mage armor.SPELL."
-    - "magic missile.SPELL."
-    - "protection from evil and good.SPELL."
-    - "ray of sickness.SPELL."
-    - "shield.SPELL."
-    - "silent image.SPELL."
-    - "sleep.SPELL."
-    - "tashas hideous laughter.SPELL."
-    - "tensers floating disk.SPELL."
-    - "thunderwave.SPELL."
-    - "unseen servant.SPELL."
-    - "witch bolt.SPELL."
+- cantrips.SPELL.:
+  - light
+  - message
+  - danzing lights
+  - friends
+  - thorn whip
+  - blade ward
+  - minor illusion
+  - eldritch blast
+  - poison spray
+  - spare the dying
+  - dancing lights
+  - chilling touch
+  - acid splash
+  - ray of frost
+  - prestidigitation
+  - sacred flame
+  - druidcraft
+  - thaumaturgy
+  - resistance
+  - vicious mockery
+  - shocking grasp
+  - guidance
+  - mage hand
+  - true strike
+  - mending
+  - fire bolt
+  - shillelagh
+  - chill touch
+  - produce flame
+- spells.SPELL.:
+  - compelled duel
+  - jump
+  - feather fall
+  - disguise self
+  - goodberry
+  - longstrider
+  - charm person
+  - animal friendship
+  - bane
+  - searing smite
+  - illusory script
+  - jump longstrider
+  - tensers floating disk
+  - mage armor
+  - command
+  - ensnaring strike
+  - guiding bolt
+  - inflict wounds
+  - shield of faith
+  - divine favor
+  - hunters mark
+  - detect magic
+  - identify
+  - hail of thorns
+  - tashas hideous laughter
+  - heroism
+  - detect poison and disease
+  - witch bolt
+  - fog cloud
+  - ray of sickness
+  - sanctuary
+  - bless
+  - grease
+  - silent image
+  - arms of hadar
+  - wrathful smite
+  - chromatic orb
+  - protection from evil and good
+  - unseen servant
+  - sleep
+  - entangle
+  - color spray
+  - ray of sicknes
+  - expeditious retreat
+  - thunderwave
+  - hex
+  - false life
+  - healing word
+  - detect evil and good
+  - dissonant whispers
+  - find familiar
+  - burning hands
+  - cure wounds
+  - speak with animals
+  - comprehend languages
+  - thunderous smite
+  - purify food and drink
+  - magic missile
+  - armor of agathys
+  - create or destroy water
+  - faerie fire
+  - hellish rebuke
+  - shield
+  - alarm

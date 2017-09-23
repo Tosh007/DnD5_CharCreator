@@ -19,31 +19,36 @@ class ConfigTable:
                 choices = getProficiencyTable().table.values()
             except:
                 return lastValue
-            maxValue = self.getMaxValue(lastValue)
-            if value==lastValue:
-                if value>0:
-                    assert self.choice
-                    v=self.choice.proficient(self.name, value) #dont search for other choices for takeover
-                    if not v:self.choice=None
-                    return v
-                #else: value==lastValue==0
-            else:
-                #value!=lastValue
-                if value>0:
-                    assert lastValue==0
-                    #assert not self.choice
-                    for choice in getProficiencyTable().table.values():
-                        v = choice.proficient(self.name, value)
-                        if v:
-                            self.choice=choice
-                            return v
+            try:
+                maxValue = self.getMaxValue(lastValue)
+                if value==lastValue:
+                    if value>0:
+                        assert self.choice
+                        v=self.choice.proficient(self.name, value) #dont search for other choices for takeover
+                        if not v:self.choice=None
+                        return v
+                    #else: value==lastValue==0
                 else:
-                    # value=0
-                    assert lastValue>0
-                    assert self.choice
-                    return self.choice.proficient(self.name,0)
-                    self.choice = None
-            return 0
+                    #value!=lastValue
+                    if value>0:
+                        assert lastValue==0
+                        #assert not self.choice
+                        for choice in getProficiencyTable().table.values():
+                            v = choice.proficient(self.name, value)
+                            if v:
+                                self.choice=choice
+                                return v
+                    else:
+                        # value=0
+                        assert lastValue>0
+                        assert self.choice
+                        return self.choice.proficient(self.name,0)
+                        self.choice = None
+                return 0
+            except BaseException as e:
+                print("checkReq failed for "+self.name)
+                print("value:"+str(value)+"\nlast value:"+str(lastValue))
+                raise e
 
         def getMaxValue(self, lastValue):
             try:
@@ -91,7 +96,7 @@ class ConfigTable:
             except NameError:
                 return True
             for prof in pt.getChildProficiencies(self.name):
-                if not getValue("prof_"+prof).canBeHidden():
+                if not getValue("prof_"+prof).widget.isHidden():
                     return False
             return True
 

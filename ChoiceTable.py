@@ -141,7 +141,7 @@ class StateTable:
             b = self.extra_ui.checkBox_variantTraits.checkState()
             if b:
                 getModifier("Human_plus1").disconnect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")),True)
-                choice = ProficiencyChoice(1,("skills",))
+                choice = ProficiencyChoice(1,("skills",),str(type(self))+"_altHumanTrait1_1_skills")
                 self.Human_SkillChoice = str(choice)
                 getProficiencyTable().addChoice(choice)
                 self.feat = StateTable.FeatChoice(self.extra_ui.comboBox_feat)
@@ -178,11 +178,25 @@ class StateTable:
 class ActiveChoiceTable(dict):
     def __init__(self):
         dict.__init__(self)
+        # always existing fsm
         self.raceSelect = StateTable.Races(getUI("ComboBox_Race"))
         self.classSelect = StateTable.Classes(getUI("ComboBox_Class"))
         self.baseState = StateTable.PrimaryState()
         self.baseState.initFSM()
         self.baseState.request("On")
+        # acces via dict or argument, set only as dict
+        self.update(self.__dict__)
+        self.__dict__.clear()
+
+    def activateChoice(self,factory):
+        choice = factory()
+        name = type(choice).__name__
+        self[name] = choice
+        return name
+
+    def desactivateChoice(self,type_):
+        self[type_.__name__].destroy()
+        del self[type_.__name__]
 
     def __getattr__(self,name):
         return self[name]

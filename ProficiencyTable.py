@@ -124,7 +124,7 @@ class ProficiencyTable:
 
     def addChoice(self, choice):
         name = str(choice)
-        assert name not in self.table.keys()
+        if name in self.table.keys():raise KeyError("addChoice({0}) duplicate".format(choice))
         self.table[name] = choice
         getValue("listWidget_proficiencies_update").changeSignal.emit()
 

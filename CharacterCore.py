@@ -13,7 +13,8 @@ def getDirectoryPrefix():
 
 class DependentObject(QObject):
     changeSignal = pyqtSignal()
-
+    globalBlock = False
+    all_obj = []
     @staticmethod
     def getWidgetSignal(widget):
         if isinstance(widget, QtWidgets.QSpinBox):
@@ -40,6 +41,7 @@ class DependentObject(QObject):
         if s:
             s.connect(self.changeSignal)
         self.changeSignal.connect(self.on_changed)
+        DependentObject.all_obj.append(self)
 
     def connect(self, objects):
         try:
@@ -63,6 +65,30 @@ class DependentObject(QObject):
     def destroy(self):
         DependentObject.getWidgetSignal(self.widget).disconnect(self.changeSignal)
         self.disconnect()
+        DependentObject.all_obj.remove(self)
+
+    @staticmethod
+    def blockSignalsGlobal(v):
+        DependentObject.globalBlock = v
+        for obj in DependentObject.all_obj:
+            obj.blockSignals(v)
+
+    @staticmethod
+    def flushChanges():
+        block = DependentObject.globalBlock
+        DependentObject.blockSignalsGlobal(True)
+        for obj in DependentObject.all_obj:
+            if isinstance(obj,ValueReference):
+                obj.on_changed()
+        DependentObject.blockSignalsGlobal(block)
+
+    @staticmethod
+    def flushChangesVisual():
+        for obj in DependentObject.all_obj:
+            try:
+                obj.on_visual_update()
+            except AttributeError:pass
+
 
 class FiniteStateMachine:
     class AlreadyInTransition(Exception):pass
@@ -77,6 +103,7 @@ class FiniteStateMachine:
             f = open(getDirectoryPrefix()+self.stateFile,"r")
             self.states = yaml.load(f)
             f.close()
+        self.blockProfChoiceInit = False
         self._states.update(self.states)
         self._states.update(states)
         self.props = []
@@ -84,7 +111,7 @@ class FiniteStateMachine:
         self.currentState = ""
 
     def request(self,state):
-        assert state in self._states
+        #assert state in self._states# we want a key error
         if self.currentState is None:
             raise self.AlreadyInTransition(str(type(self)))
         self._exitState()
@@ -102,8 +129,8 @@ class FiniteStateMachine:
                     mod.disconnect(targets)
             elif key=="depend":
                 dependants = self._states[state][key]
-                for dep in dependants:
-                    dep = getValues(name)[0]
+                for name in dependants:
+                    dep = getValue(name)
                     targets = getValues(dependants[name])
                     dep.disconnect(targets)
         ui = getUI("listWidget_traits")
@@ -142,14 +169,16 @@ class FiniteStateMachine:
                     self.props.append(item)
             elif key=="ProfChoice":
                 choices = self._states[state][key]
-                for choice in choices:
-                    choice = tuple(choice.values())[0]
+                for choice_ in choices:
+                    choice = tuple(choice_.values())[0]
+                    name = tuple(choice_.keys())[0]
+                    name = type(self).__name__+"_"+state+"_"+name
                     n = choice["n"]
                     profs = choice["profs"]
-                    c = ProficiencyChoice(n, profs)
-                    name = str(c)
+                    c = ProficiencyChoice(n, profs,name)
                     self.profs.append(name)
-                    getProficiencyTable().addChoice(c)
+                    if not self.blockProfChoiceInit:  # only activation is blocked, we still register to remove it in exit() => assume that something else creates the choice
+                        getProficiencyTable().addChoice(c)
                     getUI("treeWidget_proficiencies").itemClicked.emit(None,0)
         nstate = state.replace("-","_")
         nstate = nstate.replace(" ","_")
@@ -193,7 +222,7 @@ class ValueReference(DependentObject):
                     self.widget.setCheckState(0,Qt.Unchecked)
                 self.previousCheckState = Qt.Unchecked
         elif isinstance(widget,QtWidgets.QCheckBox):
-            self._get = self.widget.isChecked
+            self._get = 0
             self._set = self.widget.setChecked
             self._blockSignals = self.widget.blockSignals
         elif widget is None:
@@ -220,7 +249,7 @@ class ValueReference(DependentObject):
     def set(self, value, setLastValue=True):
         v, mstring = self.applyMods(value, True)
         if setLastValue:
-            self.lastValue = self.get()
+            self.lastValue = value
         if not callable(self._get):
             self._get = value
         self.showValue(value,v,mstring)
@@ -266,7 +295,8 @@ class ValueReference(DependentObject):
                 checkState = self.widget.checkState()
             except TypeError:
                 checkState = self.widget.checkState(0)
-            if checkState == Qt.Checked and self.get()==value:
+            # maybe a bug here?! not sure, possibly fixed
+            if self.get()==self.get(True) and checkState == Qt.Checked:
                 value=1
             else:
                 value=0
@@ -285,6 +315,9 @@ class ValueReference(DependentObject):
     def showValue(self,v,vmod,mdesc,maxValue=None):
         if not maxValue:maxValue=v
         svmod = " ({0})".format(vmod)
+        if not callable(self._get): # this case, only change requests are read from ui, value is stored here!
+            assert type(self._get) is int
+            self._get = v
         if self._blockSignals:
             self._blockSignals(True)
         if isinstance(self.widget, QtWidgets.QLabel) or isinstance(self.widget, QtWidgets.QListWidgetItem) or isinstance(self.widget, QtWidgets.QTreeWidgetItem):
@@ -449,7 +482,8 @@ class ChoiceReference(FiniteStateMachine, DependentObject):
 
 
 class ProficiencyChoice:
-    def __init__(self, n, profs):
+    def __init__(self, n, profs, name):
+        self.name = name
         self.maxN = n
         profs_ = list(profs)
         for prof in profs:
@@ -457,10 +491,24 @@ class ProficiencyChoice:
         self.profs = {p:0 for p in profs_}   # lastValue associated with this choice element
 
     def __str__(self):
-        s = "prof_" + str(self.maxN)
-        for i in sorted(self.profs.keys(), key=str.lower):
-            s += "_"+i
-        return s
+        #s = "prof_" + str(self.maxN)
+        #for i in sorted(self.profs.keys(), key=str.lower):
+        #    s += "_"+i
+        #return s
+        return self.name
+
+    def serialize(self):
+        return {"n":self.maxN,"profs":self.profs}
+
+    @staticmethod
+    def deserialize(name, data):
+        profs = data["profs"]
+        choice = ProficiencyChoice(data["n"],profs,name)
+        for name in profs:
+            if profs[name]>0:
+                prof = getValue("prof_"+name)
+                prof.vconf.choice = choice    # set prof reference to ProfChoice when loading
+        return choice
 
     def proficient(self,name, v):
         if str(self) not in getProficiencyTable().table.keys():return 0

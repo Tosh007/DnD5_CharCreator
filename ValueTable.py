@@ -33,9 +33,6 @@ class ValueTable:
         self._data[name] = value
     def __getattr__(self, name):
         return self._data[name]
-    def flushChanges(self):
-        for obj in self._data.values():
-            obj.changeSignal.emit()
     def custom(self):
         self._data["listWidget_proficiencies_VisualUpdate"] = DependentObject(None)
         self._data["listWidget_proficiencies_update"] = DependentObject(None)

@@ -19,6 +19,8 @@ def getValueTable():
     return Value
 def getProficiencyTable():
     return Proficiency
+def getActiveStateTable():
+    return ActiveState
 
 
 # returns a list of objects as result of a list of strings

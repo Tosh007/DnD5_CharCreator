@@ -1190,6 +1190,11 @@
     <attribute name="headerVisible">
      <bool>false</bool>
     </attribute>
+    <column>
+     <property name="text">
+      <string notr="true">1</string>
+     </property>
+    </column>
    </widget>
    <widget class="QListWidget" name="listWidget_inventory">
     <property name="geometry">
@@ -1241,6 +1246,11 @@
     <attribute name="headerVisible">
      <bool>false</bool>
     </attribute>
+    <column>
+     <property name="text">
+      <string notr="true">1</string>
+     </property>
+    </column>
    </widget>
    <widget class="QLabel" name="label_6">
     <property name="geometry">
@@ -1267,6 +1277,11 @@
     <attribute name="headerVisible">
      <bool>false</bool>
     </attribute>
+    <column>
+     <property name="text">
+      <string notr="true">1</string>
+     </property>
+    </column>
    </widget>
    <widget class="QLabel" name="label_7">
     <property name="geometry">
@@ -1279,19 +1294,6 @@
     </property>
     <property name="text">
      <string>Languages</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox_allowMonsterLanguage">
-    <property name="geometry">
-     <rect>
-      <x>840</x>
-      <y>140</y>
-      <width>145</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Allow Monster Languages</string>
     </property>
    </widget>
    <widget class="QLabel" name="Label_Perception">

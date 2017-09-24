@@ -1326,7 +1326,7 @@
     <addaction name="action_new"/>
     <addaction name="action_open_file"/>
     <addaction name="action_save_file"/>
-    <addaction name="actionSpeichern_unter"/>
+    <addaction name="action_saveAs_file"/>
    </widget>
    <addaction name="menuDatei"/>
   </widget>
@@ -1361,7 +1361,7 @@
     <string>Ctrl+S</string>
    </property>
   </action>
-  <action name="actionSpeichern_unter">
+  <action name="action_saveAs_file">
    <property name="text">
     <string>Speichern unter</string>
    </property>

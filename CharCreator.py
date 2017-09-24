@@ -13,9 +13,17 @@ class storage_:
     def __init__(self):
         self.newName = "data/character/new.yaml"
         self.currentSaveName = None
-    def saveFile(self):
-        filename, _ = QtWidgets.QFileDialog.getSaveFileName(filter="CharCreator format (*.dnd5)")
+
+    def updateWindowTitle(self):
+        MainWindow.setWindowTitle("DND5e CharCreator - " + (self.currentSaveName if self.currentSaveName else "no file"))
+
+    def saveFile(self, saveAs=False):
+        if saveAs or not self.currentSaveName:
+            filename, _ = QtWidgets.QFileDialog.getSaveFileName(filter="CharCreator format (*.dnd5)")
+        else:
+            filename = self.currentSaveName
         if not filename:return
+        self.currentSaveName = filename
         print("save filename: "+filename)
         data = {"values":{},"choice":{},"ProfChoice":{},"multiChoice":{}}
         values = data["values"]
@@ -42,12 +50,14 @@ class storage_:
         # finally open save file and dump full data sheet
         try:
             f = open(filename,"w")
-            yaml.dump(data,f,default_flow_style = False)
+            yaml.dump(data,f)#,default_flow_style = False)
             f.close()
         except BaseException as e:
             print("saving somehow failed because", e)
-    def openFile(self):
-        filename, _ = QtWidgets.QFileDialog.getOpenFileName(filter="CharCreator format (*.dnd5)")
+        self.updateWindowTitle()
+    def openFile(self, filename = None):
+        if not filename:
+            filename, _ = QtWidgets.QFileDialog.getOpenFileName(filter="CharCreator format (*.dnd5)")
         if not filename:return
         print("open filename: "+filename)
         try:
@@ -97,8 +107,12 @@ class storage_:
             for item in multiChoice[name]:
                 widget.setItemWithNameChecked(item,True)
             choice.on_changed()
+        self.currentSaveName = filename
+        if filename == "data/character/newSave.yaml":
+            self.currentSaveName = None
         DependentObject.blockSignalsGlobal(False)
         DependentObject.flushChanges()
+        self.updateWindowTitle()
 
 storage = storage_()
 app = QtWidgets.QApplication(sys.argv)
@@ -112,7 +126,11 @@ DependentObject.blockSignalsGlobal(False)
 DependentObject.flushChanges()
 MainWindow.show()
 
-acces.getUI("action_save_file").triggered.connect(storage.saveFile)
+acces.getUI("action_save_file").triggered.connect(lambda: storage.saveFile(False))
 acces.getUI("action_open_file").triggered.connect(storage.openFile)
+acces.getUI("action_saveAs_file").triggered.connect(lambda: storage.saveFile(True))
+acces.getUI("action_new").triggered.connect(lambda: storage.openFile("data/character/newSave.yaml"))
+
+storage.updateWindowTitle()
 
 sys.exit(app.exec_())

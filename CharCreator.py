@@ -1,4 +1,6 @@
-# python qt test program 1
+# main file
+# top-level control
+# anything that does not fit anywhere else
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from window_main import Ui_MainWindow
@@ -13,12 +15,14 @@ class storage_:
         self.currentSaveName = None
     def saveFile(self):
         filename, _ = QtWidgets.QFileDialog.getSaveFileName(filter="CharCreator format (*.dnd5)")
+        if not filename:return
         print("save filename: "+filename)
-        data = {"values":{},"choice":{},"ProfChoice":{}}
+        data = {"values":{},"choice":{},"ProfChoice":{},"multiChoice":{}}
         values = data["values"]
         choice = data["choice"]
         prof = data["ProfChoice"]
-        # values w/o mods
+        multiChoice = data["multiChoice"]
+        # values, no mods
         vdata = acces.getValueTable()._data
         for name in vdata.keys():
             value = vdata[name]
@@ -31,40 +35,68 @@ class storage_:
         # prof choices seperate, they need to be reconnected to prof values
         for name in getProficiencyTable().table:
             prof[name] = getProficiencyTable().table[name].serialize()
+        # multi choice (2 scores +1) next
+        cdata = acces.getActiveMultiStateTable()
+        for name in cdata:
+            multiChoice[name] = tuple(cdata[name].widget._checkedItems)
         # finally open save file and dump full data sheet
-        f = open(filename,"w")
-        yaml.dump(data,f,default_flow_style = False)
-        f.close()
+        try:
+            f = open(filename,"w")
+            yaml.dump(data,f,default_flow_style = False)
+            f.close()
+        except BaseException as e:
+            print("saving somehow failed because", e)
     def openFile(self):
         filename, _ = QtWidgets.QFileDialog.getOpenFileName(filter="CharCreator format (*.dnd5)")
+        if not filename:return
         print("open filename: "+filename)
         try:
             f = open(filename,"r")
             data = yaml.load(f)
             f.close()
-        except:pass
+        except BaseException as e:
+            print("save opening failed because", e)
+            return
         values = data["values"]
         choice = data["choice"]
         profs = data["ProfChoice"]
+        multiChoice = data["multiChoice"]
         # values
         DependentObject.blockSignalsGlobal(True)
         for name in values:
             acces.getValue(name).set(values[name])
         # choice/FSMs
-        #DependentObject.blockSignalsGlobal(False)#mods can be applied later as well
-        for name in choice:
+        s = list(choice)
+        s.sort(key=lambda x: getState(x).loadLevel)
+        for name in s:
+            print(name,choice[name])
             a = acces.getActiveState(name)
             a.blockProfChoiceInit=True
             try:
-                a.widget.setCurrentText(choice[name])
-                a.on_changed()  # call manually, signals are blocked and we need the FSM state cycle even if state does not change, to clear ProfChoice
+                if type(a.widget) is QtWidgets.QCheckBox:
+                    a.widget.setCheckState(QtCore.Qt.Checked if choice[name]=="Checked" else QtCore.Qt.Unchecked)
+                    # no idea why (?!) but this updates automatically, and throws an error if we do so twice
+                else:
+                    a.widget.setCurrentText(choice[name])
+                    a.on_changed()  # call manually, signals are blocked and we need the FSM state cycle even if state does not change, to clear ProfChoice
             except AttributeError as e:
-                print(e, "occurred while loading choice")
+                if not type(a) is getState("PrimaryState"):
+                    print(type(a))
+                    raise e
             a.blockProfChoiceInit=False
-        # prof choices, deserialize() recreates needed reference to ValueReference.vconf.choice
-        #DependentObject.blockSignalsGlobal(True)    # should prevent sideeffects
+        # ProfChoice
         for name in profs:
             getProficiencyTable().addChoice(ProficiencyChoice.deserialize(name, profs[name]))
+        # multiChoice
+        for name in multiChoice:
+            print(name,multiChoice[name])
+            choice = getActiveMultiState(name)
+            widget = choice.widget
+            widget.setAllChecked(False)
+            # set checkState according to list
+            for item in multiChoice[name]:
+                widget.setItemWithNameChecked(item,True)
+            choice.on_changed()
         DependentObject.blockSignalsGlobal(False)
         DependentObject.flushChanges()
 

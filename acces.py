@@ -1,11 +1,11 @@
 
 def initializeTables(ui):
     from ValueTable import ValueTable
-    from ChoiceTable import ActiveChoiceTable, StateTable
+    from ChoiceTable import ActiveChoiceTable, StateTable,ActiveMultiChoiceTable
     from ProficiencyTable import ProficiencyTable
     from ConfigTable import ConfigTable
     from ModifierTable import ModifierTable
-    global UI,Value,Modifier,Config,Proficiency,State,ActiveState
+    global UI,Value,Modifier,Config,Proficiency,State,ActiveState,ActiveMultiState
     UI = ui
     Config = ConfigTable
     Modifier = ModifierTable()
@@ -13,6 +13,7 @@ def initializeTables(ui):
     Proficiency = ProficiencyTable()
     State = StateTable
     ActiveState = ActiveChoiceTable()
+    ActiveMultiState = ActiveMultiChoiceTable()
     print("global table initialization complete!")
 
 def getValueTable():
@@ -21,6 +22,8 @@ def getProficiencyTable():
     return Proficiency
 def getActiveStateTable():
     return ActiveState
+def getActiveMultiStateTable():
+    return ActiveMultiState
 
 
 # returns a list of objects as result of a list of strings
@@ -56,4 +59,11 @@ def getState(name):
     return _get(State, name,"getState({0}) failed")[0]
 
 def getActiveState(name):
+    if not type(name) is str:
+        name = name.__name__
     return _get(ActiveState,name,"getActiveState({0}) failed")[0]
+
+def getActiveMultiState(name):
+    if not type(name) is str:
+        name = name.__name__
+    return _get(ActiveMultiState, name, "getActiveMultiState({0}) failed")[0]

@@ -92,7 +92,7 @@ class DependentObject(QObject):
 
 class FiniteStateMachine:
     class AlreadyInTransition(Exception):pass
-
+    loadLevel = 0
     stateFile=None
     def initFSM(self):
         self._enterState("Off")
@@ -443,20 +443,25 @@ class ChoiceReference(FiniteStateMachine, DependentObject):
         FiniteStateMachine.__init__(self,states)
         if self.usePrerequisite:
             assert "None" in self._states
-        if self.usePrerequisite:
             widget.addItem("None")
             for state in self._states:
                 if "prerequisite" in self._states[state].keys():
                     self._states[state]["prerequisite"] = eval("lambda: "+self._states[state]["prerequisite"])
                 else:
                     self._states[state]["prerequisite"] = lambda: True
-        widget.addItems(sorted(self.states.keys(),key=str.lower))
+
+        if isinstance(widget, QtWidgets.QComboBox):widget.addItems(sorted(self.states.keys(),key=str.lower))
         DependentObject.__init__(self, widget)
         self.initFSM()
         self.on_changed()
 
     def on_changed(self):
-        item = self.widget.currentText()
+        if isinstance(self.widget, QtWidgets.QCheckBox):
+            item = ("Checked" if self.widget.checkState() == Qt.Checked else "Unchecked")
+            assert not self.usePrerequisite# because this is widget specific
+        else:
+            item = self.widget.currentText()
+
         if self.usePrerequisite:
             for state in self._states:
                 if state=="Off":continue
@@ -476,10 +481,42 @@ class ChoiceReference(FiniteStateMachine, DependentObject):
 
     def destroy(self):
         self.request("Off")
-        self.widget.disconnect()
-        self.changeSignal.disconnect()
-        self.widget.clear()
+        DependentObject.destroy(self)
+        #self.widget.disconnect()
+        #self.changeSignal.disconnect()
+        if isinstance(self.widget,QtWidgets.QComboBox):
+            self.widget.clear()
 
+class MultiChoiceReference(DependentObject):
+        loadLevel = 0                           # because does not inherit from FSM
+        n = 1                                   # max selected items
+        def __init__(self, w, items):
+            self.activeMod = set()
+            DependentObject.__init__(self,w)
+            self.widget.addItems(items)
+            for i in range(self.widget.count()):
+                self.widget.setItemChecked(i, False)
+
+        def on_changed(self):
+            items = self.widget.checkedItems()
+            if len(items)>self.n:
+                uncheck = items - self.activeMod
+                for i in uncheck:
+                    self.widget.setItemWithNameChecked(i,False)
+                items = self.widget.checkedItems()
+            activate = items - self.activeMod
+            self.activate(activate)
+            deactivate = self.activeMod - items
+            self.deactivate(deactivate)
+            self.activeMod = items
+
+        def activate(self, args):pass      # override, args=>items to activate
+        def deactivate(self, args):pass    # same for deactivate
+
+        def destroy(self):
+            DependentObject.destroy(self)
+            self.widget.clear()
+            self.on_changed()
 
 class ProficiencyChoice:
     def __init__(self, n, profs, name):

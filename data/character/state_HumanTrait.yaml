@@ -1,0 +1,15 @@
+Unchecked:
+    mod:
+        Human_plus1:
+            - strength
+            - dexterity
+            - constitution
+            - charisma
+            - wisdom
+            - intelligence
+Checked:
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - skills

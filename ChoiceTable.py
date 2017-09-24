@@ -9,34 +9,21 @@ class StateTable:
     class Classes(ChoiceReference):
         stateFile = "data/character/state_Classes.yaml"
 
-    class Choice2AbilityScore(DependentObject):
+    class Choice2AbilityScore(MultiChoiceReference):
+        loadLevel = 4
+        n = 2
         def __init__(self, w, items, mod):
-            self.activeMod = set()
-            DependentObject.__init__(self,w)
-            self.widget.addItems(items)
+            MultiChoiceReference.__init__(self,w,items)
             self.mod = mod
-            for i in range(self.widget.count()):
-                self.widget.setItemChecked(i, False)
 
-        def on_changed(self):
-            items = self.widget.checkedItems()
-            if len(items)>2:
-                uncheck = items - self.activeMod
-                for i in uncheck:
-                    self.widget.setItemWithNameChecked(i,False)
-                items = self.widget.checkedItems()
-            activate = items - self.activeMod
-            self.mod.connect(getValues(activate))
-            deactivate = self.activeMod - items
-            self.mod.disconnect(getValues(deactivate))
-            self.activeMod = items
+        def activate(self, args):
+            self.mod.connect(getValues(args))
 
-        def destroy(self):
-            DependentObject.destroy(self)
-            self.widget.clear()
-            self.on_changed()
+        def deactivate(self, args):
+            self.mod.disconnect(getValues(args),True)
 
     class FeatChoice(ChoiceReference):
+        loadLevel = 4
         stateFile = "data/character/feats.yaml"
         usePrerequisite = True
         def _enterSubmenu(self, name, choice):
@@ -74,34 +61,57 @@ class StateTable:
         exitObservant = _exitSubmenu
 
     class StrengthOrDex1(ChoiceReference):
+        loadLevel = 4
         stateFile = "data/character/strengthOrDex1.yaml"
 
     class IntelligenceOrWisdom1(ChoiceReference):
+        loadLevel = 4
         stateFile = "data/character/intOrWis1.yaml"
 
     class Feat_Resilient(ChoiceReference):
+        loadLevel = 3
         stateFile = "data/character/feat_resilient.yaml"
 
     class Subrace_Genasi(ChoiceReference):
+        loadLevel = 2
         stateFile = "data/character/state_Subrace_Genasi.yaml"
 
     class Subrace_Aasimar(ChoiceReference):
+        loadLevel = 2
         stateFile = "data/character/state_Subrace_Aasimar.yaml"
 
     class Subrace_Dragonborn(ChoiceReference):
+        loadLevel = 2
         stateFile = "data/character/dragonborn_ancestry.yaml"
 
     class Subrace_Dwarf(ChoiceReference):
+        loadLevel = 2
         stateFile = "data/character/state_Subrace_Dwarf.yaml"
 
     class Subrace_Elf(ChoiceReference):
+        loadLevel = 2
         stateFile = "data/character/state_Subrace_Elf.yaml"
 
     class Subrace_Halfling(ChoiceReference):
         stateFile = "data/character/state_Subrace_Halfling.yaml"
 
     class Subrace_Gnome(ChoiceReference):
+        loadLevel = 2
         stateFile = "data/character/state_Subrace_Gnome.yaml"
+
+    class HumanTraitToggle(ChoiceReference):
+        loadLevel = 2
+        stateFile = "data/character/state_HumanTrait.yaml"
+
+        def enterChecked(self):
+            getActiveStateTable().addChoice(StateTable.FeatChoice(getActiveState("Races").extra_ui.comboBox_feat))
+            getValue("anythingChanged").connect(getActiveState(StateTable.FeatChoice)) # cannot be handled by state, because target value is a ChoiceRef
+            self.score = getActiveMultiStateTable().addChoice(StateTable.Choice2AbilityScore(getActiveState("Races").extra_ui.comboBox_abilityScore,("strength","dexterity","constitution","wisdom","intelligence","charisma"),getModifier("Human_plus1")))
+
+        def exitChecked(self):
+            getValue("anythingChanged").disconnect(getActiveState(StateTable.FeatChoice))
+            getActiveMultiStateTable().removeChoice(StateTable.Choice2AbilityScore)
+            getActiveStateTable().removeChoice(StateTable.FeatChoice)
 
     class Races(ChoiceReference):
         stateFile = "data/character/state_Races.yaml"
@@ -110,11 +120,17 @@ class StateTable:
             try:
                 choice = getState("Subrace_"+state)
             except:return
-            self.subrace = choice(getUI("ComboBox_Subrace"))
+            getActiveStateTable().addChoice(choice(getUI("ComboBox_Subrace")))
+
         def exit(self,state):
-            if hasattr(self,"subrace"):
-                self.subrace.destroy()
-                del self.subrace
+            try:
+                subrace = getState("Subrace_"+state)
+            except:
+                return
+            try:
+                getActiveStateTable().removeChoice(subrace)
+            except NameError as e:print(e)
+
 
         def enterHuman(self):
             tabRoot = getUI("tabWidget_specialProperties")
@@ -122,81 +138,56 @@ class StateTable:
             self.extra_ui = Ui_Human()
             self.extra_ui.setupUi(self.tab_human)
             self.tab = tabRoot.addTab(self.tab_human, "Human")
-            self.extra_ui.checkBox_variantTraits.stateChanged.connect(self.altHumanTrait)
-            getModifier("Human_plus1").connect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")))
+            getActiveStateTable().addChoice(StateTable.HumanTraitToggle(self.extra_ui.checkBox_variantTraits))
 
         def exitHuman(self):
-            self.extra_ui.checkBox_variantTraits.setCheckState(False)
+            getActiveStateTable().removeChoice(StateTable.HumanTraitToggle)
             getUI("tabWidget_specialProperties").removeTab(self.tab)
             self.tab_human.setParent(None)
             del self.tab_human
             del self.extra_ui
             del self.tab
-            getModifier("Human_plus1").disconnect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")),True)
-            try:
-                getProficiencyTable().removeChoice(self.Human_SkillChoice)
-            except:pass
 
-        def altHumanTrait(self):
-            b = self.extra_ui.checkBox_variantTraits.checkState()
-            if b:
-                getModifier("Human_plus1").disconnect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")),True)
-                choice = ProficiencyChoice(1,("skills",),str(type(self))+"_altHumanTrait1_1_skills")
-                self.Human_SkillChoice = str(choice)
-                getProficiencyTable().addChoice(choice)
-                self.feat = StateTable.FeatChoice(self.extra_ui.comboBox_feat)
-                getValue("anythingChanged").connect(self.feat)
-                self.score = StateTable.Choice2AbilityScore(self.extra_ui.comboBox_abilityScore,("strength","dexterity","constitution","wisdom","intelligence","charisma"),getModifier("Human_plus1"))
-            else:
-                getModifier("Human_plus1").connect(getValues(("strength", "dexterity", "constitution", "intelligence","wisdom","charisma")))
-                try:
-                    getValue("anythingChanged").disconnect(self.feat)
-                except:pass
-                try:
-                    getProficiencyTable().removeChoice(self.Human_SkillChoice)
-                except BaseException as e:pass
-                self.score.destroy()
-                self.feat.destroy()
-                del self.score
-                del self.feat
         def enterHalf_Elf(self):
             tabRoot = getUI("tabWidget_specialProperties")
             self.tab_halfelf = QWidget()
             self.extra_ui = Ui_singleCheckableCombobox()
             self.extra_ui.setupUi(self.tab_halfelf)
             self.tab = tabRoot.addTab(self.tab_halfelf, "Half-Elf")
-            self.score = StateTable.Choice2AbilityScore(self.extra_ui.comboBox1,("strength","dexterity","constitution","wisdom","intelligence"),getModifier("HalfElf_plus1"))
+            getActiveMultiStateTable().addChoice(StateTable.Choice2AbilityScore(self.extra_ui.comboBox1,("strength","dexterity","constitution","wisdom","intelligence"),getModifier("HalfElf_plus1")))
         def exitHalf_Elf(self):
             getUI("tabWidget_specialProperties").removeTab(self.tab)
             self.tab_halfelf.setParent(None)
-            self.score.destroy()
-            del self.score
+            getActiveMultiStateTable().removeChoice(StateTable.Choice2AbilityScore)
 
     class PrimaryState(FiniteStateMachine):
         stateFile = "data/character/state_ValueTable.yaml"
 
-class ActiveChoiceTable(dict):
-    def __init__(self):
-        dict.__init__(self)
-        # always existing fsm
-        self.raceSelect = StateTable.Races(getUI("ComboBox_Race"))
-        self.classSelect = StateTable.Classes(getUI("ComboBox_Class"))
-        self.baseState = StateTable.PrimaryState()
-        self.baseState.initFSM()
-        self.baseState.request("On")
-        # acces via dict or argument, set only as dict
-        self.update(self.__dict__)
-        self.__dict__.clear()
-
-    def activateChoice(self,factory):
-        choice = factory()
+class _ChoiceTableBase(dict):
+    def addChoice(self,choice):
         name = type(choice).__name__
+        assert name not in self.keys()
         self[name] = choice
         return name
 
-    def desactivateChoice(self,type_):
+    def removeChoice(self,type_):
         self[type_.__name__].destroy()
         del self[type_.__name__]
 
     def __getattr__(self,name):
         return self[name]
+
+class ActiveChoiceTable(_ChoiceTableBase):
+    def __init__(self):
+        dict.__init__(self)
+        # always existing fsm
+        self.addChoice(StateTable.Races(getUI("ComboBox_Race")))
+        self.addChoice(StateTable.Classes(getUI("ComboBox_Class")))
+        self.addChoice(StateTable.PrimaryState())
+        self.PrimaryState.initFSM()
+        self.PrimaryState.request("On")
+        # acces via dict or argument, set only as dict
+        self.update(self.__dict__)
+        self.__dict__.clear()
+
+class ActiveMultiChoiceTable(_ChoiceTableBase):pass

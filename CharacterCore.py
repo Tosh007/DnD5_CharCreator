@@ -63,7 +63,8 @@ class DependentObject(QObject):
     def on_changed(self,*args,**kw):pass
 
     def destroy(self):
-        DependentObject.getWidgetSignal(self.widget).disconnect(self.changeSignal)
+        signal = DependentObject.getWidgetSignal(self.widget)
+        if signal:signal.disconnect(self.changeSignal)
         self.disconnect()
         DependentObject.all_obj.remove(self)
 
@@ -365,6 +366,9 @@ class ValueReference(DependentObject):
         else:
             maxValue=0
         return self.vconf.hide(v,vmod,maxValue)
+
+    #def destroy(self):     # just calls parent object yet, is that really everything? untested
+    #    DependentObject.destroy(self)
 
 class ValueConfig:
     @staticmethod

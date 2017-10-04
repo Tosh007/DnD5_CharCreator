@@ -51,9 +51,18 @@
 - Warlock_HP:
     lambda: "x+8"
     text: "Warlock: +8"
+- warlock_sorcerer_spellcasting_mod:
+    lambda: 'x+getValue("proficiencyBonus").get()+getValue("charismaMod").get()'
+    text: "warlock & sorcerer: prof bonus + charisma mod"
 - Wizard_HP:
     lambda: "x+6"
     text: "Wizard: {2:+d}"
+- Wizard_spellcasting_mod:
+    lambda: 'x+getValue("proficiencyBonus").get()+getValue("intelMod").get()'
+    text: "wizard: prof bonus + intel mod"
+- wizard_numPreparedSpells:
+    lambda: max(1, getValue("level").get()+getValue("intelMod").get())
+    text: "prof bonus + int mod (min 1)"
 - initiative:
     lambda: 'getValue("dextMod").get()'
     text: ""

@@ -76,11 +76,11 @@ class ConfigTable:
         def specialSetup(self,widget,v,vmod,mdesc,maxValue):
             try:
                 races = getProficiencyTable().whoSpeaksWhat[self.name]
-            except BaseException as e:
-                return
-            mdesc += "\nspoken by:"
-            for race in races:
-                mdesc += "\n"+race
+            except BaseException as e:pass#if we would return in any case, we kill tooltips for anything but languages
+            else:
+                mdesc += "\nspoken by:"
+                for race in races:
+                    mdesc += "\n"+race
             if mdesc != self.toolTipText:
                 self.toolTipText = mdesc
                 widget.widget.setToolTip(0,mdesc)   # note:  setToolTip(int,str) only for QTreeWidget!

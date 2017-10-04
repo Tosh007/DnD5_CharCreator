@@ -1,0 +1,12 @@
+Bloodline:
+    mod:
+        Sorcerer_proficient:
+            - prof_draconic
+    property:
+        - double prof bonus on interaction with dragons
+        - AC 13+dextMod while not wearing armor
+        - hitpoint max increases by 1 every levelup
+Wild Magic:
+    property:
+        - wild magic surge
+        - tides of chaos

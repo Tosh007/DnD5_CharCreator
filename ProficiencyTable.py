@@ -29,6 +29,15 @@ class ProficiencyTable:
             value = whoSpeaksWhat[key]
             key= key.replace(" ","_").lower()
             self.whoSpeaksWhat[key]=value
+        # special: spellcasting ability is shown in proficiency/magical ability category, so we need to define this here
+        ui = QtWidgets.QTreeWidgetItem()
+        getValue("prof_magical_ability").widget.addChild(ui)
+        getValueTable().newValue("spellSaveDC", ValueReference(ui, getConfig("AllowNone"),"spell save DC: {2}"))
+        ui = QtWidgets.QTreeWidgetItem()
+        getValue("prof_magical_ability").widget.addChild(ui)
+        getValueTable().newValue("spellAttackMod", ValueReference(ui, getConfig("AllowNone"),"spell attack mod: {2}"))
+        getValue("spellSaveDC").set(8)      # because this value is always based on 8 + class.mod
+        getValue("spellSaveDC").initial = 8
 
     def loadProficiency(self, data, parent=None, virtualParent=False):  # "virtual" parent => category only for ProfChoice
         # always a list as toplevel structure

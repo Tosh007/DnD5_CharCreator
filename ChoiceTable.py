@@ -2,12 +2,48 @@ from PyQt5.QtWidgets import *
 from acces import*
 from CharacterCore import *
 from menu_human import Ui_Human
+from menu_wizard import Ui_Wizard
+from menu_twoCombobox import Ui_twoCombobox
 from menu_singleCombobox import Ui_singleCombobox
 from menu_singleCheckableCombobox import Ui_singleCheckableCombobox
 
 class StateTable:
     class Classes(ChoiceReference):
         stateFile = "data/character/state_Classes.yaml"
+        def enterWizard(self):
+            tabRoot = getUI("tabWidget_specialProperties")
+            self.tab_wizard = QWidget()
+            self.extra_ui = Ui_Wizard()
+            self.extra_ui.setupUi(self.tab_wizard)
+            self.tab = tabRoot.addTab(self.tab_wizard, "wizard")
+            getValueTable().newValue("wizard_numPreparedSpells", ValueReference(self.extra_ui.label_numPreparedSpells, getConfig("AllowNone"), "You can prepare {2} spells at a time"))
+            getModifier("wizard_numPreparedSpells").connect(getValue("wizard_numPreparedSpells"))
+            getValue("intelMod").connect(getValue("wizard_numPreparedSpells"))
+
+        def exitWizard(self):
+            getUI("tabWidget_specialProperties").removeTab(self.tab)
+            self.tab_wizard.setParent(None)
+            del self.tab_wizard
+            del self.extra_ui
+            del self.tab
+            #getModifier("wizard_numPreparedSpells").disconnect(getValue("wizard_numPreparedSpells")) # nah, we delete the object anyway
+            getValueTable().destroyValue("wizard_numPreparedSpells")
+
+        def enterSorcerer(self):
+            tabRoot = getUI("tabWidget_specialProperties")
+            self.tab_sorcerer = QWidget()
+            self.extra_ui = Ui_twoCombobox()
+            self.extra_ui.setupUi(self.tab_sorcerer)
+            self.tab = tabRoot.addTab(self.tab_sorcerer, "sorcerer")
+            getActiveStateTable().addChoice(StateTable.SorcerousOrigin(self.extra_ui.comboBox1))
+
+        def exitSorcerer(self):
+            getActiveStateTable().removeChoice(StateTable.SorcerousOrigin)
+            getUI("tabWidget_specialProperties").removeTab(self.tab)
+            self.tab_sorcerer.setParent(None)
+            del self.tab_sorcerer
+            del self.extra_ui
+            del self.tab
 
     class Choice2AbilityScore(MultiChoiceReference):
         loadLevel = 4
@@ -59,6 +95,18 @@ class StateTable:
         def enterObservant(self):
             self._enterSubmenu("Observant", StateTable.IntelligenceOrWisdom1)
         exitObservant = _exitSubmenu
+
+    class SorcerousOrigin(ChoiceReference):
+        loadLevel = 2
+        stateFile = "data/character/state_sorcerousOrigin.yaml"
+        def enterBloodline(self):
+            getActiveStateTable().addChoice(StateTable.SorcerousOrigin_bloodline(getActiveState(StateTable.Classes).extra_ui.comboBox2))
+        def exitBloodline(self):
+            getActiveStateTable().removeChoice(StateTable.SorcerousOrigin_bloodline)
+
+    class SorcerousOrigin_bloodline(ChoiceReference):
+        loadLevel = 3
+        stateFile = "data/character/state_sorcerousOrigin_bloodline.yaml"
 
     class StrengthOrDex1(ChoiceReference):
         loadLevel = 4

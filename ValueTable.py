@@ -1,6 +1,7 @@
 from CharacterCore import *
 from acces import *
 import yaml
+
 class ValueTable:
     def __init__(self):
         f = open(getDirectoryPrefix()+"data/character/values.yaml")
@@ -28,9 +29,15 @@ class ValueTable:
             self._data[name].set(initial)
             self._data[name].lastValue = initial
             self._data[name].connect(self._data["anythingChanged"])
+
     def newValue(self,name,value):
         if name in self._data.keys():raise ValueError("value '"+name+"' exists")
         self._data[name] = value
+
+    def destroyValue(self,name):
+        self._data[name].destroy()
+        del self._data[name]
+
     def __getattr__(self, name):
         return self._data[name]
     def custom(self):

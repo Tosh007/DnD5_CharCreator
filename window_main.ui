@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1305</width>
-    <height>632</height>
+    <width>1318</width>
+    <height>660</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,8 +25,8 @@
      <rect>
       <x>10</x>
       <y>60</y>
-      <width>401</width>
-      <height>531</height>
+      <width>415</width>
+      <height>570</height>
      </rect>
     </property>
     <property name="acceptDrops">
@@ -186,7 +186,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>64</width>
+              <width>120</width>
               <height>0</height>
              </size>
             </property>
@@ -334,7 +334,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>64</width>
+              <width>120</width>
               <height>0</height>
              </size>
             </property>
@@ -371,40 +371,23 @@
          </layout>
         </item>
         <item>
-         <widget class="Line" name="line_4">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
+         <widget class="QCheckBox" name="checkBox_constitution_saving_throw">
+          <property name="mouseTracking">
+           <bool>false</bool>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="text">
+           <string>Saving Throws</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="tristate">
+           <bool>false</bool>
           </property>
          </widget>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <item alignment="Qt::AlignRight">
-           <widget class="QCheckBox" name="checkBox_constitution_saving_throw">
-            <property name="mouseTracking">
-             <bool>false</bool>
-            </property>
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="text">
-             <string>Saving Throws</string>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-            <property name="tristate">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
         </item>
        </layout>
       </widget>
@@ -430,7 +413,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>64</width>
+              <width>120</width>
               <height>0</height>
              </size>
             </property>
@@ -622,7 +605,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>64</width>
+              <width>120</width>
               <height>0</height>
              </size>
             </property>
@@ -808,7 +791,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>64</width>
+              <width>120</width>
               <height>0</height>
              </size>
             </property>
@@ -1249,7 +1232,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1305</width>
+     <width>1318</width>
      <height>20</height>
     </rect>
    </property>

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'menu_singleCombobox.ui'
 #
-# Created by: PyQt5 UI code generator 5.9
+# Created by: PyQt5 UI code generator 5.7
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -13,7 +13,7 @@ class Ui_singleCombobox(object):
         singleCombobox.setObjectName("singleCombobox")
         singleCombobox.resize(261, 151)
         self.comboBox1 = QtWidgets.QComboBox(singleCombobox)
-        self.comboBox1.setGeometry(QtCore.QRect(30, 60, 161, 22))
+        self.comboBox1.setGeometry(QtCore.QRect(20, 60, 221, 22))
         self.comboBox1.setObjectName("comboBox1")
         self.label = QtWidgets.QLabel(singleCombobox)
         self.label.setGeometry(QtCore.QRect(30, 30, 131, 16))

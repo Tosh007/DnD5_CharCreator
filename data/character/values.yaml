@@ -43,7 +43,7 @@
 - constMod:
     ui: Label_EchoConstMod
     config: constMod
-    format: "const (Mod: {2})"
+    format: "constitution (Mod: {2})"
 - intelMod:
     ui: Label_EchoIntelMod
     config: intelMod

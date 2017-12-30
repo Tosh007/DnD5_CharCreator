@@ -10,6 +10,12 @@ from menu_singleCheckableCombobox import Ui_singleCheckableCombobox
 class StateTable:
     class Classes(ChoiceReference):
         stateFile = "data/character/state_Classes.yaml"
+        def enterWarlock(self):
+            getActiveStateTable().addChoice(StateTable.WarlockPatron(getUI("ComboBox_Subclass")))
+
+        def exitWarlock(self):
+            getActiveStateTable().removeChoice(StateTable.WarlockPatron)
+                        
         def enterWizard(self):
             tabRoot = getUI("tabWidget_specialProperties")
             self.tab_wizard = QWidget()
@@ -32,10 +38,10 @@ class StateTable:
         def enterSorcerer(self):
             tabRoot = getUI("tabWidget_specialProperties")
             self.tab_sorcerer = QWidget()
-            self.extra_ui = Ui_twoCombobox()
+            self.extra_ui = Ui_singleCombobox()
             self.extra_ui.setupUi(self.tab_sorcerer)
             self.tab = tabRoot.addTab(self.tab_sorcerer, "sorcerer")
-            getActiveStateTable().addChoice(StateTable.SorcerousOrigin(self.extra_ui.comboBox1))
+            getActiveStateTable().addChoice(StateTable.SorcerousOrigin(getUI("ComboBox_Subclass")))
 
         def exitSorcerer(self):
             getActiveStateTable().removeChoice(StateTable.SorcerousOrigin)
@@ -44,6 +50,24 @@ class StateTable:
             del self.tab_sorcerer
             del self.extra_ui
             del self.tab
+
+
+    class WarlockPatron(ChoiceReference):
+        loadLevel = 4
+        stateFile = "data/character/state_warlockPatron.yaml"
+
+    class SorcerousOrigin(ChoiceReference):
+        loadLevel = 2
+        stateFile = "data/character/state_sorcerousOrigin.yaml"
+        def enterBloodline(self):
+            getActiveStateTable().addChoice(StateTable.SorcerousOrigin_bloodline(getActiveState(StateTable.Classes).extra_ui.comboBox1))
+        def exitBloodline(self):
+            getActiveStateTable().removeChoice(StateTable.SorcerousOrigin_bloodline)
+
+    class SorcerousOrigin_bloodline(ChoiceReference):
+        loadLevel = 3
+        stateFile = "data/character/state_sorcerousOrigin_bloodline.yaml"
+
 
     class Choice2AbilityScore(MultiChoiceReference):
         loadLevel = 4
@@ -95,18 +119,6 @@ class StateTable:
         def enterObservant(self):
             self._enterSubmenu("Observant", StateTable.IntelligenceOrWisdom1)
         exitObservant = _exitSubmenu
-
-    class SorcerousOrigin(ChoiceReference):
-        loadLevel = 2
-        stateFile = "data/character/state_sorcerousOrigin.yaml"
-        def enterBloodline(self):
-            getActiveStateTable().addChoice(StateTable.SorcerousOrigin_bloodline(getActiveState(StateTable.Classes).extra_ui.comboBox2))
-        def exitBloodline(self):
-            getActiveStateTable().removeChoice(StateTable.SorcerousOrigin_bloodline)
-
-    class SorcerousOrigin_bloodline(ChoiceReference):
-        loadLevel = 3
-        stateFile = "data/character/state_sorcerousOrigin_bloodline.yaml"
 
     class StrengthOrDex1(ChoiceReference):
         loadLevel = 4

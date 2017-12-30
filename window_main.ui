@@ -76,14 +76,14 @@
           <item>
            <widget class="QLabel" name="Label_EchoStrengthMod">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
             <property name="minimumSize">
              <size>
-              <width>64</width>
+              <width>150</width>
               <height>0</height>
              </size>
             </property>
@@ -94,6 +94,12 @@
           </item>
           <item>
            <widget class="QSpinBox" name="SpinBox_StrengthScore">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>80</width>
@@ -179,14 +185,14 @@
           <item>
            <widget class="QLabel" name="Label_EchoDextMod">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
             <property name="minimumSize">
              <size>
-              <width>120</width>
+              <width>150</width>
               <height>0</height>
              </size>
             </property>
@@ -197,6 +203,12 @@
           </item>
           <item>
            <widget class="QSpinBox" name="SpinBox_DextScore">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>80</width>
@@ -327,14 +339,14 @@
           <item>
            <widget class="QLabel" name="Label_EchoConstMod">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
             <property name="minimumSize">
              <size>
-              <width>120</width>
+              <width>150</width>
               <height>0</height>
              </size>
             </property>
@@ -371,23 +383,34 @@
          </layout>
         </item>
         <item>
-         <widget class="QCheckBox" name="checkBox_constitution_saving_throw">
-          <property name="mouseTracking">
-           <bool>false</bool>
-          </property>
-          <property name="focusPolicy">
-           <enum>Qt::NoFocus</enum>
-          </property>
-          <property name="text">
-           <string>Saving Throws</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <property name="tristate">
-           <bool>false</bool>
+         <widget class="Line" name="line_4">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
           </property>
          </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QCheckBox" name="checkBox_constitution_saving_throw">
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
+            <property name="text">
+             <string>Saving Throws</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="tristate">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -406,14 +429,14 @@
           <item>
            <widget class="QLabel" name="Label_EchoIntelMod">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
             <property name="minimumSize">
              <size>
-              <width>120</width>
+              <width>150</width>
               <height>0</height>
              </size>
             </property>
@@ -430,6 +453,12 @@
           </item>
           <item>
            <widget class="QSpinBox" name="SpinBox_IntelScore">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>80</width>
@@ -598,14 +627,14 @@
           <item>
            <widget class="QLabel" name="Label_EchoWisdomMod">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
             <property name="minimumSize">
              <size>
-              <width>120</width>
+              <width>150</width>
               <height>0</height>
              </size>
             </property>
@@ -616,6 +645,12 @@
           </item>
           <item>
            <widget class="QSpinBox" name="SpinBox_WisdomScore">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>80</width>
@@ -784,14 +819,14 @@
           <item>
            <widget class="QLabel" name="Label_EchoCharismaMod">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
             <property name="minimumSize">
              <size>
-              <width>120</width>
+              <width>150</width>
               <height>0</height>
              </size>
             </property>
@@ -802,6 +837,12 @@
           </item>
           <item>
            <widget class="QSpinBox" name="SpinBox_CharismaScore">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>80</width>
@@ -950,15 +991,18 @@
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>390</x>
-      <y>10</y>
-      <width>341</width>
-      <height>41</height>
+      <x>280</x>
+      <y>20</y>
+      <width>521</width>
+      <height>25</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_7">
      <item>
       <widget class="QComboBox" name="ComboBox_Class"/>
+     </item>
+     <item>
+      <widget class="QComboBox" name="ComboBox_Subclass"/>
      </item>
      <item>
       <widget class="QComboBox" name="ComboBox_Race"/>
@@ -974,7 +1018,7 @@
       <x>110</x>
       <y>20</y>
       <width>161</width>
-      <height>16</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
@@ -987,7 +1031,7 @@
       <x>10</x>
       <y>20</y>
       <width>81</width>
-      <height>16</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">

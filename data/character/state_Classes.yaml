@@ -188,10 +188,7 @@ Warlock:
             n: 2
             profs:
                 - warlock_cantrips
-        - c:
-            n: 2
-            profs:
-                - warlock_spells_lvl1
+
 Wizard:
     mod:
         Wizard_HP:

@@ -1,0 +1,26 @@
+The Archfey:
+    ProfChoice:
+        - c:
+            n: 2
+            profs:
+                - warlock_spells_lvl1
+                - faerie_fire
+                - sleep
+The Fiend:
+    ProfChoice:
+        - c:
+            n: 2
+            profs:
+                - warlock_spells_lvl1
+                - burning_hands
+                - command
+The Great old One:
+    ProfChoice:
+        - c:
+            n: 2
+            profs:
+                - warlock_spells_lvl1
+                - dissonant_whispers
+                - tashas_hideous_laughter
+            
+

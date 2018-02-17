@@ -19,9 +19,8 @@
         constitution: constMod
         dexterity: dextMod
         intelligence: intelMod
-        wisdom: wisdomMod
+        wisdom: [wisdomMod, perception]
         charisma: charismaMod
         constMod: maxHP
         dextMod: initiative
-        wisdom: perception
         prof_perception: perception

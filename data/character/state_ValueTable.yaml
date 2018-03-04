@@ -14,6 +14,21 @@
             - perception
         perception_proficient:
             - perception
+        strengthMod:
+            - strengthMod
+        dextMod:
+            - dextMod
+        constMod:
+            - constMod
+        intelMod:
+            - intelMod
+        wisdomMod:
+            - wisdomMod
+        charismaMod:
+            - charismaMod
+        maxHitpoints:
+            - maxHP
+
     depend:
         strength: strengthMod
         constitution: constMod

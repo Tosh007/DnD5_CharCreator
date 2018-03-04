@@ -68,6 +68,50 @@
     text: ""
     order: -1
 
+- strengthMod:
+    lambda: '(getValue("strength").get()//2)-5'
+    text: "based of strength score"
+    order: -1
+    dependsOn:
+        strength
+- dextMod:
+    lambda: '(getValue("dexterity").get()//2)-5'
+    text: "based of dexterity score"
+    order: -1
+    dependsOn:
+        dexterity
+- constMod:
+    lambda: '(getValue("constitution").get()//2)-5'
+    text: "based of constitution score"
+    order: -1
+    dependsOn:
+        constitution
+- intelMod:
+    lambda: '(getValue("intelligence").get()//2)-5'
+    text: "based of intelligence score"
+    order: -1
+    dependsOn:
+        intelligence
+- wisdomMod:
+    lambda: '(getValue("wisdom").get()//2)-5'
+    text: "based of wisdom score"
+    order: -1
+    dependsOn:
+        wisdom
+- charismaMod:
+    lambda: '(getValue("charisma").get()//2)-5'
+    text: "based of charisma score"
+    order: -1
+    dependsOn:
+        charisma
+
+- maxHitpoints:
+    lambda: 'getValue("constMod").get()'
+    order: -1
+    text: "based on constitution mod"
+    dependsOn:
+        constMod
+
 - perception_wisdom:
     text: "wis mod + 10"
     lambda: 'x+getValue("wisdomMod").get()+10'

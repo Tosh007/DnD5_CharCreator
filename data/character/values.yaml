@@ -34,27 +34,21 @@
 # ability modifiers
 - strengthMod:
     ui: Label_EchoStrengthMod
-    config: strengthMod
     format: "Strength (Mod: {2})"
 - dextMod:
     ui: Label_EchoDextMod
-    config: dextMod
     format: "dexterity (Mod: {2})"
 - constMod:
     ui: Label_EchoConstMod
-    config: constMod
     format: "constitution (Mod: {2})"
 - intelMod:
     ui: Label_EchoIntelMod
-    config: intelMod
     format: "intelligence (Mod: {2})"
 - wisdomMod:
     ui: Label_EchoWisdomMod
-    config: wisdomMod
     format: "wisdom (Mod: {2})"
 - charismaMod:
     ui: Label_EchoCharismaMod
-    config: charismaMod
     format: "charisma (Mod: {2})"
 # other scores
 - speed:
@@ -74,6 +68,5 @@
     format: "Perception: {2}"
 - maxHP:
     ui: Label_MaxHP
-    config: MaxHPConfig
     format: "Hit Point Maximum: {2}"
     initial: 0

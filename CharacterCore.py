@@ -5,6 +5,7 @@ import os
 from acces import *
 from checkableCombobox import CheckableComboBox
 import yaml
+
 def getDirectoryPrefix():
     if os.path.exists("./data"):
         return ""
@@ -112,7 +113,6 @@ class FiniteStateMachine:
         self.currentState = ""
 
     def request(self,state):
-        #assert state in self._states# we want a key error
         if self.currentState is None:
             raise self.AlreadyInTransition(str(type(self)))
         self._exitState()
@@ -210,7 +210,7 @@ class ValueReference(DependentObject):
         elif isinstance(widget, QtWidgets.QListWidgetItem) or isinstance(widget,QtWidgets.QTreeWidgetItem):
             self._get = 0
             self._set = (self.widget.setText if isinstance(widget, QtWidgets.QListWidgetItem) else lambda text:self.widget.setText(0,text))
-            if valueconfig.forceCheckbox:
+            if self.vconf.forceCheckbox:
                 if isinstance(widget, QtWidgets.QListWidgetItem):
                     widget = widget.listWidget()
                 else:
@@ -232,20 +232,6 @@ class ValueReference(DependentObject):
             raise TypeError("unsupported widget "+str(type(widget)))
         if self.vconf.VisualUpdateSignal:
             getValue(self.vconf.VisualUpdateSignal).changeSignal.connect(self.on_visual_update)
-
-    def __iadd__(self,other):
-        assert type(other) is int
-        if other==0:return self
-        self.set(self.get(True)+other)
-        #self.changeSignal.emit()
-        return self
-
-    def __isub__(self,other):
-        assert type(other) is int
-        if other==0:return self
-        self.set(self.get(True)-other)
-        #self.changeSignal.emit()
-        return self
 
     def set(self, value, setLastValue=True):
         v, mstring = self.applyMods(value, True)
@@ -285,18 +271,12 @@ class ValueReference(DependentObject):
         # always called when value is changed by gui, or another value changed that may cause this to change
         # uses ValueConfig to verify such a value is possible,
         # and either updates the fallback value, or resets to fallback
-        # exception: if valueconfig.getMaxValue the value is just set to the highest possible value.
-        if self.vconf.alwaysMax:
-            maxv = self.vconf.getMaxValue(self.lastValue)
-            self.set(maxv)
-            return
         value = self.get(True)
         if self.vconf.forceCheckbox:
             try:
                 checkState = self.widget.checkState()
             except TypeError:
                 checkState = self.widget.checkState(0)
-            # maybe a bug here?! not sure, possibly fixed
             if self.get()==self.get(True) and checkState == Qt.Checked:
                 value=1
             else:
@@ -343,7 +323,6 @@ class ValueReference(DependentObject):
             except TypeError:
                 self.widget.setCheckState(0,b)
         try:
-
             if self.widget:
                 self.widget.setHidden(self.vconf.hide(v,vmod,maxValue))
                 if self.vconf.setToolTip:
@@ -354,7 +333,6 @@ class ValueReference(DependentObject):
             self.vconf.specialSetup(self, v, vmod, mdesc, maxValue)
             if self._blockSignals:
                 self._blockSignals(False)
-
         except TypeError as e:
             raise e
 
@@ -367,15 +345,12 @@ class ValueReference(DependentObject):
             maxValue=0
         return self.vconf.hide(v,vmod,maxValue)
 
-    #def destroy(self):     # just calls parent object yet, is that really everything? untested
-    #    DependentObject.destroy(self)
 
 class ValueConfig:
     @staticmethod
     def checkRequirements(value, oldvalue):
         return oldvalue
     getMaxValue = None
-    alwaysMax = False
     forceCheckbox = False
     VisualUpdateSignal = None
     setToolTip = True
@@ -390,7 +365,6 @@ class ValueConfig_allow(ValueConfig):
 
 
 class ValueModifier:
-    # now using linear id counter upon instance creation for dict identification
     _ID = 0
     def __init__(self,mod,text,order=0):
         self.mod = mod
@@ -472,8 +446,6 @@ class ChoiceReference(FiniteStateMachine, DependentObject):
                 enabled = self._states[state]["prerequisite"]()
                 index = self.widget.findText(state)
                 self.widget.model().item(index).setEnabled(enabled)
-            #if item=="None":
-            #    self.request("Off")
             if item == self.currentState:
                 if not self._states[item]["prerequisite"]():
                     self.widget.setCurrentIndex(0)
@@ -486,10 +458,9 @@ class ChoiceReference(FiniteStateMachine, DependentObject):
     def destroy(self):
         self.request("Off")
         DependentObject.destroy(self)
-        #self.widget.disconnect()
-        #self.changeSignal.disconnect()
         if isinstance(self.widget,QtWidgets.QComboBox):
             self.widget.clear()
+
 
 class MultiChoiceReference(DependentObject):
         loadLevel = 0                           # because does not inherit from FSM
@@ -532,10 +503,6 @@ class ProficiencyChoice:
         self.profs = {p:0 for p in profs_}   # lastValue associated with this choice element
 
     def __str__(self):
-        #s = "prof_" + str(self.maxN)
-        #for i in sorted(self.profs.keys(), key=str.lower):
-        #    s += "_"+i
-        #return s
         return self.name
 
     def serialize(self):

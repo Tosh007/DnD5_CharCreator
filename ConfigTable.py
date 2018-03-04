@@ -118,26 +118,3 @@ class ConfigTable:
             #assert (value>=8)
             if (value>15):return 100
             return (0,1,2,3,4,5,7,9)[value-8]
-
-    class AbilityModConfig(ValueConfig):
-        def __init__(self, score):
-            self.score = score
-
-        def getMaxValue(self,lastValue):
-            score = getValues(self.score)[0]
-            return (score.get()//2)-5
-        hide = lambda self,v,vmod,maxV:False
-        specialSetup = lambda self,widget,v,vmod,mdesc,maxValue: None
-        alwaysMax = True
-
-    strengthMod = AbilityModConfig("strength")
-    dextMod = AbilityModConfig("dexterity")
-    constMod = AbilityModConfig("constitution")
-    intelMod = AbilityModConfig("intelligence")
-    wisdomMod = AbilityModConfig("wisdom")
-    charismaMod = AbilityModConfig("charisma")
-
-    class MaxHPConfig(ValueConfig):
-        alwaysMax = True
-        def getMaxValue(lastValue):
-            return getValue("constMod").get()

@@ -134,10 +134,6 @@ Sorcerer:
         warlock_sorcerer_spellcasting_mod:
             - spellSaveDC
             - spellAttackMod
-    depend:
-        charismaMod:
-            - spellSaveDC
-            - spellAttackMod
     ProfChoice:
         - a:
             n: 2
@@ -167,10 +163,6 @@ Warlock:
             - prof_charisma_saving_throw
             - prof_spellcasting
         warlock_sorcerer_spellcasting_mod:
-            - spellSaveDC
-            - spellAttackMod
-    depend:
-        charismaMod:
             - spellSaveDC
             - spellAttackMod
     ProfChoice:
@@ -205,10 +197,6 @@ Wizard:
         Wizard_spellcasting_mod:
             - spellAttackMod
             - spellSaveDC
-    depend:
-        intelMod:
-            - spellSaveDC
-            - spellAttackMod
     property:
         - arcane recovery
         - spellbook user

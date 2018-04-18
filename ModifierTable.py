@@ -15,6 +15,7 @@ class ModifierTable:
             l = lambda x:x
             text = "default modifier text"
             order = 0
+            dependsOn = ()
             for key in meta:
                 if key=="lambda":
                     l = "lambda x:"+meta[key]
@@ -23,7 +24,9 @@ class ModifierTable:
                     order = meta[key]
                 if key=="text":
                     text = meta[key]
-            self.newModifier(name, ValueModifier(l, text, order))
+                if key=="dependsOn":
+                    dependsOn = meta[key]
+            self.newModifier(name, ValueModifier(l, text, order, dependsOn))
         for auto in (AutoModRace,AutoModClass):
             c = auto()
             self.autoModInit(c)

@@ -28,14 +28,3 @@
             - charismaMod
         maxHitpoints:
             - maxHP
-
-    depend:
-        strength: strengthMod
-        constitution: constMod
-        dexterity: dextMod
-        intelligence: intelMod
-        wisdom: [wisdomMod, perception]
-        charisma: charismaMod
-        constMod: maxHP
-        dextMod: initiative
-        prof_perception: perception

@@ -5,6 +5,7 @@ import os
 from acces import *
 from checkableCombobox import CheckableComboBox
 import yaml
+import networkx
 
 def getDirectoryPrefix():
     if os.path.exists("./data"):
@@ -158,6 +159,7 @@ class FiniteStateMachine:
                     mod = getModifier(mod)
                     mod.connect(targets)
             elif key=="depend":
+                print("warning: usage of 'depend' is deprecated, use with causion (stateMachine:{0})".format(self.stateFile))
                 dependants = self._states[state][key]
                 for name in dependants:
                     dep = getValues(name)[0]
@@ -366,31 +368,41 @@ class ValueConfig_allow(ValueConfig):
 
 class ValueModifier:
     _ID = 0
-    def __init__(self,mod,text,order=0):
+    def __init__(self,mod,text,order=0,dependsOn=()):
         self.mod = mod
         self.text = text
         self.order = order
         self.ID = self._ID
+        self.dependsOn = dependsOn
         ValueModifier._ID+=1
+
+    def _connect(self, valueref, connect):
+        if connect:
+            valueref.modifiers.append(self)
+            values = getValues(self.dependsOn)
+            for value in values:
+                value.connect(valueref)
+        else:
+            valueref.modifiers.remove(self)
+            values = getValues(self.dependsOn)
+            for value in values:
+                value.disconnect(valueref)
+        valueref.changeSignal.emit()
 
     def connect(self, valueref):
         try:
             for ref in valueref:
-                ref.modifiers.append(self)
-                ref.changeSignal.emit()
+                self._connect(ref, True)
         except TypeError:
-            valueref.modifiers.append(self)
-            valueref.changeSignal.emit()
+            self._connect(valueref, True)
 
     def disconnect(self, valueref, try_=False):
         try:
             try:
                 for ref in valueref:
-                        ref.modifiers.remove(self)
-                        ref.changeSignal.emit()
+                    self._connect(ref,False)
             except TypeError:
-                valueref.modifiers.remove(self)
-                valueref.changeSignal.emit()
+                self._connect(ref,False)
         except ValueError as e:
             if not try_:
                 raise ValueError from e
@@ -550,6 +562,3 @@ class ProficiencyChoice:
 
     def getUsedPoints(self):
         return sum(self.profs.values())
-
-class BaseMenu:
-    typename = "BaseMenu"

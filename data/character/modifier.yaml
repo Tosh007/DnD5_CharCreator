@@ -54,19 +54,30 @@
 - warlock_sorcerer_spellcasting_mod:
     lambda: 'x+getValue("proficiencyBonus").get()+getValue("charismaMod").get()'
     text: "warlock & sorcerer: prof bonus + charisma mod"
+    dependsOn:
+        - proficiencyBonus
+        - charismaMod
 - Wizard_HP:
     lambda: "x+6"
     text: "Wizard: {2:+d}"
 - Wizard_spellcasting_mod:
     lambda: 'x+getValue("proficiencyBonus").get()+getValue("intelMod").get()'
     text: "wizard: prof bonus + intel mod"
+    dependsOn:
+        - proficiencyBonus
+        - intelMod
 - wizard_numPreparedSpells:
     lambda: max(1, getValue("level").get()+getValue("intelMod").get())
     text: "prof bonus + int mod (min 1)"
+    dependsOn:
+        - level
+        - intelMod
 - initiative:
     lambda: 'getValue("dextMod").get()'
     text: ""
     order: -1
+    dependsOn:
+        - dextMod
 
 - strengthMod:
     lambda: '(getValue("strength").get()//2)-5'
@@ -116,9 +127,14 @@
     text: "wis mod + 10"
     lambda: 'x+getValue("wisdomMod").get()+10'
     order: -1
+    dependsOn:
+        - wisdomMod
 - perception_proficient:
     text: "+ prof bonus"
     lambda: 'x+(getValue("proficiencyBonus").get() if getValue("prof_perception").get() else 0)'
+    dependsOn:
+        - proficiencyBonus
+        - prof_perception
 - plus1:
     text: "+1"
     lambda: "x+1"
@@ -145,6 +161,8 @@
 - Tough:
     text: "Tough: +2*level ({2})"
     lambda: "x+2*getValue('level').get()"
+    dependsOn:
+        - level
 - Observant_plus5:
     text: "Observant: +5"
     lambda: "x+5"

@@ -86,10 +86,6 @@ Half-Elf:
             profs:
                 - standart_languages
                 - exotic_languages
-        - b:
-            n: 2
-            profs:
-                - skills
     property:
         - Darkvision
         - Fey Ancestry
@@ -326,3 +322,31 @@ Genasi:
             - constitution
         Genasi_proficient:
             - prof_primordial
+Tortle:
+    mod:
+        Tortle_plus2:
+            - strength
+        Tortle_plus1:
+            - wisdom
+        Tortle_proficient:
+            - prof_survival
+            - prof_aquan
+    property:
+        - Claws
+        - Hold Breath
+        - Natural Armor
+Grung:
+    mod:
+        Grung_plus2:
+            - dexterity
+        Grung_plus1:
+            - constitution
+        Grung_proficient:
+            - prof_perception
+            - prof_grung
+    property:
+        - Amphibious
+        - Poison Immunity
+        - Poisonous Skin
+        - Standing Leap
+        - Water Dependancy

@@ -122,7 +122,7 @@ class ProficiencyTable:
             self._createPropagateModifier(parent).connect(valueref)
             pv = getValue("prof_"+parent)
             pv.connect(valueref)
-            valueref.changeSignal.connect(pv.on_visual_update)
+            valueref.changeSignal.connect(Signal(pv.on_visual_update))
         return sname
 
     def _createPropagateModifier(self,parentLearn):

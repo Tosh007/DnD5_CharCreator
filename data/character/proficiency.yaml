@@ -1,23 +1,28 @@
 # proficiency table
 - skills:
-    - athletics.SKIL.
-    - acrobatics.SKIL.
-    - sleight of hand.SKIL.
-    - stealth.SKIL.
-    - arcana.SKIL.
-    - history.SKIL.
-    - investigation.SKIL.
-    - nature.SKIL.
-    - religion.SKIL.
-    - animal handling.SKIL.
-    - insight.SKIL.
-    - medicine.SKIL.
-    - perception.SKIL.
-    - survival.SKIL.
-    - deception.SKIL.
-    - performance.SKIL.
-    - persuation.SKIL.
-    - intimidation.SKIL.
+    - strength skills:
+        - athletics.SKIL.
+    - dexterity skills:
+        - acrobatics.SKIL.
+        - sleight of hand.SKIL.
+        - stealth.SKIL.
+    - intelligence skills:
+        - arcana.SKIL.
+        - history.SKIL.
+        - investigation.SKIL.
+        - nature.SKIL.
+        - religion.SKIL.
+    - wisdom skills:
+        - animal handling.SKIL.
+        - insight.SKIL.
+        - medicine.SKIL.
+        - perception.SKIL.
+        - survival.SKIL.
+    - charisma skills:
+        - deception.SKIL.
+        - performance.SKIL.
+        - persuation.SKIL.
+        - intimidation.SKIL.
 - saving throws:
     - strength saving throw.SKIL.
     - dexterity saving throw.SKIL.
@@ -31,6 +36,10 @@
         - medium armor
         - heavy armor
     - shields
+- vehicles:
+    - land vehicles
+    - water vehicles
+    - air vehicles
 - weapons:
     - martial weapons:
         - martial melee weapons:
@@ -106,12 +115,18 @@
     - weaver tools
     - woodcarve tools
     - smith tools
+    - navigator tools
 - other tools:
     - thief tools
     - herbalism kit
+    - disguise_kit
+- gaming set:
+    - dice set
+    - card set
+    - chess set
+    - three dragon ante set
 - magical ability:
     - spellcasting
-
 - languages.LANG.:
     - standart languages:
         - common!
@@ -158,3 +173,4 @@
         - worg
         - druidic
         - goblin
+        - grung

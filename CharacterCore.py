@@ -5,7 +5,7 @@ import os
 from acces import *
 from checkableCombobox import CheckableComboBox
 import yaml
-import networkx
+from copy import copy
 
 def getDirectoryPrefix():
     if os.path.exists("./data"):
@@ -13,8 +13,58 @@ def getDirectoryPrefix():
     else:
         return "program/"
 
+class Signal:
+    class Dead(Exception):pass
+    signal_table = []
+    def __init__(self, handler=lambda *x,**kw:None):
+        Signal.signal_table.append(self)
+        self.SignalId = len(Signal.signal_table)-1
+        self._listeners = []
+        self.handler = handler
+        self.dead=False
+
+    def __call__(self,*args,**kw):
+        self.emit()
+
+    def connect(self, other):
+        assert isinstance(other, Signal)
+        self._listeners.append(other)
+
+    def disconnect(self,other=None):
+        if other:
+            assert isinstance(other, Signal)
+            self._listeners.remove(other)
+        else:
+            self._listeners=[] # disconnect from everything, disables all listeners
+
+    def emit(self):
+        if not Signal.blocked:
+            l=[]
+            self._createCallList(l)
+            for i in l:
+                i.handler()
+
+    def _createCallList(self, l):
+        if self.dead:raise Signal.Dead
+        try:
+            l.remove(self)
+        except ValueError:pass
+        l.append(self)
+        for i in copy(self._listeners):
+            try:
+                i._createCallList(l)
+            except Signal.Dead:
+                self._listeners.remove(i)   # because we cannot efficiently remove dead signals, we remove them when they are encountered.
+
+    def destroy(self):
+        self.dead=True
+        self.signal_table.remove(self)
+
+    @staticmethod
+    def blockSignals(block):
+        Signal.blocked = block
+
 class DependentObject(QObject):
-    changeSignal = pyqtSignal()
     globalBlock = False
     all_obj = []
     @staticmethod
@@ -40,9 +90,9 @@ class DependentObject(QObject):
         super().__init__()
         self.widget = widget
         s = DependentObject.getWidgetSignal(widget)
+        self.changeSignal = Signal(self.on_changed)
         if s:
             s.connect(self.changeSignal)
-        self.changeSignal.connect(self.on_changed)
         DependentObject.all_obj.append(self)
 
     def connect(self, objects):
@@ -68,22 +118,14 @@ class DependentObject(QObject):
         signal = DependentObject.getWidgetSignal(self.widget)
         if signal:signal.disconnect(self.changeSignal)
         self.disconnect()
+        self.changeSignal.destroy()
         DependentObject.all_obj.remove(self)
 
     @staticmethod
-    def blockSignalsGlobal(v):
-        DependentObject.globalBlock = v
-        for obj in DependentObject.all_obj:
-            obj.blockSignals(v)
-
-    @staticmethod
     def flushChanges():
-        block = DependentObject.globalBlock
-        DependentObject.blockSignalsGlobal(True)
         for obj in DependentObject.all_obj:
             if isinstance(obj,ValueReference):
                 obj.on_changed()
-        DependentObject.blockSignalsGlobal(block)
 
     @staticmethod
     def flushChangesVisual():
@@ -233,7 +275,7 @@ class ValueReference(DependentObject):
         else:
             raise TypeError("unsupported widget "+str(type(widget)))
         if self.vconf.VisualUpdateSignal:
-            getValue(self.vconf.VisualUpdateSignal).changeSignal.connect(self.on_visual_update)
+            getValue(self.vconf.VisualUpdateSignal).changeSignal.connect(Signal(self.on_visual_update))
 
     def set(self, value, setLastValue=True):
         v, mstring = self.applyMods(value, True)
@@ -387,6 +429,7 @@ class ValueModifier:
             values = getValues(self.dependsOn)
             for value in values:
                 value.disconnect(valueref)
+        if type(valueref) is not ValueReference:print(valueref)
         valueref.changeSignal.emit()
 
     def connect(self, valueref):

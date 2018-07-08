@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'window_main.ui'
 #
-# Created by: PyQt5 UI code generator 5.7
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,7 +12,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
-        MainWindow.resize(1318, 660)
+        MainWindow.resize(1318, 792)
         MainWindow.setAutoFillBackground(False)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -21,9 +21,6 @@ class Ui_MainWindow(object):
         self.Label_CharLevel = QtWidgets.QLabel(self.centralwidget)
         self.Label_CharLevel.setObjectName("Label_CharLevel")
         self.gridLayout.addWidget(self.Label_CharLevel, 0, 0, 1, 1)
-        self.Label_ProficiencyBonus = QtWidgets.QLabel(self.centralwidget)
-        self.Label_ProficiencyBonus.setObjectName("Label_ProficiencyBonus")
-        self.gridLayout.addWidget(self.Label_ProficiencyBonus, 0, 1, 1, 1)
         self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_7.setObjectName("horizontalLayout_7")
         self.ComboBox_Class = QtWidgets.QComboBox(self.centralwidget)
@@ -44,6 +41,9 @@ class Ui_MainWindow(object):
         self.ComboBox_Subrace = QtWidgets.QComboBox(self.centralwidget)
         self.ComboBox_Subrace.setObjectName("ComboBox_Subrace")
         self.horizontalLayout_7.addWidget(self.ComboBox_Subrace)
+        self.ComboBox_Background = QtWidgets.QComboBox(self.centralwidget)
+        self.ComboBox_Background.setObjectName("ComboBox_Background")
+        self.horizontalLayout_7.addWidget(self.ComboBox_Background)
         self.gridLayout.addLayout(self.horizontalLayout_7, 0, 2, 1, 2)
         self.horizontalLayout_8 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_8.setSpacing(12)
@@ -555,9 +555,12 @@ class Ui_MainWindow(object):
         self.label_2.setObjectName("label_2")
         self.gridLayout_2.addWidget(self.label_2, 0, 2, 1, 1)
         self.gridLayout.addLayout(self.gridLayout_2, 3, 3, 1, 1)
+        self.Label_ProficiencyBonus = QtWidgets.QLabel(self.centralwidget)
+        self.Label_ProficiencyBonus.setObjectName("Label_ProficiencyBonus")
+        self.gridLayout.addWidget(self.Label_ProficiencyBonus, 1, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1318, 20))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1318, 25))
         self.menubar.setObjectName("menubar")
         self.menuDatei = QtWidgets.QMenu(self.menubar)
         self.menuDatei.setObjectName("menuDatei")
@@ -586,7 +589,6 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.Label_CharLevel.setText(_translate("MainWindow", "Level"))
-        self.Label_ProficiencyBonus.setText(_translate("MainWindow", "Proficiency Bonus"))
         self.Label_Initiative.setText(_translate("MainWindow", "Initiative"))
         self.Label_Speed.setText(_translate("MainWindow", "Speed"))
         self.Label_MaxHP.setText(_translate("MainWindow", "Max. Hit Point"))
@@ -631,6 +633,7 @@ class Ui_MainWindow(object):
         self.label_6.setText(_translate("MainWindow", "Cantrips and Spells"))
         self.label_5.setText(_translate("MainWindow", "Proficiencies"))
         self.label_2.setText(_translate("MainWindow", "Features & Traits"))
+        self.Label_ProficiencyBonus.setText(_translate("MainWindow", "Proficiency Bonus"))
         self.menuDatei.setTitle(_translate("MainWindow", "Datei"))
         self.action_new.setText(_translate("MainWindow", "Neu"))
         self.action_new.setToolTip(_translate("MainWindow", "Neuen Char erstellen"))

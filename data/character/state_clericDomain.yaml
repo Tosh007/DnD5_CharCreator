@@ -1,0 +1,96 @@
+Death Domain:
+    mod:
+        Cleric_proficient:
+            - prof_martial_weapons
+            - prof_false_life
+            - prof_ray_of_sickness
+    property:
+        - Reaper (todo)
+Forge Domain:
+    mod:
+        Cleric_proficient:
+            - prof_identify
+            - prof_searing_smite
+            - prof_heavy_armor
+            - prof_smith_tools
+    property:
+        - Blessing of the Forge
+Grave Domain:
+    mod:
+        Cleric_proficient:
+            - prof_false_life
+            - prof_bane
+    property:
+        - Circle of Mortality
+        - Eyes of the Grave
+Knowledge Domain:
+    mod:
+        Cleric_proficient:
+            - prof_command
+            - prof_identify
+    property:
+        - Blessing of knowledge
+    ProfChoice:
+        - a:
+            n: 2
+            profs:
+                - languages
+        - b:
+            n: 2
+            profs:
+                - intelligence_skills
+Life Domain:
+    mod:
+        Cleric_proficient:
+            - prof_bless
+            - prof_cure_wounds
+            - prof_heavy_armor
+    property:
+        - Disciple of Life
+Light Domain:
+    mod:
+        Cleric_proficient:
+            - prof_burning_hands
+            - prof_faerie_fire
+            - prof_light
+    property:
+        - Warding Flare
+Nature Domain:
+    mod:
+        Cleric_proficient:
+            - prof_animal_friendship
+            - prof_speak_with_animals
+            - prof_heavy_armor
+    property:
+        - Acolyte of Nature (To Do)
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - animal_handling
+                - nature
+                - survival
+Tempest Domain:
+    mod:
+        Cleric_proficient:
+            - prof_fog_cloud
+            - prof_thunderwave
+            - prof_martial_weapons
+    property:
+        - Wrath of the Storm
+Trickery Domain:
+    mod:
+        Cleric_proficient:
+            - prof_charm_person
+            - prof_disguise_self
+    property:
+        - Blessing of the Trickster
+War Domain:
+    mod:
+        Cleric_proficient:
+            - prof_divine_favor
+            - prof_shield_of_faith
+            - prof_martial_weapons
+            - prof_heavy_armor
+    property:
+        - War Priest

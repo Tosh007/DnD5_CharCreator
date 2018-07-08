@@ -1,0 +1,421 @@
+Acolyte:
+    mod:
+        Acolyte_proficient:
+            - prof_insight
+            - prof_religion
+    ProfChoice:
+        - a:
+            n: 2
+            profs:
+                - standart_languages
+                - exotic_languages
+    property:
+        - Shelter of the Faithful
+Haunted One:
+    ProfChoice:
+        - a:
+            n: 2
+            profs:
+                - arcana
+                - investigation
+                - religion
+                - survival
+        - b:
+            n: 1
+            profs:
+                - exotic_languages
+    property:
+        - Heart of the Darkness
+Anthropologist:
+    mod:
+        Anthropologist_proficient:
+            - prof_insight
+            - prof_religion
+    ProfChoice:
+        - a:
+            n: 2
+            profs:
+                - languages
+    property:
+        - Cultural Chameleon
+Archeologist:
+    mod:
+        plus1:
+            - prof_history
+            - prof_survival
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - cartographer_tools
+                - navigator_tools
+        - b:
+            n: 1
+            profs:
+                - languages
+    property:
+        - historical knowledge
+City Watch:
+    mod:
+        CityWatch_proficient:
+            - prof_athletics
+            - prof_insight
+    ProfChoice:
+        - a:
+            n: 2
+            profs:
+                - languages
+    property:
+        - "Watcher's Eye"
+Clan Crafter:
+    mod:
+        ClanCrafter_proficient:
+            - prof_history
+            - prof_insight
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - artisans_tools
+    property:
+        - respect of the stout folk
+        - gains proficiency in dwarvish
+        - if already proficient,
+        - can choose another language
+Cloistered Sholar:
+    mod:
+        Sholar_proficient:
+            - prof_history
+    ProfChoice:
+        - a:
+            n: 2
+            profs:
+                - arcana
+                - nature
+                - religion
+        - b:
+            n: 2
+            profs:
+                - languages
+    property:
+        - library access
+Courtier:
+    mod:
+        Courtier_proficient:
+            - prof_insight
+            - prof_persuation
+    ProfChoice:
+        - a:
+            n: 2
+            profs:
+                - languages
+    property:
+        - court functionary
+Faction Agent:
+    mod:
+        FactionAgent_proficient:
+            - prof_insight
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - intelligence_skills
+                - wisdom_skills
+                - charisma_skills
+        - b:
+            n: 2
+            profs:
+                - languages
+    property:
+        - Safe Haven
+Far Traveler:
+    mod:
+        Far Traveler_proficient:
+            - prof_insight
+            - prof_perception
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - musical_instrument
+                - gaming_set
+    property:
+        - all eyes on you
+Inheritor:
+    mod:
+        Inheritor_proficient:
+          - prof_survival
+    ProfChoice:
+        - a:
+            n: 2
+            profs:
+                - arcana
+                - history
+                - religion
+        - b:
+            n: 1
+            profs:
+                - gaming_set
+                - musical_instrument
+        - c:
+            n: 1
+            profs:
+                - languages
+    property:
+        - inheritance
+Knight of the Order:
+    mod:
+        Knight of the Order_proficient:
+            - prof_persuation
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - skills
+        - b:
+            n: 1
+            profs:
+                - gaming_set
+                - musical_instrument
+        - c:
+            n: 1
+            profs:
+                - languages
+    property:
+        - Knightly Regard
+Mercenary Veteran:
+    mod:
+        Mercenary Veteran_proficient:
+            - prof_athletics
+            - prof_persuation
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - gaming_set
+    property:
+        - Mercenary Life
+Urban Bounty Hunter:
+    ProfChoice:
+        - a:
+            n: 2
+            profs:
+                - deception
+                - insight
+                - persuation
+                - stealth
+        - b:
+            n: 2
+            profs:
+                - gaming_set
+                - musical_instrument
+                - thief_tools
+    property:
+        - Ear to the Ground
+Tribe Member:
+    mod:
+        Tribe Member_proficient:
+            - prof_athletics
+            - prof_survival
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - musical_instrument
+                - artisans_tools
+        - b:
+            n: 1
+            profs:
+                - languages
+    property:
+        - Uthgard Heritage
+Waterdhavian Noble:
+    mod:
+        Noble_proficient:
+            - prof_history
+            - prof_persuation
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - languages
+        - b:
+            n: 1
+            profs:
+                - gaming_set
+                - musical_instrument
+    property:
+        - Kept in Style
+Charlatan:
+    mod:
+        Charlatan_proficient:
+            - prof_deception
+            - prof_sleight_of_hand
+    property:
+        - false identity
+Criminal:
+    mod:
+      Criminal_proficient:
+          - prof_deception
+          - prof_stealth
+          - prof_thief_tools
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - gaming_set
+    property:
+        - criminal contact
+Entertainer:
+    mod:
+        Entertainer_proficient:
+            - prof_acrobatics
+            - prof_performance
+            - prof_disguise_kit
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - musical_instrument
+    property:
+        - By popular demand
+Folk Hero:
+    mod:
+        Folk Hero_proficient:
+            - prof_animal_handling
+            - prof_survival
+            - prof_land_vehicles
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - artisans_tools
+    property:
+        - Rustic Hospitality
+Guild Artisan:
+    mod:
+        Artisan_proficient:
+            - prof_insight
+            - prof_persuation
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - artisans_tools
+        - b:
+            n: 1
+            profs:
+                - languages
+    property:
+        - Guild Membership
+Hermit:
+    mod:
+        Hermit_proficient:
+            - prof_medicine
+            - prof_religion
+            - prof_herbalism_kit
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - languages
+    property:
+        - Discovery
+Noble:
+    mod:
+        Noble_proficient:
+            - prof_history
+            - prof_persuation
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - gaming_set
+        - b:
+            n: 1
+            profs:
+                - languages
+    property:
+        - position of priviledge
+Noble Knight:
+    mod:
+        Noble_proficient:
+            - prof_history
+            - prof_persuation
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - gaming_set
+        - b:
+            n: 1
+            profs:
+                - languages
+    property:
+        - Retainers
+Outlander:
+    mod:
+        Outlander_proficient:
+            - prof_athletics
+            - prof_survival
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - musical_instrument
+        - b :
+            n: 1
+            profs:
+                - languages
+Sage:
+    mod:
+        Sage_proficient:
+            - prof_arcana
+            - prof_history
+    ProfChoice:
+        - a:
+            n: 2
+            profs:
+                - languages
+    property:
+        - Researcher
+Sailor:
+    mod:
+        Sailor_proficient:
+            - prof_athletics
+            - prof_perception
+            - prof_navigator_tools
+            - prof_water_vehicles
+    property:
+        - Ships Passage
+Pirate:
+    mod:
+        Sailor_proficient:
+            - prof_athletics
+            - prof_perception
+            - prof_navigator_tools
+            - prof_water_vehicles
+    property:
+        - Bad Reputation
+Soldier:
+    mod:
+        Soldier_proficient:
+            - prof_athletics
+            - prof_intimidation
+            - prof_land_vehicles
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - gaming_set
+    property:
+        - Military Rank
+Urchin:
+    mod:
+        Urchin_proficient:
+            - prof_sleight_of_hand
+            - prof_stealth
+            - prof_disguise_kit
+            - prof_thief_tools
+    property:
+        - City Secrets

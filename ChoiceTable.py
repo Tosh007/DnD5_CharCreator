@@ -3,19 +3,41 @@ from acces import*
 from CharacterCore import *
 from menu_human import Ui_Human
 from menu_wizard import Ui_Wizard
+from menu_warlock import Ui_Warlock
+from menu_sorcerer import Ui_Sorcerer
 from menu_twoCombobox import Ui_twoCombobox
 from menu_singleCombobox import Ui_singleCombobox
 from menu_singleCheckableCombobox import Ui_singleCheckableCombobox
+from menu_halfElf import Ui_halfElf
 
 class StateTable:
     class Classes(ChoiceReference):
         stateFile = "data/character/state_Classes.yaml"
         def enterWarlock(self):
             getActiveStateTable().addChoice(StateTable.WarlockPatron(getUI("ComboBox_Subclass")))
+            tabRoot = getUI("tabWidget_specialProperties")
+            self.tab_warlock = QWidget()
+            self.extra_ui = Ui_Warlock()
+            self.extra_ui.setupUi(self.tab_warlock)
+            self.tab = tabRoot.addTab(self.tab_warlock, "warlock")
+            getValueTable().newValue("warlock_spellSlotLevel", ValueReference(self.extra_ui.label_spellSlotLevel, getConfig("AllowNone"), "your spell slots are of level {2}"))
+            getValueTable().newValue("warlock_spellSlots", ValueReference(self.extra_ui.label_spellSlots, getConfig("AllowNone"), "you have {2} spell slots"))
+            getModifier("warlock_spellSlotLevel").connect(getValue("warlock_spellSlotLevel"))
+            getModifier("warlock_spellSlots").connect(getValue("warlock_spellSlots"))
+
 
         def exitWarlock(self):
             getActiveStateTable().removeChoice(StateTable.WarlockPatron)
-                        
+            getValueTable().destroyValue("warlock_spellSlots")
+            getValueTable().destroyValue("warlock_spellSlotLevel")
+            self.tab_warlock.setParent(None)
+
+        def enterCleric(self):
+            getActiveStateTable().addChoice(StateTable.ClericDomain(getUI("ComboBox_Subclass")))
+
+        def exitCleric(self):
+            getActiveStateTable().removeChoice(StateTable.ClericDomain)
+
         def enterWizard(self):
             tabRoot = getUI("tabWidget_specialProperties")
             self.tab_wizard = QWidget()
@@ -24,7 +46,6 @@ class StateTable:
             self.tab = tabRoot.addTab(self.tab_wizard, "wizard")
             getValueTable().newValue("wizard_numPreparedSpells", ValueReference(self.extra_ui.label_numPreparedSpells, getConfig("AllowNone"), "You can prepare {2} spells at a time"))
             getModifier("wizard_numPreparedSpells").connect(getValue("wizard_numPreparedSpells"))
-            getValue("intelMod").connect(getValue("wizard_numPreparedSpells"))
 
         def exitWizard(self):
             getUI("tabWidget_specialProperties").removeTab(self.tab)
@@ -32,13 +53,12 @@ class StateTable:
             del self.tab_wizard
             del self.extra_ui
             del self.tab
-            #getModifier("wizard_numPreparedSpells").disconnect(getValue("wizard_numPreparedSpells")) # nah, we delete the object anyway
             getValueTable().destroyValue("wizard_numPreparedSpells")
 
         def enterSorcerer(self):
             tabRoot = getUI("tabWidget_specialProperties")
             self.tab_sorcerer = QWidget()
-            self.extra_ui = Ui_singleCombobox()
+            self.extra_ui = Ui_Sorcerer()
             self.extra_ui.setupUi(self.tab_sorcerer)
             self.tab = tabRoot.addTab(self.tab_sorcerer, "sorcerer")
             getActiveStateTable().addChoice(StateTable.SorcerousOrigin(getUI("ComboBox_Subclass")))
@@ -51,6 +71,9 @@ class StateTable:
             del self.extra_ui
             del self.tab
 
+    class ClericDomain(ChoiceReference):
+        loadLevel = 2
+        stateFile = "data/character/state_clericDomain.yaml"
 
     class WarlockPatron(ChoiceReference):
         loadLevel = 4
@@ -159,6 +182,29 @@ class StateTable:
         loadLevel = 2
         stateFile = "data/character/state_Subrace_Gnome.yaml"
 
+    class Subrace_Half_Elf(ChoiceReference):
+        loadLevel = 2
+        stateFile = "data/character/state_Subrace_HalfElf.yaml"
+        def enterHalfWoodElf(self):
+            getActiveStateTable().addChoice(StateTable.HalfWoodElf(getActiveState("Races").extra_ui.comboBox))
+
+        def exitHalfWoodElf(self):
+            getActiveStateTable().removeChoice(StateTable.HalfWoodElf)
+
+        def enterHalfHighElf(self):
+            getActiveStateTable().addChoice(StateTable.HalfHighElf(getActiveState("Races").extra_ui.comboBox))
+
+        def exitHalfHighElf(self):
+            getActiveStateTable().removeChoice(StateTable.HalfHighElf)
+
+    class HalfWoodElf(ChoiceReference):
+        loadLevel = 3
+        stateFile = "data/character/state_HalfWoodElf.yaml"
+
+    class HalfHighElf(ChoiceReference):
+        loadLevel = 3
+        stateFile = "data/character/state_HalfHighElf.yaml"
+
     class HumanTraitToggle(ChoiceReference):
         loadLevel = 2
         stateFile = "data/character/state_HumanTrait.yaml"
@@ -211,7 +257,7 @@ class StateTable:
         def enterHalf_Elf(self):
             tabRoot = getUI("tabWidget_specialProperties")
             self.tab_halfelf = QWidget()
-            self.extra_ui = Ui_singleCheckableCombobox()
+            self.extra_ui = Ui_halfElf()
             self.extra_ui.setupUi(self.tab_halfelf)
             self.tab = tabRoot.addTab(self.tab_halfelf, "Half-Elf")
             getActiveMultiStateTable().addChoice(StateTable.Choice2AbilityScore(self.extra_ui.comboBox1,("strength","dexterity","constitution","wisdom","intelligence"),getModifier("HalfElf_plus1")))
@@ -222,6 +268,9 @@ class StateTable:
 
     class PrimaryState(FiniteStateMachine):
         stateFile = "data/character/state_ValueTable.yaml"
+
+    class Backgrounds(ChoiceReference):
+        stateFile = "data/character/state_Background.yaml"
 
 class _ChoiceTableBase(dict):
     def addChoice(self,choice):
@@ -243,6 +292,7 @@ class ActiveChoiceTable(_ChoiceTableBase):
         # always existing fsm
         self.addChoice(StateTable.Races(getUI("ComboBox_Race")))
         self.addChoice(StateTable.Classes(getUI("ComboBox_Class")))
+        self.addChoice(StateTable.Backgrounds(getUI("ComboBox_Background")))
         self.addChoice(StateTable.PrimaryState())
         self.PrimaryState.initFSM()
         self.PrimaryState.request("On")

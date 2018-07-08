@@ -18,6 +18,10 @@
     lambda: "25"
     text: "Aarakocra"
 
+- Grung_speed:
+    lambda: "25"
+    text: "Grung"
+
 - Barbarian_HP:
     lambda: "x+12"
     text: "Barbarian: {2:+d}"
@@ -57,6 +61,16 @@
     dependsOn:
         - proficiencyBonus
         - charismaMod
+- warlock_spellSlots:
+    lambda: "1"
+    text: "1 spell slot at level 1"
+    dependsOn:
+        - level
+- warlock_spellSlotLevel:
+    lambda: "1"
+    text: spell level 1
+    dependsOn":
+        - level
 - Wizard_HP:
     lambda: "x+6"
     text: "Wizard: {2:+d}"

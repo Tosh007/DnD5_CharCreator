@@ -1,0 +1,13 @@
+Elf Weapon Training:
+    mod:
+        HalfElf_proficient:
+            - prof_longsword
+            - prof_shortsword
+            - prof_shortbow
+            - prof_longbow
+Wizard Cantrip:
+    ProfChoice:
+        - a:
+            n: 1
+            profs:
+                - wizard_cantrips

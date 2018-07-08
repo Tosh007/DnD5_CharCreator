@@ -1,0 +1,14 @@
+Elf Weapon Training:
+    mod:
+        HalfElf_proficient:
+            - prof_shortbow
+            - prof_longbow
+            - prof_shortsword
+            - prof_longsword
+Fleet of Foot Trait:
+    mod:
+        Wood_Elf_Speed:
+            - speed
+Mask of the Wild Trait:
+    property:
+        - Mask Of The Wild

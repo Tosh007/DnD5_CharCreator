@@ -1,0 +1,19 @@
+HalfElf:
+    ProfChoice:
+        - b:
+            n: 2
+            profs:
+                - skills
+HalfWoodElf:
+    property:
+        - woodelfstuff(todo)
+HalfDrow:
+    property:
+        - Drow Magic
+    mod:
+        HalfElf_proficient:
+            - prof_dancing_lights
+HalfHighElf: none
+HalfAquaticElf:
+    property:
+        - swimming speed 30

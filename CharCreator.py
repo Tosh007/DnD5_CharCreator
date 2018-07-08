@@ -72,7 +72,7 @@ class storage_:
         profs = data["ProfChoice"]
         multiChoice = data["multiChoice"]
         # values
-        DependentObject.blockSignalsGlobal(True)
+        Signal.blockSignals(True)
         for name in values:
             acces.getValue(name).set(values[name])
         # choice/FSMs
@@ -110,7 +110,7 @@ class storage_:
         self.currentSaveName = filename
         if filename == "data/character/newSave.yaml":
             self.currentSaveName = None
-        DependentObject.blockSignalsGlobal(False)
+        DependentObject.blockSignals(False)
         DependentObject.flushChanges()
         self.updateWindowTitle()
 
@@ -120,9 +120,9 @@ MainWindow = QtWidgets.QMainWindow()
 ui = Ui_MainWindow()
 ui.setupUi(MainWindow)
 
-DependentObject.blockSignalsGlobal(True)
+Signal.blockSignals(True)
 acces.initializeTables(ui)
-DependentObject.blockSignalsGlobal(False)
+Signal.blockSignals(False)
 DependentObject.flushChanges()
 MainWindow.show()
 
@@ -132,5 +132,4 @@ acces.getUI("action_saveAs_file").triggered.connect(lambda: storage.saveFile(Tru
 acces.getUI("action_new").triggered.connect(lambda: storage.openFile("data/character/newSave.yaml"))
 
 storage.updateWindowTitle()
-
-sys.exit(app.exec_())
+app.exec_()

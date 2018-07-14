@@ -64,7 +64,31 @@ class Signal:
     def blockSignals(block):
         Signal.blocked = block
 
-class DependentObject(QObject):
+    @staticmethod
+    def updateAll():
+        for s in Signal.signal_table:
+            s.count = 0
+        for s in Signal.signal_table:
+            for l in copy(s._listeners):
+                if l.dead: s._listeners.remove(l)
+                else:
+                    l.count += 1
+        L = []
+        for s in Signal.signal_table:
+            if s.count == 0:
+                L.append(s)
+        while (L):
+            s = L.pop()
+            s.emit()
+            for n in s._listeners:
+                n.count -= 1
+                if n.count == 0:
+                    L.append(n)
+                    del n.count
+        for s in Signal.signal_table:
+            assert (not hasattr(s, "count") or s.count==0)
+
+class DependentObject():
     globalBlock = False
     all_obj = []
     @staticmethod
@@ -123,6 +147,7 @@ class DependentObject(QObject):
 
     @staticmethod
     def flushChanges():
+        print("WARNING: DependentObject.flushChanges() is deprecated!")
         for obj in DependentObject.all_obj:
             if isinstance(obj,ValueReference):
                 obj.on_changed()
@@ -140,6 +165,7 @@ class FiniteStateMachine:
     loadLevel = 0
     stateFile=None
     def initFSM(self):
+        return
         self._enterState("Off")
 
     def __init__(self, states={}):
@@ -153,7 +179,7 @@ class FiniteStateMachine:
         self._states.update(states)
         self.props = []
         self.profs = []
-        self.currentState = ""
+        self.currentState = "Off"
 
     def request(self,state):
         if self.currentState is None:
@@ -301,13 +327,21 @@ class ValueReference(DependentObject):
         return v
 
     def applyMods(self, v, needDescription=False):
-        mstring = ""
+        modDesc = []
         self.modifiers.sort(key=ValueModifier.modOrder)
         for mod in self.modifiers:
             nv = mod.mod(v)
-            if (nv!=v): mstring += mod.string(v)+"\n"  # only add mod desc to mstring if value is changed
+            if (nv!=v): modDesc.append(mod.string(v)) # only add mod desc to mstring if value is changed
             v = nv
-        mstring = mstring[:-1]
+        if len(modDesc)==0:
+            mstring = ""
+        elif len(modDesc)==1:
+            mstring = "<b>modifier:</b> <br>"+modDesc[0]
+        else:
+            mstring = "<b>modifiers:</b> "
+            for s in modDesc:
+                mstring += "\n" + s
+        #print(mstring)
         if not needDescription:return v
         else:return (v,mstring)
 
@@ -554,7 +588,7 @@ class ProficiencyChoice:
         self.maxN = n
         profs_ = list(profs)
         for prof in profs:
-            profs_ += tuple(getProficiencyTable().getChildProficiencies(prof))
+            profs_ += getProficiencyTable().getChildProficiencies(prof)
         self.profs = {p:0 for p in profs_}   # lastValue associated with this choice element
 
     def __str__(self):

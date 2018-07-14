@@ -7,7 +7,6 @@ from window_main import Ui_MainWindow
 from CharacterCore import *
 import acces
 import yaml
-print(sys.version_info)
 
 class storage_:
     def __init__(self):
@@ -55,6 +54,7 @@ class storage_:
         except BaseException as e:
             print("saving somehow failed because", e)
         self.updateWindowTitle()
+
     def openFile(self, filename = None):
         if not filename:
             filename, _ = QtWidgets.QFileDialog.getOpenFileName(filter="CharCreator format (*.dnd5)")
@@ -85,13 +85,14 @@ class storage_:
             try:
                 if type(a.widget) is QtWidgets.QCheckBox:
                     a.widget.setCheckState(QtCore.Qt.Checked if choice[name]=="Checked" else QtCore.Qt.Unchecked)
-                    # no idea why (?!) but this updates automatically, and throws an error if we do so twice
+                    a.on_changed()
+                    # no idea why (?!) but this updates automatically, and throws an error if we do so twice (does no longer...)
                 else:
                     a.widget.setCurrentText(choice[name])
                     a.on_changed()  # call manually, signals are blocked and we need the FSM state cycle even if state does not change, to clear ProfChoice
             except AttributeError as e:
                 if not type(a) is getState("PrimaryState"):
-                    print(type(a))
+                    print(type(a))  # PrimaryState is, so far, the only State not connected to GUI.
                     raise e
             a.blockProfChoiceInit=False
         # ProfChoice
@@ -99,7 +100,7 @@ class storage_:
             getProficiencyTable().addChoice(ProficiencyChoice.deserialize(name, profs[name]))
         # multiChoice
         for name in multiChoice:
-            print(name,multiChoice[name])
+            #print(name,multiChoice[name])  # its a tuple!
             choice = getActiveMultiState(name)
             widget = choice.widget
             widget.setAllChecked(False)
@@ -110,8 +111,8 @@ class storage_:
         self.currentSaveName = filename
         if filename == "data/character/newSave.yaml":
             self.currentSaveName = None
-        DependentObject.blockSignals(False)
-        DependentObject.flushChanges()
+        Signal.blockSignals(False)
+        Signal.updateAll()
         self.updateWindowTitle()
 
 storage = storage_()
@@ -123,7 +124,7 @@ ui.setupUi(MainWindow)
 Signal.blockSignals(True)
 acces.initializeTables(ui)
 Signal.blockSignals(False)
-DependentObject.flushChanges()
+storage.openFile("data/character/newSave.yaml")
 MainWindow.show()
 
 acces.getUI("action_save_file").triggered.connect(lambda: storage.saveFile(False))
@@ -131,5 +132,4 @@ acces.getUI("action_open_file").triggered.connect(storage.openFile)
 acces.getUI("action_saveAs_file").triggered.connect(lambda: storage.saveFile(True))
 acces.getUI("action_new").triggered.connect(lambda: storage.openFile("data/character/newSave.yaml"))
 
-storage.updateWindowTitle()
 app.exec_()

@@ -233,10 +233,7 @@ class StateTable:
                 subrace = getState("Subrace_"+state)
             except:
                 return
-            try:
-                getActiveStateTable().removeChoice(subrace)
-            except NameError as e:print(e)
-
+            getActiveStateTable().removeChoice(subrace)
 
         def enterHuman(self):
             tabRoot = getUI("tabWidget_specialProperties")

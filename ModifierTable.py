@@ -69,24 +69,24 @@ class AutoModBase:
 
 class AutoModRace(AutoModBase):
     lambdaBase = "x{0}"
-    textBase = "{0}"
+    textBase = "{0}: {1}"
     nameBase = "{0}_{1}"
     def __init__(self):
         f = open(getDirectoryPrefix()+"data/character/automod_races.yaml")
         self.values = yaml.load(f)
         f.close()
     def new(self,value):
-        yield self.newFromFormat(("+1",), (value+": +1",), (value, "plus1"))
-        yield self.newFromFormat(("+2",), (value+": +2",), (value, "plus2"))
-        yield self.newFromFormat(("+1",), (value,), (value, "proficient"))
+        yield self.newFromFormat(("+1",), (value,"+1",), (value, "plus1"))
+        yield self.newFromFormat(("+2",), (value,"+2",), (value, "plus2"))
+        yield self.newFromFormat(("+1",), (value,"proficient"), (value, "proficient"))
 
 class AutoModClass(AutoModBase):
     lambdaBase = "x{0}"
-    textBase = "{0}"
+    textBase = "{0}: {1}"
     nameBase = "{0}_proficient"
     def __init__(self):
         f = open(getDirectoryPrefix()+"data/character/automod_classes.yaml")
         self.values = yaml.load(f)
         f.close()
     def new(self,value):
-        yield self.newFromFormat(("+1",), (value,), (value,))
+        yield self.newFromFormat(("+1",), (value,"+1"), (value,"plus1"))

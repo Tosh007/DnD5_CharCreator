@@ -219,3 +219,36 @@
     - "protection from evil and good"
     - "unseen servant"
     - "witch bolt"
+- "Bard Rituals lvl1.SPELL.":
+    - "comprehend languages"
+    - "detect magic"
+    - identify
+    - illusory script
+    - speak with animals
+    - unseen servant
+- "Cleric Rituals lvl1.SPELL.":
+    - "ceremony"
+    - "detect magic"
+    - "detect poison and disease"
+    - "purify food and drink"
+- "Druid Rituals lvl1.SPELL.":
+    - "detect magic"
+    - "detect poison and disease"
+    - "purify food and drink"
+    - "speak with animals"
+- "Sorcerer Rituals lvl1.SPELL.":
+    - "comprehend languages"
+    - "detect magic"
+- "Warlock Rituals lvl1.SPELL.":
+    - "comprehend languages"
+    - "illusory script"
+    - "unseen servant"
+- "Wizard Rituals lvl1.SPELL.":
+    - "alarm"
+    - "comprehend languages"
+    - "detect magic"
+    - "find familiar"
+    - "identify"
+    - "illusory script"
+    - "tensers floating disk"
+    - "unseen servant"

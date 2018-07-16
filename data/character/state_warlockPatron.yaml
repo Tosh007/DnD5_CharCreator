@@ -6,6 +6,8 @@ The Archfey:
                 - warlock_spells_lvl1
                 - faerie_fire
                 - sleep
+    property:
+        - fey precence
 The Fiend:
     ProfChoice:
         - c:
@@ -14,6 +16,8 @@ The Fiend:
                 - warlock_spells_lvl1
                 - burning_hands
                 - command
+    property:
+        - dark one's blessing
 The Great old One:
     ProfChoice:
         - c:
@@ -22,5 +26,49 @@ The Great old One:
                 - warlock_spells_lvl1
                 - dissonant_whispers
                 - tashas_hideous_laughter
-            
-
+    property:
+        - awakened mind
+The Undying:
+    mod:
+        Warlock_proficient:
+            - prof_spare_the_dying
+    ProfChoice:
+        - c:
+            n: 2
+            profs:
+                - warlock_spells_lvl1
+                - false life
+                - ray of sickness
+    property:
+        - among the dead
+The Celestial:
+    ProfChoice:
+        - c:
+            n: 2
+            profs:
+                - warlock_spells_lvl1
+                - cure wounds
+                - guiding bolt
+    mod:
+        Warlock_proficient:
+            - prof_light
+            - prof_sacred flame
+    property:
+        - healing light
+The Hexblade:
+    ProfChoice:
+        - a:
+            n: 2
+            profs:
+                - warlock_spells_lvl1
+                - shield
+                - wrathful smite
+    mod:
+        Warlock_proficient:
+            - prof_medium_armor
+            - prof_shields
+            - prof_martial_weapons
+    property:
+        - hexblade curse
+        - hex warrior
+        

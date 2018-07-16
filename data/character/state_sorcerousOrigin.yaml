@@ -2,11 +2,27 @@ Bloodline:
     mod:
         Sorcerer_proficient:
             - prof_draconic
+            - maxHP
+        armorClassSorcer:
+            - armorClass
     property:
         - double prof bonus on interaction with dragons
-        - AC 13+dextMod while not wearing armor
         - hitpoint max increases by 1 every levelup
 Wild Magic:
     property:
         - wild magic surge
         - tides of chaos
+Storm Magic:
+    mod:
+        Sorcerer_proficient:
+            - prof_primordial
+    property:
+        - tempestuous magic
+Shadow Magic:
+    property:
+        - darkvision 120ft
+        - eyes of the dark
+        - strength of the grave
+Divine Magic:
+    property:
+        - favored by the gods

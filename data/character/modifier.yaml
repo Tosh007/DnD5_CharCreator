@@ -185,3 +185,35 @@
     lambda: "min(20,x)"
     text: "Hardcap at 20"
     order: 8
+
+- armorClassDefault:
+    lambda: '10+getValue("dextMod").get()'
+    text: "based on dex mod"
+    dependsOn:
+        - dextMod
+- armorClassBarbarian:
+    lambda: 'max(x, 10+getValue("dextMod").get()+getValue("constMod").get())'
+    text: "barbarian: +dex"
+    dependsOn:
+        - dextMod
+        - constMod
+    order: 1
+- armorClassMonk:
+    lambda: 'max(x, 10+getValue("dextMod").get()+getValue("wisdomMod").get())'
+    text: "barbarian: +dex"
+    dependsOn:
+        - dextMod
+        - wisdomMod
+    order: 2
+- armorClassLizard:
+    lambda: 'max(x, 13+getValue("dextMod").get())'
+    text: "lizardfolk"
+    dependsOn:
+        - dextMod
+    order: 3
+- armorClassSorcer:
+    lambda: 'max(x, 13+getValue("dextMod").get())'
+    text: "draconic sorcerer"
+    dependsOn:
+        - dextMod
+    order: 4

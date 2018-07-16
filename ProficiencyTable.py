@@ -44,6 +44,7 @@ class ProficiencyTable:
         for obj in data:
             if type(obj) is str:
                 # just a new proficiency
+                print(obj)
                 if not virtualParent:
                     self.newProficiency(obj,parent)
                 else:

@@ -2,6 +2,8 @@ Barbarian:
     mod:
         Barbarian_HP:
             - maxHP
+        armorClassBarbarian:
+            - armorClass
         Barbarian_proficient:
             - prof_light_armor
             - prof_medium_armor
@@ -10,7 +12,8 @@ Barbarian:
             - prof_martial_weapons
             - prof_strength_saving_throw
             - prof_constitution_saving_throw
-
+    property:
+        - Rage
 Bard:
     mod:
         Bard_HP:
@@ -32,7 +35,8 @@ Bard:
             n: 3
             profs:
                 - skills
-
+    property:
+        - bardic inspiration
 Cleric:
     mod:
         Cleric_HP:
@@ -54,7 +58,8 @@ Monk:
             - prof_shortsword
             - prof_strength_saving_throw
             - prof_dexterity_saving_throw
-
+    property:
+        - martial arts
 Druid:
     mod:
         Druid_HP:
@@ -71,6 +76,7 @@ Druid:
             - prof_herbalism_kit
             - prof_intelligence_saving_throw
             - prof_wisdom_saving_throw
+            - prof_druidic
 Fighter:
     mod:
         Fighter_HP:
@@ -82,7 +88,8 @@ Fighter:
             - prof_martial_weapons
             - prof_strength_saving_throw
             - prof_constitution_saving_throw
-
+    property:
+        - fighting style (todo)
 Paladin:
     mod:
         Paladin_HP:
@@ -94,7 +101,9 @@ Paladin:
             - prof_martial_weapons
             - prof_wisdom_saving_throw
             - prof_charisma_saving_throw
-
+    property:
+        - divine sense
+        - lay on hands
 Ranger:
     mod:
         Ranger_HP:
@@ -106,7 +115,9 @@ Ranger:
             - prof_martial_weapons
             - prof_strength_saving_throw
             - prof_dexterity_saving_throw
-
+    property:
+        - favoured enemy
+        - natural explorer
 Rogue:
     mod:
         Rogue_HP:
@@ -118,6 +129,10 @@ Rogue:
             - prof_shortsword
             - prof_rapier
             - prof_thief_tools
+            - prof_thieves_cant
+    property:
+        - expertise (todo)
+        - sneak attack
 Sorcerer:
     mod:
         Sorcerer_HP:

@@ -94,3 +94,14 @@ War Domain:
             - prof_heavy_armor
     property:
         - War Priest
+Arcana Domain:
+    mod:
+        Cleric_proficient:
+            - prof_detect_magic
+            - prof_magic_missile
+            - prof_arcana
+    ProfChoice:
+        - a:
+            n: 2
+            profs:
+                - wizard_cantrips

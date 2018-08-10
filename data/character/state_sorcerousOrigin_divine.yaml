@@ -1,0 +1,20 @@
+good:
+    mod:
+        Sorcerer_proficient:
+            - prof_cure_wounds
+evil:
+    mod:
+        Sorcerer_proficient:
+            - prof_inflict_wounds
+law:
+    mod:
+        Sorcerer_proficient:
+            - prof_bless
+chaos:
+    mod:
+        Sorcerer_proficient:
+            - prof_bane
+neutral:
+    mod:
+        Sorcerer_proficient:
+            - prof_protection_from_evil_and_good

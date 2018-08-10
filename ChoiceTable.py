@@ -86,11 +86,18 @@ class StateTable:
             getActiveStateTable().addChoice(StateTable.SorcerousOrigin_bloodline(getActiveState(StateTable.Classes).extra_ui.comboBox1))
         def exitBloodline(self):
             getActiveStateTable().removeChoice(StateTable.SorcerousOrigin_bloodline)
+        def enterDivine_Magic(self):
+            getActiveStateTable().addChoice(StateTable.SorcerousOrigin_divine(getActiveState(StateTable.Classes).extra_ui.comboBox1))
+        def exitDivine_Magic(self):
+            getActiveStateTable().removeChoice(StateTable.SorcerousOrigin_divine)
+
+    class SorcerousOrigin_divine(ChoiceReference):
+        loadLevel = 3
+        stateFile = "data/character/state_sorcerousOrigin_divine.yaml"
 
     class SorcerousOrigin_bloodline(ChoiceReference):
         loadLevel = 3
         stateFile = "data/character/state_sorcerousOrigin_bloodline.yaml"
-
 
     class Choice2AbilityScore(MultiChoiceReference):
         loadLevel = 4

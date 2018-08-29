@@ -143,9 +143,11 @@ class ProficiencyTable:
     def removeChoice(self,name, try_=False):
         if try_:
             try:
+                self.table[name].destroy()
                 del self.table[name]
             except:pass
         else:
+            self.table[name].destroy()
             del self.table[name]
         getValue("listWidget_proficiencies_update").changeSignal.emit()
 

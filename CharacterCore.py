@@ -587,6 +587,12 @@ class ProficiencyChoice:
         self.name = name
         self.maxN = n
         self.text = stateName + ": chose {0} from:<br> - ".format(n)+"<br> - ".join(p for p in profs)
+        self.choiceListEntries = []
+        text=self.text.split("<br>")
+        ui = getUI("listWidget_profChoices")
+        for t in text:
+            ui.addItem(t)
+            self.choiceListEntries.append(ui.item(ui.count()-1))
         profs_ = list(profs)
         for prof in profs:
             profs_ += getProficiencyTable().getChildProficiencies(prof)
@@ -637,3 +643,7 @@ class ProficiencyChoice:
 
     def getUsedPoints(self):
         return sum(self.profs.values())
+
+    def destroy(self):
+        ui=getUI("listWidget_profChoices")
+        for item in self.choiceListEntries: ui.takeItem(ui.row(item))

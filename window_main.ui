@@ -1063,6 +1063,13 @@
     </item>
     <item row="3" column="3">
      <layout class="QGridLayout" name="gridLayout_2">
+      <item row="2" column="2">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Cantrips and Spells</string>
+        </property>
+       </widget>
+      </item>
       <item row="3" column="1">
        <widget class="QTreeWidget" name="treeWidget_proficiencies">
         <attribute name="headerVisible">
@@ -1114,13 +1121,6 @@
       <item row="1" column="2" colspan="2">
        <widget class="QListWidget" name="listWidget_traits"/>
       </item>
-      <item row="2" column="2">
-       <widget class="QLabel" name="label_6">
-        <property name="text">
-         <string>Cantrips and Spells</string>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="1">
        <widget class="QLabel" name="label_5">
         <property name="text">
@@ -1137,24 +1137,37 @@
         </widget>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QTreeWidget" name="treeWidget_languages">
-        <attribute name="headerVisible">
-         <bool>false</bool>
-        </attribute>
-        <column>
-         <property name="text">
-          <string notr="true">1</string>
-         </property>
-        </column>
-       </widget>
-      </item>
       <item row="0" column="2">
        <widget class="QLabel" name="label_2">
         <property name="text">
          <string>Features &amp; Traits</string>
         </property>
        </widget>
+      </item>
+      <item row="1" column="1">
+       <layout class="QVBoxLayout" name="verticalLayout_19">
+        <item>
+         <widget class="QTreeWidget" name="treeWidget_languages">
+          <attribute name="headerVisible">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string notr="true">1</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListWidget" name="listWidget_profChoices">
+          <item>
+           <property name="text">
+            <string>proficiency / spell choices</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>

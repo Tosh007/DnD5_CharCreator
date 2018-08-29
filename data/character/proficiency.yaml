@@ -129,51 +129,51 @@
     - spellcasting
 - languages.LANG.:
     - standart languages:
-        - common!
-        - dwarvish
-        - orcish
-        - elvish
-        - gnomish
-        - halfling
+        - common.LANG.!
+        - dwarvish.LANG.
+        - orcish.LANG.
+        - elvish.LANG.
+        - gnomish.LANG.
+        - halfling.LANG.
     - exotic languages:
-        - giant
-        - abyssal
-        - celestial
-        - draconic
-        - deep speech
-        - infernal
-        - primordial
-        - sylvan
-        - undercommon
-        - auran
-        - aarakocra
+        - giant.LANG.
+        - abyssal.LANG.
+        - celestial.LANG.
+        - draconic.LANG.
+        - deep speech.LANG.
+        - infernal.LANG.
+        - primordial.LANG.
+        - sylvan.LANG.
+        - undercommon.LANG.
+        - auran.LANG.
+        - aarakocra.LANG.
     - monster languages:
-        - ignan
-        - terran
-        - gith
-        - gnoll
-        - grell
-        - bullywug
-        - aquan
-        - hook horror
-        - modron
-        - otyugh
-        - sahuagin
-        - slaad
-        - sphinx
-        - thri-kreen
-        - troglodyte
-        - umber hulk
-        - yeti
-        - blink dog
-        - giant eagle
-        - giant elk
-        - giant owl
-        - winter wolf
-        - worg
-        - druidic
-        - goblin
-        - grung
+        - ignan.LANG.
+        - terran.LANG.
+        - gith.LANG.
+        - gnoll.LANG.
+        - grell.LANG.
+        - bullywug.LANG.
+        - aquan.LANG.
+        - hook horror.LANG.
+        - modron.LANG.
+        - otyugh.LANG.
+        - sahuagin.LANG.
+        - slaad.LANG.
+        - sphinx.LANG.
+        - thri-kreen.LANG.
+        - troglodyte.LANG.
+        - umber hulk.LANG.
+        - yeti.LANG.
+        - blink dog.LANG.
+        - giant eagle.LANG.
+        - giant elk.LANG.
+        - giant owl.LANG.
+        - winter wolf.LANG.
+        - worg.LANG.
+        - druidic.LANG.
+        - goblin.LANG.
+        - grung.LANG.
 - thieves cant
 - martial maneuvers:
     - commanders strike

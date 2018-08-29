@@ -246,7 +246,7 @@ class FiniteStateMachine:
                     name = type(self).__name__+"_"+state+"_"+name
                     n = choice["n"]
                     profs = choice["profs"]
-                    c = ProficiencyChoice(n, profs,name)
+                    c = ProficiencyChoice(n, profs,name, state)
                     self.profs.append(name)
                     if not self.blockProfChoiceInit:  # only activation is blocked, we still register to remove it in exit() => assume that something else creates the choice
                         getProficiencyTable().addChoice(c)
@@ -408,7 +408,7 @@ class ValueReference(DependentObject):
                         self.widget.setToolTip(mdesc)
                     except TypeError:
                         self.widget.setToolTip(0,mdesc)
-            self.vconf.specialSetup(self, v, vmod, mdesc, maxValue)
+            if hasattr(self.vconf, "specialSetup"):self.vconf.specialSetup(self, v, vmod, mdesc, maxValue)
             if self._blockSignals:
                 self._blockSignals(False)
         except TypeError as e:
@@ -433,7 +433,7 @@ class ValueConfig:
     VisualUpdateSignal = None
     setToolTip = True
     hide=lambda v,vmod,maxV:False
-    specialSetup = lambda widget,v,vmod,mdesc,maxValue=None: None# a special ui setup sequence
+    #specialSetup = lambda widget,v,vmod,mdesc,maxValue=None: None# a special ui setup sequence
 
 
 class ValueConfig_allow(ValueConfig):
@@ -583,16 +583,14 @@ class MultiChoiceReference(DependentObject):
             self.on_changed()
 
 class ProficiencyChoice:
-    def __init__(self, n, profs, name):
+    def __init__(self, n, profs, name, stateName=""):
         self.name = name
         self.maxN = n
+        self.text = stateName + ": chose {0} from:<br> - ".format(n)+"<br> - ".join(p for p in profs)
         profs_ = list(profs)
         for prof in profs:
             profs_ += getProficiencyTable().getChildProficiencies(prof)
         self.profs = {p:0 for p in profs_}   # lastValue associated with this choice element
-
-    def __str__(self):
-        return self.name
 
     def serialize(self):
         return {"n":self.maxN,"profs":self.profs}
@@ -608,7 +606,7 @@ class ProficiencyChoice:
         return choice
 
     def proficient(self,name, v):
-        if str(self) not in getProficiencyTable().table.keys():return 0
+        if self.name not in getProficiencyTable().table.keys():return 0
         if name not in self.profs.keys():
             return 0
         if self.profs[name] == v:   # nothing changed
@@ -630,7 +628,7 @@ class ProficiencyChoice:
             raise ValueError("invalid case for ProficiencyChoice!")
 
     def possible(self,name,v):
-        if str(self) not in getProficiencyTable().table.keys():
+        if self.name not in getProficiencyTable().table.keys():
             return 0
         if name not in self.profs.keys():
             return 0

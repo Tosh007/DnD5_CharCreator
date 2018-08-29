@@ -44,7 +44,7 @@ class ProficiencyTable:
         for obj in data:
             if type(obj) is str:
                 # just a new proficiency
-                print(obj)
+                #print(obj)
                 if not virtualParent:
                     self.newProficiency(obj,parent)
                 else:
@@ -93,13 +93,15 @@ class ProficiencyTable:
                 sname = sname[:-6]
                 name = name[:-6]
                 ui = getUI("treeWidget_languages")
+                c = getConfig("LanguageProfConfig")(sname, parent)
             elif sname[-7:]==".SPELL.":
                 sname = sname[:-7]
                 name = name[:-7]
                 ui = getUI("treeWidget_spells")
+                c = getConfig("ProficiencyListConfig")(sname, parent)
             else:
                 ui = getUI("treeWidget_proficiencies")
-            c = getConfig("ProficiencyListConfig")(sname, parent)
+                c = getConfig("ProficiencyListConfig")(sname, parent)
         if hasChildren:
             c = getConfig("ProficiencyCategoryConfig")(sname, parent)
             if sname == "skills" or sname == "saving_throws":
@@ -133,7 +135,7 @@ class ProficiencyTable:
         return self.table[name]
 
     def addChoice(self, choice):
-        name = str(choice)
+        name = choice.name
         if name in self.table.keys():raise KeyError("addChoice({0}) duplicate".format(choice))
         self.table[name] = choice
         getValue("listWidget_proficiencies_update").changeSignal.emit()

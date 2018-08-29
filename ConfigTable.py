@@ -6,19 +6,32 @@ class ConfigTable:
     AllowNone = ValueConfig
     AllowAll  = ValueConfig_allow
 
-    class ProficiencyConfig(ValueConfig):
+    class _specialToolTipSetup:
+        setToolTip = False
+        def __init__(self):
+            self.toolTipFunctions = []
+            self.toolTipText = ""
+        def specialSetup(self,widget,v,vmod,mdesc,maxValue):
+            for func in self.toolTipFunctions:
+                mdesc = func(widget,v,vmod,mdesc,maxValue)
+            if mdesc != self.toolTipText:
+                self.toolTipText = mdesc
+                try:
+                    widget.widget.setToolTip(0,mdesc)   # note:  setToolTip(int,str) only for QTreeWidget!
+                except TypeError:
+                    widget.widget.setToolTip(mdesc)
+    class ProficiencyConfig(_specialToolTipSetup, ValueConfig):
         forceCheckbox = True
         def __init__(self, name, root):
+            ConfigTable._specialToolTipSetup.__init__(self)
             self.name = name
             self.root = root    # name of parent proficiency
             self.choice = None  # choice from which value is drawn
-
+            self.choiceText=""
+            self.toolTipFunctions.append(self.addChoiceText)
         def checkRequirements(self,value,lastValue):
             if value<0 or (not self.root):return 0
-            try:
-                choices = getProficiencyTable().table.values()
-            except:
-                return lastValue
+            choices = getProficiencyTable().table.values()  # note: try in prev version, probably no longer needed
             try:
                 maxValue = self.getMaxValue(lastValue)
                 if value==lastValue:
@@ -37,18 +50,21 @@ class ConfigTable:
                             v = choice.proficient(self.name, value)
                             if v:
                                 self.choice=choice
+                                self.choiceText = choice.text
                                 return v
                     else:
                         # value=0
                         assert lastValue>0
                         assert self.choice
+                        self.choiceText = ""
                         return self.choice.proficient(self.name,0)
-                        self.choice = None
                 return 0
             except BaseException as e:
                 print("checkReq failed for "+self.name)
                 print("value:"+str(value)+"\nlast value:"+str(lastValue))
                 raise e
+
+        def addChoiceText(self, widget, v, vmod, mdesc, maxValue): return mdesc + self.choiceText
 
         def getMaxValue(self, lastValue):
             try:
@@ -63,28 +79,23 @@ class ConfigTable:
                     pass
             return 0
         hide = lambda self,v,vmod,maxValue:False
-        specialSetup = lambda self,widget,v,vmod,mdesc,maxValue: None
 
     class ProficiencyListConfig(ProficiencyConfig):
         hide = lambda self,v,vmod,maxValue:(v==0) and (vmod==0) and (maxValue==0)
         VisualUpdateSignal = "listWidget_proficiencies_VisualUpdate"
-        setToolTip = False
-        def __init__(self,name,root):
-            ConfigTable.ProficiencyConfig.__init__(self,name,root)
-            self.toolTipText = ""
 
-        def specialSetup(self,widget,v,vmod,mdesc,maxValue):
-            try:
-                races = getProficiencyTable().whoSpeaksWhat[self.name]
-            except BaseException as e:pass#if we would return in any case, we kill tooltips for anything but languages
-            else:
-                mdesc += "\n<b>spoken by:</b>"
-                for race in races:
-                    mdesc += "\n"+race+","
-                mdesc = mdesc[:-1]
-            if mdesc != self.toolTipText:
-                self.toolTipText = mdesc
-                widget.widget.setToolTip(0,mdesc)   # note:  setToolTip(int,str) only for QTreeWidget!
+    class LanguageProfConfig(ProficiencyListConfig):
+        def __init__(self, name, root):
+            ConfigTable.ProficiencyListConfig.__init__(self, name, root)
+            self.toolTipFunctions.append(self.spokenByToolTip)
+        def spokenByToolTip(self, widget, v, vmod, mdesc, maxValue):
+            races = getProficiencyTable().whoSpeaksWhat[self.name]
+            if mdesc: mdesc += "<br>"
+            mdesc += "<b>spoken by:</b>"
+            for race in races:
+                mdesc += "<br>"+race+","
+            mdesc = mdesc[:-1]
+            return mdesc
 
     class ProficiencyCategoryConfig(ProficiencyListConfig):
         forceCheckbox=False

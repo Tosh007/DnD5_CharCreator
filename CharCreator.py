@@ -135,7 +135,7 @@ ui.setupUi(MainWindow)
 Signal.blockSignals(True)
 acces.initializeTables(ui)
 Signal.blockSignals(False)
-storage.openFile("data/character/newSave.yaml")
+storage.openFile(getDirectoryPrefix()+"data/character/newSave.yaml")
 MainWindow.show()
 
 acces.getUI("action_save_file").triggered.connect(lambda: storage.saveFile(False))

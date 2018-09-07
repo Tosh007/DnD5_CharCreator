@@ -2,11 +2,22 @@
 # top-level control
 # anything that does not fit anywhere else
 import sys
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets, Qt
 from window_main import Ui_MainWindow
 from CharacterCore import *
 import acces
 import yaml
+from sip import SIP_VERSION_STR
+try:
+    from PyQt5.Qt import PYQT_VERSION_STR
+    print("-"*10+"begin version info "+"-"*10)
+    print("Qt version: " + QtCore.QT_VERSION_STR+"\n"\
+    "PyQt version: " + PYQT_VERSION_STR+"\n" \
+    "sip version: " + SIP_VERSION_STR)
+    print(sys.version_info)
+    print("-"*10+"end version info "+"-"*10)
+except BaseException as e:
+    print(e)
 
 class storage_:
     def __init__(self):
